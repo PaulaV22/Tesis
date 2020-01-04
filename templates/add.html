@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>Alleles Searcher</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href= "{{ url_for('static', filename='fonts/icomoon/style.css') }}">
+
+    <link rel="stylesheet" href= "{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='css/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/flaticon/font/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="static/js/functions.js"></script>
+  </head>
+
+  <body>
+
+    <div class="site-wrap">
+
+      <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div>
+
+      <div class="top-bar">
+        <div class="container">
+          <div class="row">
+            <div class="col-8">
+              <a href="#" class=""><span class="mr-2  icon-envelope-open-o"></span> <span class="d-none d-md-inline-block"> {{ email }}</span></a>
+              <span class="mx-md-2 d-inline-block"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input type="hidden" class="hidden" id="results-input" value="{{ results }}" />
+
+      <div class="ftco-blocks-cover-1">
+        <div class="ftco-cover-1 overlay" style="background-image: url('static/images/background.jpg')">
+          <div class="container">
+            <div id="loader" class="loader" hidden=""></div>
+
+            <div class="row align-items-center justify-content-center text-center">
+              <div>
+                <h1>Alleles Searcher</h1>
+                <p class="mb-5">Solving SNP desambiguations</p>
+                <form method="post">
+                  <div class="container">
+                    <div class="form-group">
+                      <div class="col-6">
+                         <label>Name</label>
+                         <input name="name" id="name" required>
+                      </div>
+                      <div class="col-6">
+                        <label>Search folder in file system</label>
+                        <input type="file" name="file" autocomplete="off" required>
+                      </div>
+                    </div>
+                    <button type="submit">Upload</button>
+                  </div>
+                 <label hidden="">{{ message }}</label>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END .ftco-cover-1 -->
+      </div>
+
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="footer-heading mb-4">About Us</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum voluptate debitis voluptatum et dolorum.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    </div>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,28 @@
+# Don't track content of these folders
+project/BlastDb/
+project/BlastResult/
+project/Categories/
+project/Databases/
+project/DbAmbigua/
+project/FinalResult/
+project/Test/
+venv/
+
+#files
+prueba.fa
+queryTest2.fa
+queryTestBola.fa
+queryTestBolaModif.fa
+queryTestBolaModifCorta.fa
+queryTestBolaModifLarga.fa
+output.fasta
+DERB34501_DRB32705.fa
+Muestra1.fa
+Muestra2.fa
+Muestra5.fa
+Muestra9.fa
+person.json
+tmp.fa
+Muestra1 - CORTADA.fa
+compareView_ui1.py
+compareView_ui1.pyc
