@@ -49,3 +49,13 @@ function createTable(){
         divContainer.removeAttribute("hidden");
     }
 }
+
+function showMessage(){
+    msg = document.getElementById("msg").value;
+    console.log(msg);
+
+    label = document.getElementById("lblmessage");
+    label.innerHTML = msg;
+    var divContainer = document.getElementById("message");
+    divContainer.removeAttribute("hidden");
+}

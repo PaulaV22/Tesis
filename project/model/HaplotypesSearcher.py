@@ -52,22 +52,17 @@ class HaplotypesSearcher():
             # alinear y obtener resultados de la query deseada
             self.simpleBlast.align(queryPath, self.queryName)
             results = self.resultsAnalizer.getSimilarSequences(self.numSeqs)
-            self.signals.updatedatabases.emit()
             return results
             #return results
         if self.option=="configuredb":
             self.configureDb(self.newDb)
-            self.signals.database.emit("finished")
-            self.signals.updatedatabases.emit()
+
         if self.option=="deletedb":
             self.deleteDb(self.db)
-            self.signals.deleted.emit()
         if self.option=="deleteSeq":
             self.deleteSeq(self.db, self.sequenceToDelete)
-            self.signals.deletedSeq.emit()
         if self.option=="addSeq":
             self.addSeq(self.path,self.db,self.newSeqName, self.newSeqContent)
-            self.signals.addedSeq.emit()
 
     def setAddSeqValues(self, path, content,name):
         self.path = path

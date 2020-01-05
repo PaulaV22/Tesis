@@ -62,23 +62,39 @@
                 <p class="mb-5">Solving SNP desambiguations</p>
                 <form method="post">
                   <div class="container">
-                      <div class="col-12">
-                         <label>User email </label>
+                    <div class="form-group">
+                      <div class="col-4">
+                         <label>Number of results </label>
+                         <input type="number" name="numResults" id="numResults" min="1" max="50" step="1" value="10">
+                      </div>
+                      <div class="col-4">
+                        <label>Database</label>
+                        <select id="database" name="database">
+                          {%for i in range(0, numDatabases )%}
+                            <option value="{{ databases[i] }}">{{ databases[i] }}</option>
+                          {%endfor%}
+                        </select>
+                      </div>
+                      <div class="col-4">
                          <input type="text" name="email" id="email" placeholder="example@example.com">
                       </div>
+                    </div>
+                     <div class="form-group">
+                        <textarea name="sequence" id="sequence"  class="text-area" placeholder="{{ sequenceExample }}" rows="10" cols="85">{{ sequence }}</textarea>
+                     </div>
 
-                      <button type="submit" onclick="searchUser()" >Search</button>
-                      <input type="hidden" class="hidden" id="error" value="{{ error }}" />
+                      <button type="submit" onclick="showLoading()" >Search</button>
+                  </div>
+                  <div class="container bordered" id="table-results" hidden="">
 
                   </div>
-
                 </form>
               </div>
             </div>
           </div>
         </div>
-      </div>
         <!-- END .ftco-cover-1 -->
+      </div>
 
       <script>
          createTable();
