@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>Alleles Searcher</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href= "{{ url_for('static', filename='fonts/icomoon/style.css') }}">
+
+    <link rel="stylesheet" href= "{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='css/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/flaticon/font/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="/static/js/functions.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  </head>
+
+  <body>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-white w3-animate-left side-bar" style="display:none;z-index:4" id="mySidebar">
+  <div class="button-content">
+      <button class="w3-bar-item2 w3-button" onclick="w3_close()">x</button>
+  </div>
+  <a href="#" class="w3-bar-item w3-button">Compare</a>
+  <a href="#" class="w3-bar-item w3-button">Add Database</a>
+  <a href="#" class="w3-bar-item w3-button">Edit Database</a>
+  <a href="#" class="w3-bar-item w3-button">Delete Database</a>
+  <a href="#" class="w3-bar-item w3-button">Delete Account</a>
+
+</div>
+
+<!-- Overlay -->
+<div class="w3-overlay" onclick="w3_close()" style="cursor:pointer"></div>
+
+<!-- Page content -->
+<div class="">
+    <div class="site-wrap">
+
+      <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div>
+
+      <div class="top-bar">
+          <div class="row">
+            <button class="w3-button w3-xlarge" onclick="w3_open()">&#9776;</button>
+          </div>
+      </div>
+
+      <input type="hidden" class="hidden" id="results-input" value="{{ results }}" />
+      <input type="hidden" class="hidden" id="msg" value="{{ msg }}" />
+
+      <div class="ftco-blocks-cover-1">
+        <div class="ftco-cover-1 overlay" style="background-image: url('static/images/background.jpg')">
+          <div class="container">
+            <div id="loader" class="loader" hidden=""></div>
+
+            <div class="row align-items-center justify-content-center text-center">
+              <div>
+                <h1>Alleles Searcher</h1>
+                <p class="mb-5">Solving SNP desambiguations</p>
+                <form method="post">
+                  <div class="container">
+                    <div class="form-group">
+                      <div class="col-4">
+                         <label>Number of results </label>
+                         <input type="number" name="numResults" id="numResults" min="1" max="50" step="1" value="10">
+                      </div>
+                      <div class="col-4">
+                        <label>Database</label>
+                        <select id="database" name="database">
+                          {%for i in range(0, numDatabases )%}
+                            <option value="{{ databases[i] }}">{{ databases[i] }}</option>
+                          {%endfor%}
+                        </select>
+                      </div>
+                      <div class="col-4">
+                         <input type="text" name="email" id="email" placeholder="example@example.com">
+                      </div>
+                    </div>
+                     <div class="form-group">
+                        <textarea name="sequence" id="sequence"  class="text-area" placeholder="{{ sequenceExample }}" rows="10" cols="85">{{ sequence }}</textarea>
+                     </div>
+
+                      <button type="submit" onclick="showLoading()" >Search</button>
+                  </div>
+                  <div class="container bordered" id="table-results" hidden="">
+
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END .ftco-cover-1 -->
+      </div>
+
+      <script>
+         createTable();
+      </script>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="footer-heading mb-4">About Us</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum voluptate debitis voluptatum et dolorum.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    </div>
+
+
+  </body>
+
+</html>

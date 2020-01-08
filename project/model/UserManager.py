@@ -19,7 +19,6 @@ class UserManager():
 
 
     def addUser(self, name, email, password):
-        print(self.users)
         for user in self.users:
             print(user)
             jsonUser = json.loads(user)
@@ -46,8 +45,10 @@ class UserManager():
 
     def getUser(self, email):
         for user in self.users:
-            if user.email == email:
-                return user
+            print(user)
+            jsonUser = json.loads(user)
+            if jsonUser['email'] == email:
+                return jsonUser
         return None
 
     def getUserDbs(self,email):
@@ -55,3 +56,16 @@ class UserManager():
         if user is None:
             return []
         return user.dbs
+
+    def saveUser(self,user):
+        for i in range(len(self.users)):
+            u = self.users[i]
+            jsonUser = json.loads(u)
+            print(jsonUser)
+            if (jsonUser['email'] == user['email']):
+                jsonUser['name'] = user['name']
+                jsonUser['password'] = user['password']
+                jsonUser['logged'] = user['logged']
+            self.users[i] = json.dumps(jsonUser)
+        with open("users.json", mode='w', encoding='utf-8') as f:
+            json.dump(self.users, f)

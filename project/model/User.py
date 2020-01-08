@@ -13,6 +13,7 @@ class User(object):
         output = {
             "email": self.email,
             "name": self.name,
+            "password": self.password,
             "dbs": self.dbs,
         }
         return json.dumps(output)
