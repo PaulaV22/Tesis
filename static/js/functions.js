@@ -70,6 +70,7 @@ function w3_close() {
   document.getElementById("myOverlay").style.display = "none";
 }
 
+
 jQuery(function ($) {
 
     $(".sidebar-dropdown > a").click(function() {
@@ -101,3 +102,10 @@ $("#show-sidebar").click(function() {
 });
 
 });
+
+function configureSideBar(){
+    var username = document.getElementById("username").value;
+    console.log(username);
+    var span = document.getElementById("usernameSpan");
+    span.innerHTML = username;
+}

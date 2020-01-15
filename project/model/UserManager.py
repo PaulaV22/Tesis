@@ -66,6 +66,21 @@ class UserManager():
                 jsonUser['name'] = user['name']
                 jsonUser['password'] = user['password']
                 jsonUser['logged'] = user['logged']
+                jsonUser['dbs'] = user['dbs']
             self.users[i] = json.dumps(jsonUser)
         with open("users.json", mode='w', encoding='utf-8') as f:
             json.dump(self.users, f)
+
+    def addDbToUser(self,email,db):
+        user = self.getUser(email)
+        userDbs = user['dbs']
+        if db in userDbs:
+            print("ya existe la db")
+            return None
+        else:
+            userDbs.append(db)
+            print(userDbs)
+            user['dbs'] = userDbs
+            print(user)
+            self.saveUser(user)
+            return user

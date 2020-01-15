@@ -1279,47 +1279,58 @@ h1, h2, h3, h4, h5,
   position: relative;}
   .ftco-cover-1, .ftco-cover-1 .container > .row {
     min-height: 600px;
+    padding: 0 4% 0 0;
+}
+  .ftco-cover-1, .ftco-cover-1 .container > .right-row {
+    min-height: 600px;
+    padding-top: 2%;
     padding-left: 8%;
 }
+
   .ftco-cover-1 > .container {
     position: relative; }
-  .ftco-cover-1.overlay {
-    position: relative; }
-    .ftco-cover-1.overlay:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      opacity: .3;
-      background: #377aff;
-      background: -moz-linear-gradient(45deg, #377aff 0%, #00d9ff 100%);
-      background: -webkit-gradient(left bottom, right top, color-stop(0%, #377aff), color-stop(100%, #00d9ff));
-      background: -webkit-linear-gradient(45deg, #377aff 0%, #00d9ff 100%);
-      background: -o-linear-gradient(45deg, #377aff 0%, #00d9ff 100%);
-      background: -ms-linear-gradient(45deg, #377aff 0%, #00d9ff 100%);
-      background: linear-gradient(45deg, #9c9c9c85 0%, #000000 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#377aff', endColorstr='#00d9ff', GradientType=1); }
-    .ftco-cover-1.overlay h1 {
+  .ftco-cover-1.fullscreen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;}
+   .ftco-cover-1.overlay{}
+.ftco-cover-1.overlay:before, .ftco-cover-1.fullscreen:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .5;
+    /* background: #377aff; */
+    background: -moz-linear-gradient(45deg, #377aff 0%, #00d9ff 100%);
+    background: -webkit-gradient(left bottom, right top, color-stop(0%, #377aff), color-stop(100%, #00d9ff));
+    /* background: -webkit-linear-gradient(45deg, #377aff 0%, #00d9ff 100%); */
+    background: -o-linear-gradient(45deg, #377aff 0%, #00d9ff 100%);
+    background: -ms-linear-gradient(45deg, #377aff 0%, #00d9ff 100%);
+    background: linear-gradient(45deg, #000000 0%, #4646468f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#377aff', endColorstr='#00d9ff', GradientType=1);
+}    .ftco-cover-1.overlay, .ftco-cover-1.fullscreen h1 {
       color: #fff; }
-    .ftco-cover-1.overlay p {
+    .ftco-cover-1.overlay, .ftco-cover-1.fullscreen p {
       color: #fff; }
-      .ftco-cover-1.overlay p a {
+      .ftco-cover-1.overlay, .ftco-cover-1.fullscreen p a {
         color: #fff;
         text-decoration: underline;
         font-weight: 700; }
-        .ftco-cover-1.overlay p a:hover {
+        .ftco-cover-1.overlay, .ftco-cover-1.fullscreen p a:hover {
           text-decoration: none; }
-    .ftco-cover-1.overlay form .form-control,
-    .ftco-cover-1.overlay form .btn {
+    .ftco-cover-1.overlay, .ftco-cover-1.fullscreen form .form-control,
+    .ftco-cover-1.overlay, .ftco-cover-1.fullscreen form .btn {
       border-radius: 4px; }
-    .ftco-cover-1.overlay form .form-control {
+    .ftco-cover-1.overlay, .ftco-cover-1.fullscreen form .form-control {
       padding-left: 20px;
       padding-right: 20px;
       border-color: transparent;
       margin-right: 10px; }
-    .ftco-cover-1.overlay form .btn {
+    .ftco-cover-1.overlay, .ftco-cover-1.fullscreen form .btn {
       border-color: transparent; }
 
 .ftco-service-image-1 .service img {
@@ -1439,6 +1450,8 @@ h1, h2, h3, h4, h5,
 
 .form-group{
     display:flex !important;
+    margin-left: 2%;
+    margin-right: 3%;
 }
 
 #cover-spin {
@@ -1932,11 +1945,15 @@ body {
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-menu ul li:hover>a,
-.chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active>a,
 .chiller-theme .sidebar-wrapper .sidebar-header .user-info,
 .chiller-theme .sidebar-wrapper .sidebar-brand>a:hover,
 .chiller-theme .sidebar-footer>a:hover i {
     color: #b8bfce;
+}
+
+.chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active>a{
+    color: #bfc4ce;
+    background-color: #41454e;
 }
 
 .page-wrapper.chiller-theme.toggled #close-sidebar {

@@ -2,6 +2,15 @@ from flask import Flask, url_for, request, render_template, redirect
 from project.Controller.CompareController import CompareController as CC
 from project.Controller.UserController import UserController as UC
 from flask_debug import Debug
+from werkzeug.utils import secure_filename
+import os
+import shutil
+
+UPLOAD_FOLDER = 'project/Databases'
+ALLOWED_EXTENSIONS = {'fasta','fa'}
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app = Flask(__name__)
 Debug(app)
@@ -9,6 +18,11 @@ app.run(debug=True)
 cc = CC()
 uc = UC()
 # route and method to access to the index view.
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 sequenceExample = ">HLA030F_1\n" \
                   "GRCGTRTGTCATTTCTTCACGGGACCGAGCGGGTGCGGTTSCTGGASAGAYMCTTCTATA" \
@@ -54,13 +68,14 @@ def compare(id):
                 try:
                     results = cc.compare(sequence, numResults, database)
                     return render_template("compare.html", results=results, num=int(numResults), databases=user['dbs'],
-                                       numDatabases=len(user['dbs']), msg="", sequence=sequence, username=user['name'] )
+                                       numDatabases=len(user['dbs']), msg="", sequence=sequence, username=user['name'],
+                                        userid=id)
 
                 except Exception as e:
                     print(e)
 
         return render_template("compare.html", results="", sequenceExample=sequenceExample, num=0, databases=user['dbs'],
-                           numDatabases=len(user['dbs']), msg="", sequence="")
+                           numDatabases=len(user['dbs']), msg="", sequence="",username=user['name'], userid=id)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -82,3 +97,41 @@ def register():
         return render_template("register.html", msg=message, name=name, email=email, password=password)
 
     return render_template("register.html", msg=message, name=name, email=email, password=password)
+
+@app.route('/addDatabase/<id>', methods=['GET', 'POST'])
+def addDatabase(id):
+    user = uc.getUserByEmail(id)
+    if id is None or not user['logged']:
+        return render_template("login.html", email="", password="", msg="Plese enter a valid user")
+    message=""
+    if request.method == 'POST':
+        # check if the post request has the file part
+        uploaded_files =  request.files.getlist("file[]")
+        dbName = request.form["dbname"]
+        newDb = UPLOAD_FOLDER + "/" + id + "/" + dbName
+        if os.path.exists(newDb):
+            shutil.rmtree(newDb)
+        os.makedirs(newDb)
+        for file in uploaded_files:
+            # Check if the file is one of the allowed types/extensions
+            if file and allowed_file(file.filename):
+                # Make the filename safe, remove unsupported chars
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(newDb,filename))
+        uc.addDbToUser(id,dbName)
+
+                # Save the filename into a list, we'll use it later
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        #if file.filename == '':
+        #    return redirect(request.url)
+        #if file and allowed_file(file.filename):
+        #    filename = secure_filename(file.filename)
+         #   file.save(os.path.join(UPLOAD_FOLDER, filename))
+         #   message="file uploaded"
+         #   return render_template("addDb.html", msg=message)
+        #else:
+        #    message="Upload files with .fasta extension"
+    return render_template("addDb.html", msg=message)
+
+

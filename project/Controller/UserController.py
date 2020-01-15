@@ -25,3 +25,6 @@ class UserController():
 
     def saveUser(self,user):
         return self.userManager.saveUser(user)
+
+    def addDbToUser(self,id,dbName):
+        return self.userManager.addDbToUser(id,dbName)
