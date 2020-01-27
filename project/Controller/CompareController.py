@@ -3,12 +3,13 @@ import numpy as np
 from project.model.HaplotypesSearcher import HaplotypesSearcher
 import os
 import sys
+import json
 
 class CompareController():
 
     def __init__(self):
         self.HS = HaplotypesSearcher()
-        self.dbList = self.getDatabases()
+        #self.dbList = self.getDatabases()
         self.dbName = self.HS.getDatabases()[0]
 
     def resourcePath(self, relative_path):
@@ -17,13 +18,34 @@ class CompareController():
         output = base_path + relative_path
         return output
 
-    def getDatabases(self):
+    def getDatabases(self, id):
         output = []
-        dbs= self.resourcePath("/Databases")
-        for dir in os.listdir(dbs):
-            output.append(dir)
-        output.sort()
-        return output
+        dbs= self.resourcePath("/Databases/"+id)
+        for base, dirs, files in os.walk(dbs):
+            dirName = os.path.basename(os.path.normpath(base))
+            if dirName!=id:
+                fileList = []
+                for file in files:
+                    filePath = base + "/"+file
+                    size = os.path.getsize(filePath)
+                    size = size/1000
+                    if size<0:
+                        size = 1
+                    print(size)
+
+                    size = str(size)+ "kb"
+                    openedFile= open(filePath,'r')
+                    content = openedFile.read()
+                    openedFile.close()
+                    fileList.append({'name':file, 'size':size, 'content':content})
+                output.append({'Name':dirName, 'Files':len(fileList),'FileList':fileList})
+        #for dir in os.listdir(dbs):
+            #filesList = os.listdir(dir)
+        if len(output)>0:
+            salidaJson = json.dumps(output)
+            print(salidaJson)
+            return salidaJson
+        return None
 
     def getDb(self):
         self.dbList = self.getDatabases()
@@ -36,10 +58,14 @@ class CompareController():
         self.dbName= dbName
         self.HS.setDb(dbName)
 
-    def compare(self, sequence, numResults, database):
+    def compare(self, sequence, numResults, database, userId):
         if not self.HS:
             self.HS = HaplotypesSearcher()
-        self.HS.setDb(database)
+        dbPath =userId+"/"+database
+        print("userId es "+ userId)
+
+        print("dbPath es "+ dbPath)
+        self.HS.setDb(dbPath, database)
         seqName = sequence.partition('\n')[0]
         seqName = seqName[1:]
         seqName = seqName.replace("\r", "")
@@ -54,13 +80,18 @@ class CompareController():
         file.write(sequence)
         file.close()
         print(numResults)
-        results = self.HS.getResults(seqName,seqPath,database,numResults)
+        results = self.HS.getResults(seqName,seqPath,dbPath,numResults)
         return results
-
+        #return []
     def showResults(self, results):
         dt = np.dtype('string', 'float', 'int')
         resultsArray = np.array(results, dtype=dt)
         return resultsArray
         # self.drawTable(results)
 
+    def createDb(self,userId,dbName):
+        if not self.HS:
+            self.HS = HaplotypesSearcher()
+        dbPath = userId+"/"+dbName
+        self.HS.configureDb(userId,dbPath,dbName)
 

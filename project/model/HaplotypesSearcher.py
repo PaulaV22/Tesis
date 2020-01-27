@@ -17,7 +17,7 @@ class HaplotypesSearcher():
         self.projectPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.categories  = {"ALTA": 1, "MEDIA": 1, "BAJA": 1}
         self.categoriesPath = self.projectPath+"/Categories"
-        self.setDb(self.db)
+        self.setDb(self.db, dbName)
         if not os.path.exists(self.categoriesPath):
             os.makedirs(self.categoriesPath)
         self.option="compare"
@@ -39,7 +39,7 @@ class HaplotypesSearcher():
     def getResults(self,queryName,queryPath, database, numSeqs):
         simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", database, True)
         simpleBlast.align(queryPath, queryName)
-        resultsAnalizer = RA.ResultsAnalizer("FinalResult",database, self.categories,self.categoriesPath)
+        resultsAnalizer = RA.ResultsAnalizer("FinalResult",database)
 
         results = resultsAnalizer.getSimilarSequences(queryName,numSeqs)
         return results
@@ -91,7 +91,30 @@ class HaplotypesSearcher():
     def deleteseqAdmin (self, db, sequence):
         self.dbAdmin.deleteSequence(self.projectPath,db,sequence)
 
-    def configureDb(self, db):
+    def configureDb(self, userid, dbPath, dbName):
+        ####crear la bd con los archivos originales de BoLa####
+        ready = False
+        simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta")
+
+        globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", dbPath)
+        ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb", "salida", "fasta", "DbAmbigua",dbPath)
+        #simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", dbPath, True)
+        #self.resultsAnalizer = RA.ResultsAnalizer("FinalResult", self.db, self.categories, self.categoriesPath)
+        simpleDbCreator.makeDb()
+        ####alinear todas las secuencias de BoLa entre si generando un archivo de salida por cada alineacion (n x n)####
+        while not ready:
+            try:
+                globalBlast.align("/Databases/"+dbPath)
+                ready = True
+            except:
+               self.simpleDbCreator.makeDb()
+               ready = False
+        ####armar la base de datos con las posibles combinaciones (Nuevadb)####
+        ambiguousDbCreator.makeDb()
+        #categoriesFile = self.projectPath + "/Categories/" + db + ".json"
+
+
+    def configureDb2(self, db):
         ####crear la bd con los archivos originales de BoLa####
         ready = False
         self.simpleDbCreator.makeDb()
@@ -191,14 +214,15 @@ class HaplotypesSearcher():
     def getDbName(self):
         return self.db
 
-    def setDb(self, dbName):
-        self.db = dbName
-        self.simpleDbCreator = SC.SimpleDbCreator("Databases/"+self.db, "Blastdb",
-                                                  self.db, "secuencias", "fasta")
-        self.globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", self.db)
-        self.ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb" , "salida", "fasta", "DbAmbigua", self.db)
-        self.simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", self.db, True)
-        self.resultsAnalizer = RA.ResultsAnalizer("FinalResult",self.db, self.categories,self.categoriesPath)
+    def setDb(self, dbPath, dbName):
+        self.db = dbPath
+        self.simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb",
+                                                  dbName, "secuencias", "fasta")
+        self.globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", dbPath)
+        self.ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb" , "salida", "fasta", "DbAmbigua", dbPath)
+        self.simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", dbPath, True)
+        self.resultsAnalizer = RA.ResultsAnalizer("FinalResult",dbPath)
+
 
     def getProjectPath(self):
         return self.projectPath

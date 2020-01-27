@@ -46,10 +46,10 @@ class SimpleDbCreator:
 
     def saveSequencesInFile(self, path, sequences, outputFile= None):
         if outputFile is None:
-            with open(path + "/" + self.outputFile + "." + self.outputFormat, "w") as output_handle:
+            with open(path + "/" + self.outputFile + "." + self.outputFormat, "w+") as output_handle:
                 SeqIO.write(sequences, output_handle, self.outputFormat)
         else:
-            with open(path + "/" + outputFile + "." + self.outputFormat, "w") as output_handle:
+            with open(path + "/" + outputFile + "." + self.outputFormat, "w+") as output_handle:
                 SeqIO.write(sequences, output_handle, self.outputFormat)
 
     def makeBlastDb(self, directory):
@@ -85,17 +85,19 @@ class SimpleDbCreator:
         self.createFolder(dbPath)
         # recorro los archivos y guardo las secuencias en un arreglo. Para cada directorio de las secuencias documentadas
         # creo el archivo secuencias.fasta para poder crear la base de datos en cada subdirectorio
-        #print ("busca en los archivos " +self.filesPath)
-        ##print (self.newDb)
         for bases, dirs, files in os.walk(self.filesPath):
             subdirectory = bases
             sequences = []
-            bases = subdirectory.split('/')[2]
-            newSubFolder = self.resourcePath("/"+self.newDb + "/" + bases)
+            array = subdirectory.split('/')
+            user = array[2]
+            dbName = array[3]
+
+            newSubFolder = self.resourcePath("/"+self.newDb + "/" + user+ "/"+dbName)
             newSubFolder = newSubFolder.replace(" ", "_")
 
             # creo una subcarpeta para el subdirectorio correspondiente
             self.createFolder(newSubFolder)
+            print("newSubFolder es " + newSubFolder)
 
             #print 'subfolder es ' + newSubFolder
             for file in os.listdir(subdirectory):

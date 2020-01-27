@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='fonts/flaticon/font/flaticon.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -60,118 +61,32 @@
           </li>
           <li class="sidebar-dropdown">
             <a href="">
-              <i class="fa fa-tachometer-alt"></i>
+              <i class="fa fa-table"></i>
               <span>Compare sequences</span>
             </a>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-shopping-cart"></i>
+              <i class="fa fa-database"></i>
               <span>Administrate data</span>
             </a>
             <div class="sidebar-submenu">
               <ul>
                  <li>
-                  <a href="#">Inspect</a>
+                  <a href="/inspect/{{ userid }}"> <i class="fa fa-search"></i><span>Inspect</span></a>
                 </li>
                 <li>
-                  <a href="/addDatabase/{{ userid }}">New
-                  </a>
+                  <a href="/addDatabase/{{ userid }}"><i class="fa fa-plus"></i><span>Add</span></a>
                 </li>
                 <li>
-                  <a href="#">Delete</a>
+                  <a href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
                 </li>
                 <li>
-                  <a href="#">Edit</a>
+                  <a href="#"><i class="fa fa-database"></i><span>Edit</span></a>
                 </li>
               </ul>
             </div>
           </li>
-        <!--  <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="far fa-gem"></i>
-              <span>Components</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">General</a>
-                </li>
-                <li>
-                  <a href="#">Panels</a>
-                </li>
-                <li>
-                  <a href="#">Tables</a>
-                </li>
-                <li>
-                  <a href="#">Icons</a>
-                </li>
-                <li>
-                  <a href="#">Forms</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fa fa-chart-line"></i>
-              <span>Charts</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Pie chart</a>
-                </li>
-                <li>
-                  <a href="#">Line chart</a>
-                </li>
-                <li>
-                  <a href="#">Bar chart</a>
-                </li>
-                <li>
-                  <a href="#">Histogram</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fa fa-globe"></i>
-              <span>Maps</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Google maps</a>
-                </li>
-                <li>
-                  <a href="#">Open street map</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="header-menu">
-            <span>Extra</span>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fa fa-book"></i>
-              <span>Documentation</span>
-              <span class="badge badge-pill badge-primary">Beta</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fa fa-calendar"></i>
-              <span>Calendar</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fa fa-folder"></i>
-              <span>Examples</span>
-            </a>
-          </li> -->
         </ul>
       </div>
     </div>

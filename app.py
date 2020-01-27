@@ -66,7 +66,7 @@ def compare(id):
             if (len(sequence) > 0):
                 numResults = request.form['numResults']
                 try:
-                    results = cc.compare(sequence, numResults, database)
+                    results = cc.compare(sequence, numResults, database, id)
                     return render_template("compare.html", results=results, num=int(numResults), databases=user['dbs'],
                                        numDatabases=len(user['dbs']), msg="", sequence=sequence, username=user['name'],
                                         userid=id)
@@ -119,19 +119,18 @@ def addDatabase(id):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(newDb,filename))
         uc.addDbToUser(id,dbName)
-
-                # Save the filename into a list, we'll use it later
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        #if file.filename == '':
-        #    return redirect(request.url)
-        #if file and allowed_file(file.filename):
-        #    filename = secure_filename(file.filename)
-         #   file.save(os.path.join(UPLOAD_FOLDER, filename))
-         #   message="file uploaded"
-         #   return render_template("addDb.html", msg=message)
-        #else:
-        #    message="Upload files with .fasta extension"
-    return render_template("addDb.html", msg=message)
+        cc.createDb(id,dbName)
+    return render_template("addDb.html",userid = id, msg=message)
 
 
+@app.route('/inspect/<id>', methods=['GET', 'POST'])
+def inspect(id):
+    user = uc.getUserByEmail(id)
+    if id is None or not user['logged']:
+        return render_template("login.html", email="", password="", msg="Plese enter a valid user")
+    message = ""
+    databases = cc.getDatabases(id)
+    if databases is None:
+        message="No databases added"
+
+    return render_template("inspect.html",userid = id, msg=message, numResults=len(databases),results=databases)

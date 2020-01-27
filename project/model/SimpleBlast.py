@@ -47,14 +47,29 @@ class SimpleBlast:
     def align(self, query, queryName):
         self.alignPath = self.outputPath + "/"+queryName
         self.createFolder(self.alignPath)
+        print("alignPath "+self.alignPath)
+        print("query "+query)
+        print("queryName "+queryName)
         i=0
+        print("dbpath es "+self.dbPath)
         for bases, dirs, files in os.walk(self.dbPath):
             for file in files:
                 # fileName es "secuencias.fasta" o salida.fasta
+                #print("self.dbName "+self.dbName)
+                #print("self.outputFormat "+self.outputFormat)
+                #print("file "+file)
                 fileName = self.dbName + "." + self.outputFormat
-                print(file)
-                fileName = file.split('.')[0]
-                fileFormat = file.split('.')[1]
+                fileArray = file.split('.')
+                #print(fileArray)
+                fileName = fileArray[0:len(fileArray)-1]
+                if len(fileName)>1:
+                    fileName='.'.join(fileName)
+                else:
+                    fileName = fileName[0]
+                fileFormat = fileArray[len(fileArray)-1]
+                #print("fileName "+fileName)
+                #print("fileFormat "+fileFormat)
+                #print(fileFormat+" "+self.outputFormat)
                 if fileFormat == self.outputFormat:
                     self.dbName = file[:-6]
                     # ahora tengo que armar un archivo de salida para cada una de las bases de datos
