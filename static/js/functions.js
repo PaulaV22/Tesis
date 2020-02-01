@@ -142,11 +142,25 @@ function createDatabasesTable(){
         var cols = ["Name", "Files", "Expand"];
         var tr = thead.insertRow(-1);
 
-        for (var c in cols) {
-            var th = document.createElement("th");
-            th.innerHTML = cols[c];
-            tr.appendChild(th);
-        }
+
+            var th1 = document.createElement("th");
+            th1.innerHTML = "<b>NAME</b>";
+            tr.appendChild(th1);
+
+             var th2 = document.createElement("th");
+            th2.innerHTML = "<b>FILES</b>";
+            tr.appendChild(th2);
+
+             var th3 = document.createElement("th");
+            th3.innerHTML = "<b>DELETE</b>";
+            tr.appendChild(th3);
+
+             var th4 = document.createElement("th");
+            th4.innerHTML = "<b>EXPAND</b>";
+            tr.appendChild(th4);
+
+
+
         thead.appendChild(tr);
         table.appendChild(thead);
 
@@ -160,10 +174,24 @@ function createDatabasesTable(){
 
             tr = tbody.insertRow(-1);
 
-             for (var j= 0; j < cols.length -1; j++) {
-                var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = item[cols[j]];
-            }
+
+            var tabCell1 = tr.insertCell(-1);
+            tabCell1.innerHTML = item["Name"];
+            var tabCell2 = tr.insertCell(-1);
+            tabCell2.innerHTML = item["Files"];
+
+            var buttonDelete = document.createElement("button");
+            buttonDelete.setAttribute("type", "button");
+            buttonDelete.className="button-icon";
+            buttonDelete.setAttribute("data-toggle","collapse");
+            buttonDelete.setAttribute("data-target", "#"+accordionId);
+            buttonDelete.innerHTML = '<i class = "fa fa-trash-o"></i>';
+
+            var tabCell3 = tr.insertCell(-1);
+            //tabCell.appendChild(link);
+            tabCell3.appendChild(buttonDelete);
+
+
             var accordionId = "accordion"+i
 
             var button = document.createElement("button");
@@ -173,18 +201,45 @@ function createDatabasesTable(){
             button.setAttribute("data-target", "#"+accordionId);
             button.innerHTML = '<i class = "fa  fa-angle-down"></i>';
 
-            var tabCell = tr.insertCell(-1);
+            var tabCell4 = tr.insertCell(-1);
             //tabCell.appendChild(link);
-            tabCell.appendChild(button);
+            tabCell4.appendChild(button);
 
             var hiddenTr = tbody.insertRow(-1);
             hiddenTr.className="table-padding";
-            hiddenTr.setAttribute("id", "accordion"+i);
+            hiddenTr.setAttribute("id", accordionId);
             hiddenTr.setAttribute("class", "collapse");
 
             var tabCellName = hiddenTr.insertCell(-1);
             var fileList = item["FileList"];
             tabCellName.setAttribute("colspan", fileList.length)
+
+            //hidden row header
+            var divHeaderRow = document.createElement("div");
+            var divHeaderSubRow = document.createElement("div");
+            divHeaderSubRow.className="row";
+            var divHeaderSubRow1 = document.createElement("div");
+            divHeaderSubRow1.className="col-5 text-left";
+            divHeaderSubRow1.innerHTML = "<b>SEQUENCE NAME</b>";
+            var divHeaderSubRow2 = document.createElement("div");
+            divHeaderSubRow2.className="col-2 text-left";
+            divHeaderSubRow2.innerHTML= "<b>SIZE</b>"
+            var divHeaderSubRow3 = document.createElement("div");
+            divHeaderSubRow3.className="col-2";
+            divHeaderSubRow3.innerHTML="<b>INSPECT</b>"
+            var divHeaderSubRow4 = document.createElement("div");
+            divHeaderSubRow4.className="col-3 text-left";
+            divHeaderSubRow4.innerHTML= "<b>DELETE SEQUENCE</b>"
+
+            divHeaderSubRow.appendChild(divHeaderSubRow1);
+            divHeaderSubRow.appendChild(divHeaderSubRow2);
+            divHeaderSubRow.appendChild(divHeaderSubRow3);
+            divHeaderSubRow.appendChild(divHeaderSubRow4);
+
+            divHeaderRow.appendChild(divHeaderSubRow);
+
+            tabCellName.appendChild(divHeaderRow);
+
             for (var k= 0; k < fileList.length -1; k++) {
                var fileInfo = fileList[k]
                var divRow = document.createElement("div");
@@ -195,9 +250,9 @@ function createDatabasesTable(){
                divSubRow1.innerHTML = fileInfo["name"];
                var divSubRow2 = document.createElement("div");
                divSubRow2.className="col-2 text-left";
-               divSubRow2.innerHTML= fileInfo["size"]
+               divSubRow2.innerHTML= fileInfo["size"];
                 var divSubRow3 = document.createElement("div");
-               divSubRow3.className="col-5";
+               divSubRow3.className="col-2";
 
                 var buttonInspect = document.createElement("button");
                 buttonInspect.setAttribute("type", "button");
@@ -211,16 +266,30 @@ function createDatabasesTable(){
                     var name = dbs[db]["FileList"][file]["name"];
                     showModal(name, content);
                });
-
-                var inspect = document.createElement("i");
-                inspect.setAttribute("href", "#")
-                inspect.className = "fa fa-search";
-
                 divSubRow3.appendChild(buttonInspect);
+
+
+                var divSubRow4 = document.createElement("div");
+                divSubRow4.className="col-3";
+
+                var buttonDelete = document.createElement("button");
+                buttonDelete.setAttribute("type", "button");
+                buttonDelete.className="button-icon";
+                buttonDelete.setAttribute("id", i+"_"+k+"_delete");
+                buttonDelete.innerHTML = '<i class = "fa  fa-trash-o"></i>';
+                buttonDelete.addEventListener('click', function(){
+                    var db = this.id.split('_')[0];
+                    var file = this.id.split('_')[1];
+                    var content = dbs[db]["FileList"][file]["content"];
+                    var name = dbs[db]["FileList"][file]["name"];
+                    showModal(name, content);
+               });
+               divSubRow4.appendChild(buttonDelete);
 
                divSubRow.appendChild(divSubRow1);
                divSubRow.appendChild(divSubRow2);
                divSubRow.appendChild(divSubRow3);
+               divSubRow.appendChild(divSubRow4);
 
                divRow.appendChild(divSubRow);
                tabCellName.appendChild(divRow);
