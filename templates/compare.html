@@ -127,6 +127,7 @@
       <input type="hidden" class="hidden" id="results-input" value="{{ results }}" />
       <input type="hidden" class="hidden" id="msg" value="{{ msg }}" />
       <input type="hidden" class="hidden" id="username" value="{{ username }}"/>
+      <input type="hidden" class="hidden" id="databases" value = "{{ databases }}"/>
       <div class="ftco-blocks-cover-1">
         <div class="ftco-cover-1 fullscreen">
           <div class="container">
@@ -145,10 +146,7 @@
                       </div>
                       <div class="col-6">
                         <label>Database</label>
-                        <select id="database" name="database">
-                          {%for i in range(0, numDatabases )%}
-                            <option value="{{ databases[i] }}">{{ databases[i] }}</option>
-                          {%endfor%}
+                        <select id="selectDbs" name="selectDbs">
                         </select>
                       </div>
 
@@ -171,11 +169,10 @@
       </div>
 
       <script>
-          configureSideBar();
+         setDatabases();
+         configureSideBar();
          createTable();
       </script>
-
-
 
     </div>
 </div>

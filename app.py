@@ -55,9 +55,10 @@ def index():
 @app.route('/compare/<id>', methods=['GET', 'POST'])
 def compare(id):
     user = uc.getUserByEmail(id)
+    dbs = cc.getDatabases(id)
+    print(dbs)
     if id is None or not user['logged']:
         return render_template("login.html", email="", password="", msg="Plese enter a valid user")
-
     else:
         if request.method == 'POST':
             sequence = request.form['sequence']
@@ -67,15 +68,13 @@ def compare(id):
                 numResults = request.form['numResults']
                 try:
                     results = cc.compare(sequence, numResults, database, id)
-                    return render_template("compare.html", results=results, num=int(numResults), databases=user['dbs'],
-                                       numDatabases=len(user['dbs']), msg="", sequence=sequence, username=user['name'],
-                                        userid=id)
-
+                    return render_template("compare.html", results=results, num=int(numResults), databases=dbs,
+                                           msg="", sequence=sequence, username=user['name'], userid=id)
                 except Exception as e:
                     print(e)
 
-        return render_template("compare.html", results="", sequenceExample=sequenceExample, num=0, databases=user['dbs'],
-                           numDatabases=len(user['dbs']), msg="", sequence="",username=user['name'], userid=id)
+        return render_template("compare.html", results="", sequenceExample=sequenceExample, num=0, databases=dbs,
+                           msg="", sequence="",username=user['name'], userid=id)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -133,4 +132,21 @@ def inspect(id):
     if databases is None:
         message="No databases added"
 
-    return render_template("inspect.html",userid = id, msg=message, numResults=len(databases),results=databases)
+    return render_template("inspect.html",userid = id, msg=message,results=databases)
+
+@app.route('/deleteDatabase', methods=['POST'])
+def deleteDatabase():
+    id = request.form['id']
+    name =  request.form['name']
+    user = uc.getUserByEmail(id)
+    if id is None or not user['logged']:
+        return
+    else:
+        try:
+            cc.deleteDatabase(id,name)
+        except Exception as e:
+            print(e)
+        databases = cc.getDatabases(id)
+        print(databases)
+        return databases
+

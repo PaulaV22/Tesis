@@ -45,7 +45,7 @@ class CompareController():
             salidaJson = json.dumps(output)
             print(salidaJson)
             return salidaJson
-        return None
+        return []
 
     def getDb(self):
         self.dbList = self.getDatabases()
@@ -95,3 +95,10 @@ class CompareController():
         dbPath = userId+"/"+dbName
         self.HS.configureDb(userId,dbPath,dbName)
 
+    def deleteDatabase(self,id,name):
+        dbPath = id+"/"+name
+        print("va a borrar "+dbPath)
+        HS = HaplotypesSearcher()
+        result = HS.deleteDb(dbPath,True)
+        print (result)
+        return result

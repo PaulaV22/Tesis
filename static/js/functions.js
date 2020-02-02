@@ -128,21 +128,18 @@ function createSelectOption(){
    }
 }
 
-
 function createDatabasesTable(){
     var table = document.createElement("table");
     table.setAttribute("id", "table_results");
     table.setAttribute("class", "table table-striped table-dark");
     var results=document.getElementById("results-input").value;
     console.log(results);
-    if (results.length!=0){
+    if ((results.length!=0)&& (results!="None")){
         results = JSON.parse(results);
         dbs = results;
         var thead = document.createElement("thead");
         var cols = ["Name", "Files", "Expand"];
         var tr = thead.insertRow(-1);
-
-
             var th1 = document.createElement("th");
             th1.innerHTML = "<b>NAME</b>";
             tr.appendChild(th1);
@@ -158,7 +155,6 @@ function createDatabasesTable(){
              var th4 = document.createElement("th");
             th4.innerHTML = "<b>EXPAND</b>";
             tr.appendChild(th4);
-
 
 
         thead.appendChild(tr);
@@ -183,9 +179,13 @@ function createDatabasesTable(){
             var buttonDelete = document.createElement("button");
             buttonDelete.setAttribute("type", "button");
             buttonDelete.className="button-icon";
-            buttonDelete.setAttribute("data-toggle","collapse");
-            buttonDelete.setAttribute("data-target", "#"+accordionId);
+            buttonDelete.setAttribute("id", "delete_"+i);
             buttonDelete.innerHTML = '<i class = "fa fa-trash-o"></i>';
+             buttonDelete.addEventListener('click', function(){
+                    var db = this.id.split('_')[1];
+                    var name = dbs[db]["Name"];
+                    showModalDeleteDatabase(name, db);
+               });
 
             var tabCell3 = tr.insertCell(-1);
             //tabCell.appendChild(link);
@@ -270,7 +270,7 @@ function createDatabasesTable(){
 
 
                 var divSubRow4 = document.createElement("div");
-                divSubRow4.className="col-3";
+                divSubRow4.className="col-2";
 
                 var buttonDelete = document.createElement("button");
                 buttonDelete.setAttribute("type", "button");
@@ -317,11 +317,55 @@ function toggleRow(id){
 
 function showModal(name, content){
     var modal = document.getElementById("modalSequences");
-    var title = document.getElementById("modal-title");
-    var body = document.getElementById("modal-body");
+    var title = document.getElementById("modalSequences-title");
+    var body = document.getElementById("modalSequences-body");
 
     title.innerHTML = name;
     body.innerHTML = content;
     $('#modalSequences').modal('show');
          // initializes and invokes show immediately
+}
+
+function showModalDeleteDatabase(name, db){
+    var modal = document.getElementById("modalDeleteDb");
+    var title = document.getElementById("modalDelete-title");
+    var body = document.getElementById("modalDelete-body");
+
+    var saveDb =  document.getElementById("sequenceToDelete");
+    saveDb.value = db;
+    title.innerHTML = "Delete Sequence ";
+    body.innerHTML = "Confirm delete database "+ name +" ?";
+    $('#modalDeleteDb').modal('show');
+}
+
+function deleteDatabase(){
+     document.getElementById("loader").removeAttribute("hidden");
+     var db =  document.getElementById("sequenceToDelete").value;
+     var userid =  document.getElementById("userid").value;
+     var dbName = dbs[db]["Name"];
+     $.post('/deleteDatabase', {
+                id: userid,
+                name: dbName,
+            }).done(function(response) {
+                document.getElementById("loader").setAttribute("hidden", true);
+                document.getElementById("results-input").value = response;
+                createDatabasesTable();
+            }).fail(function() {
+                document.getElementById("loader").setAttribute("hidden", true);
+                console.log("error deleting db ");
+            });
+}
+
+function setDatabases(){
+    var dbs = document.getElementById("databases").value;
+    if(dbs!="None"){
+     dbs = JSON.parse(dbs);
+    var select = document.getElementById("selectDbs");
+    for (var k= 0; k < dbs.length; k++) {
+        var opt = document.createElement('option');
+        opt.value = dbs[k]["Name"];
+        opt.innerHTML = dbs[k]["Name"];
+        select.appendChild(opt);
+        }
+    }
 }

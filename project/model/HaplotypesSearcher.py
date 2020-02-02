@@ -149,27 +149,30 @@ class HaplotypesSearcher():
             try:
                 shutil.rmtree(Database)
             except:
+                print("error deleting from Database")
                 pass
         try:
             shutil.rmtree(BlastDb)
         except:
+            print("error deleting from BlastDb")
             pass
         try:
             shutil.rmtree(BlastResult)
         except:
+            print("error deleting from BlastResult")
             pass
         try:
             shutil.rmtree(DbAmbigua)
         except:
+            print("error deleting from DbAmbigua")
             pass
         try:
             shutil.rmtree(FinalResult)
         except:
-            pass
-        try:
-            os.remove(self.resourcePath("/Categories/"+db+".json"))
-        except:
-            print("Error in a deletion")
+            print("error deleting from FinalResult")
+            return "Error in a deletion"
+        print("borro todo")
+        return "Deleted ok"
 
     def deleteSeq(self, db, seqPath):
         try:
