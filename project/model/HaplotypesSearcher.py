@@ -91,7 +91,7 @@ class HaplotypesSearcher():
     def deleteseqAdmin (self, db, sequence):
         self.dbAdmin.deleteSequence(self.projectPath,db,sequence)
 
-    def configureDb(self, userid, dbPath, dbName):
+    def configureDb(self, dbPath, dbName):
         ####crear la bd con los archivos originales de BoLa####
         ready = False
         simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta")
@@ -104,12 +104,16 @@ class HaplotypesSearcher():
         ####alinear todas las secuencias de BoLa entre si generando un archivo de salida por cada alineacion (n x n)####
         while not ready:
             try:
+                print("global blast va a alinear "+dbPath)
                 globalBlast.align("/Databases/"+dbPath)
                 ready = True
             except:
-               self.simpleDbCreator.makeDb()
-               ready = False
+                print(" hubo error y sismpledbcreator va a crear db de nuevo ")
+                simpleDbCreator.makeDb()
+                ready = False
         ####armar la base de datos con las posibles combinaciones (Nuevadb)####
+        print(" ambiguousdbcreator va a makeDb ")
+
         ambiguousDbCreator.makeDb()
         #categoriesFile = self.projectPath + "/Categories/" + db + ".json"
 
@@ -135,9 +139,10 @@ class HaplotypesSearcher():
         with open(categoriesFile, mode='w+') as f:
             json.dump(categories, f)
 
-    def restartDb(self,db):
-        self.deleteDb(db, False)
-        self.configureDb(db)
+    def restartDb(self,userDb, dbName):
+        self.deleteDb(userDb, False)
+        print("termino de borrar. Va a configureDb con "+ userDb +" "+dbName)
+        self.configureDb(userDb, dbName)
 
     def deleteDb(self,db,total=True):
         Database = self.resourcePath('/Databases/' + db)
@@ -174,13 +179,14 @@ class HaplotypesSearcher():
         print("borro todo")
         return "Deleted ok"
 
-    def deleteSeq(self, db, seqPath):
+    def deleteSeq(self, userDb, dbName, seqPath):
         try:
             os.remove(seqPath)
-            self.restartDb(db)
+            self.restartDb(userDb, dbName)
         except:
             print("La carpeta no existe")
-        self.configureDb(db)
+        self.configureDb(userDb,dbName)
+        return "removed ok"
 
 
     def addSeq(self, path,db, name, seq):

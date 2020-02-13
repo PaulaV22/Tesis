@@ -89,6 +89,7 @@ class SimpleDbCreator:
             subdirectory = bases
             sequences = []
             array = subdirectory.split('/')
+            print(array)
             user = array[2]
             dbName = array[3]
 

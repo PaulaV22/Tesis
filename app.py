@@ -5,6 +5,7 @@ from flask_debug import Debug
 from werkzeug.utils import secure_filename
 import os
 import shutil
+import json
 
 UPLOAD_FOLDER = 'project/Databases'
 ALLOWED_EXTENSIONS = {'fasta','fa'}
@@ -142,11 +143,51 @@ def deleteDatabase():
     if id is None or not user['logged']:
         return
     else:
-        try:
-            cc.deleteDatabase(id,name)
-        except Exception as e:
-            print(e)
+        cc.deleteDatabase(id,name)
         databases = cc.getDatabases(id)
         print(databases)
         return databases
 
+@app.route('/deleteSequence', methods=['POST'])
+def deleteSequence():
+    id = request.form['id']
+    db = request.form['dbName']
+    sequenceName =  request.form['sequenceName']
+    user = uc.getUserByEmail(id)
+    if id is None or not user['logged']:
+        return
+    else:
+        print( id+" "+ " "+ db +" "+ sequenceName)
+        print("LLEGO A DELETE SEQ")
+        cc.deleteSequence(id, db, sequenceName)
+        databases = cc.getDatabases(id)
+        print(databases)
+        return databases
+
+@app.route('/addSequence', methods=['POST'])
+def addSequence():
+    id = request.form['id']
+    user = uc.getUserByEmail(id)
+    if id is None or not user['logged']:
+        return
+    else:
+        uploaded_file = request.files.get('file')
+        dbName = request.form["dbName"]
+        newFilePath = UPLOAD_FOLDER + "/" + id + "/" + dbName
+        if os.path.exists(newFilePath):
+                    # Check if the file is one of the allowed types/extensions
+            if uploaded_file and allowed_file(uploaded_file.filename):
+                # Make the filename safe, remove unsupported chars
+                filename = secure_filename(uploaded_file.filename)
+                uploaded_file.save(os.path.join(newFilePath, filename))
+        cc.restartDb(id, dbName)
+        databases = cc.getDatabases(id)
+        print(databases)
+        return databases
+
+
+
+
+@app.route('/test', methods=['get'])
+def test():
+    return render_template("test.html")

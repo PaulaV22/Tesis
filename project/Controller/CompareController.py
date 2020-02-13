@@ -21,6 +21,10 @@ class CompareController():
     def getDatabases(self, id):
         output = []
         dbs= self.resourcePath("/Databases/"+id)
+        if len(os.listdir(dbs)) == 0:
+            salidaJson = json.dumps(output)
+            print(salidaJson)
+            return salidaJson
         for base, dirs, files in os.walk(dbs):
             dirName = os.path.basename(os.path.normpath(base))
             if dirName!=id:
@@ -31,7 +35,7 @@ class CompareController():
                     size = size/1000
                     if size<0:
                         size = 1
-                    print(size)
+                   # print(size)
 
                     size = str(size)+ "kb"
                     openedFile= open(filePath,'r')
@@ -41,11 +45,9 @@ class CompareController():
                 output.append({'Name':dirName, 'Files':len(fileList),'FileList':fileList})
         #for dir in os.listdir(dbs):
             #filesList = os.listdir(dir)
-        if len(output)>0:
-            salidaJson = json.dumps(output)
-            print(salidaJson)
-            return salidaJson
-        return []
+        salidaJson = json.dumps(output)
+        print(salidaJson)
+        return salidaJson
 
     def getDb(self):
         self.dbList = self.getDatabases()
@@ -93,7 +95,7 @@ class CompareController():
         if not self.HS:
             self.HS = HaplotypesSearcher()
         dbPath = userId+"/"+dbName
-        self.HS.configureDb(userId,dbPath,dbName)
+        self.HS.configureDb(dbPath,dbName)
 
     def deleteDatabase(self,id,name):
         dbPath = id+"/"+name
@@ -102,3 +104,19 @@ class CompareController():
         result = HS.deleteDb(dbPath,True)
         print (result)
         return result
+
+
+    def deleteSequence(self,userid, db, sequenceName):
+        HS = HaplotypesSearcher()
+        seqPath = self.resourcePath("/Databases/"+ userid + "/" + db+"/"+sequenceName)
+        print(seqPath)
+        dbPath = userid+"/"+db
+        result = HS.deleteSeq(dbPath,db,seqPath)
+        print(result)
+        return result
+
+    def restartDb(self,userid, dbName):
+        HS = HaplotypesSearcher()
+        userDb =userid + "/" + dbName
+        print("VA A RESTARTDB")
+        HS.restartDb(userDb, dbName)

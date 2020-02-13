@@ -133,7 +133,6 @@ function createDatabasesTable(){
     table.setAttribute("id", "table_results");
     table.setAttribute("class", "table table-striped table-dark");
     var results=document.getElementById("results-input").value;
-    console.log(results);
     if ((results.length!=0)&& (results!="None")){
         results = JSON.parse(results);
         dbs = results;
@@ -153,8 +152,12 @@ function createDatabasesTable(){
             tr.appendChild(th3);
 
              var th4 = document.createElement("th");
-            th4.innerHTML = "<b>EXPAND</b>";
+            th4.innerHTML = "<b>ADD SEQUENCE</b>";
             tr.appendChild(th4);
+
+             var th5 = document.createElement("th");
+            th5.innerHTML = "<b>EXPAND</b>";
+            tr.appendChild(th5);
 
 
         thead.appendChild(tr);
@@ -191,6 +194,28 @@ function createDatabasesTable(){
             //tabCell.appendChild(link);
             tabCell3.appendChild(buttonDelete);
 
+            var buttonAdd = document.createElement("button");
+            buttonAdd.setAttribute("type", "button");
+            buttonAdd.className="button-icon";
+            buttonAdd.setAttribute("id", "add_"+i);
+            buttonAdd.innerHTML = '<i class = "fa fa-plus"></i>';
+            buttonAdd.addEventListener('click', function(){
+                   var input = document.getElementById("btnFile");
+                   var clicked = this;
+                   input.onchange = function(e) {
+                        console.log(input.files);
+                        console.log(clicked);
+                        if (input.files.length>0){
+                            showUploadModal(input.files, clicked.id)
+                        }
+                    };
+                   $('#btnFile').trigger('click');
+
+               });
+
+            var tabCell4 = tr.insertCell(-1);
+            //tabCell.appendChild(link);
+            tabCell4.appendChild(buttonAdd);
 
             var accordionId = "accordion"+i
 
@@ -201,9 +226,10 @@ function createDatabasesTable(){
             button.setAttribute("data-target", "#"+accordionId);
             button.innerHTML = '<i class = "fa  fa-angle-down"></i>';
 
-            var tabCell4 = tr.insertCell(-1);
+            var tabCell5 = tr.insertCell(-1);
             //tabCell.appendChild(link);
-            tabCell4.appendChild(button);
+            tabCell5.appendChild(button);
+
 
             var hiddenTr = tbody.insertRow(-1);
             hiddenTr.className="table-padding";
@@ -212,23 +238,26 @@ function createDatabasesTable(){
 
             var tabCellName = hiddenTr.insertCell(-1);
             var fileList = item["FileList"];
-            tabCellName.setAttribute("colspan", fileList.length)
+            tabCellName.setAttribute("colspan", 5)
+
+
+
 
             //hidden row header
             var divHeaderRow = document.createElement("div");
             var divHeaderSubRow = document.createElement("div");
             divHeaderSubRow.className="row";
             var divHeaderSubRow1 = document.createElement("div");
-            divHeaderSubRow1.className="col-5 text-left";
+            divHeaderSubRow1.className="col-md-5 text-left";
             divHeaderSubRow1.innerHTML = "<b>SEQUENCE NAME</b>";
             var divHeaderSubRow2 = document.createElement("div");
-            divHeaderSubRow2.className="col-2 text-left";
+            divHeaderSubRow2.className="col-md-2 text-left";
             divHeaderSubRow2.innerHTML= "<b>SIZE</b>"
             var divHeaderSubRow3 = document.createElement("div");
-            divHeaderSubRow3.className="col-2";
+            divHeaderSubRow3.className="col-md-2";
             divHeaderSubRow3.innerHTML="<b>INSPECT</b>"
             var divHeaderSubRow4 = document.createElement("div");
-            divHeaderSubRow4.className="col-3 text-left";
+            divHeaderSubRow4.className="col-md-3 text-left";
             divHeaderSubRow4.innerHTML= "<b>DELETE SEQUENCE</b>"
 
             divHeaderSubRow.appendChild(divHeaderSubRow1);
@@ -240,19 +269,19 @@ function createDatabasesTable(){
 
             tabCellName.appendChild(divHeaderRow);
 
-            for (var k= 0; k < fileList.length -1; k++) {
+            for (var k= 0; k < fileList.length; k++) {
                var fileInfo = fileList[k]
                var divRow = document.createElement("div");
                var divSubRow = document.createElement("div");
                divSubRow.className="row";
                var divSubRow1 = document.createElement("div");
-               divSubRow1.className="col-5 text-left";
+               divSubRow1.className="col-md-5 text-left";
                divSubRow1.innerHTML = fileInfo["name"];
                var divSubRow2 = document.createElement("div");
-               divSubRow2.className="col-2 text-left";
+               divSubRow2.className="col-md-2  text-left";
                divSubRow2.innerHTML= fileInfo["size"];
                 var divSubRow3 = document.createElement("div");
-               divSubRow3.className="col-2";
+               divSubRow3.className="col-md-2";
 
                 var buttonInspect = document.createElement("button");
                 buttonInspect.setAttribute("type", "button");
@@ -270,7 +299,7 @@ function createDatabasesTable(){
 
 
                 var divSubRow4 = document.createElement("div");
-                divSubRow4.className="col-2";
+                divSubRow4.className="col-md-3";
 
                 var buttonDelete = document.createElement("button");
                 buttonDelete.setAttribute("type", "button");
@@ -280,9 +309,8 @@ function createDatabasesTable(){
                 buttonDelete.addEventListener('click', function(){
                     var db = this.id.split('_')[0];
                     var file = this.id.split('_')[1];
-                    var content = dbs[db]["FileList"][file]["content"];
                     var name = dbs[db]["FileList"][file]["name"];
-                    showModal(name, content);
+                    showModalDeleteSequence(db, name);
                });
                divSubRow4.appendChild(buttonDelete);
 
@@ -326,21 +354,9 @@ function showModal(name, content){
          // initializes and invokes show immediately
 }
 
-function showModalDeleteDatabase(name, db){
-    var modal = document.getElementById("modalDeleteDb");
-    var title = document.getElementById("modalDelete-title");
-    var body = document.getElementById("modalDelete-body");
-
-    var saveDb =  document.getElementById("sequenceToDelete");
-    saveDb.value = db;
-    title.innerHTML = "Delete Sequence ";
-    body.innerHTML = "Confirm delete database "+ name +" ?";
-    $('#modalDeleteDb').modal('show');
-}
-
-function deleteDatabase(){
+var deleteDatabase = function(){
      document.getElementById("loader").removeAttribute("hidden");
-     var db =  document.getElementById("sequenceToDelete").value;
+     var db =  document.getElementById("dbToDelete").value;
      var userid =  document.getElementById("userid").value;
      var dbName = dbs[db]["Name"];
      $.post('/deleteDatabase', {
@@ -355,6 +371,110 @@ function deleteDatabase(){
                 console.log("error deleting db ");
             });
 }
+
+function showModalDeleteDatabase(name, db){
+    var modal = document.getElementById("modalDeleteDb");
+    var title = document.getElementById("modalDelete-title");
+    var body = document.getElementById("modalDelete-body");
+    document.getElementById( "buttonDelete" ).setAttribute( "onClick", "javascript: deleteDatabase();" );
+
+    var saveDb =  document.getElementById("dbToDelete");
+    saveDb.value = db;
+    title.innerHTML = "Delete Database ";
+    body.innerHTML = "Confirm delete database "+ name +" ?";
+    $('#modalDeleteDb').modal('show');
+}
+
+var deleteSequence = function(){
+     document.getElementById("loader").removeAttribute("hidden");
+     var sequence =  document.getElementById("sequenceToDelete").value;
+     var db = document.getElementById("dbToDelete").value;
+     var userid =  document.getElementById("userid").value;
+     var dbName = dbs[db]["Name"];
+      $.post('/deleteSequence', {
+                id: userid,
+                dbName: dbName,
+                sequenceName: sequence
+            }).done(function(response) {
+                document.getElementById("loader").setAttribute("hidden", true);
+                document.getElementById("results-input").value = response;
+                createDatabasesTable();
+            }).fail(function() {
+                document.getElementById("loader").setAttribute("hidden", true);
+                console.log("error deleting db ");
+            });
+}
+
+function showModalDeleteSequence(db, name){
+   var modal = document.getElementById("modalDeleteDb");
+    var title = document.getElementById("modalDelete-title");
+    var body = document.getElementById("modalDelete-body");
+    var userid =  document.getElementById("userid").value;
+    document.getElementById( "buttonDelete" ).setAttribute( "onClick", "javascript: deleteSequence();" );
+    var saveDb =  document.getElementById("dbToDelete");
+    saveDb.value = db;
+    var saveSeq=  document.getElementById("sequenceToDelete");
+    saveSeq.value = name;
+    title.innerHTML = "Delete Sequence ";
+    body.innerHTML = "Confirm delete sequence "+ name +" from database ?";
+    $('#modalDeleteDb').modal('show');
+}
+
+
+
+var addSequence = function(){
+     document.getElementById("loader").removeAttribute("hidden");
+     var sequence =  document.getElementById("sequenceToDelete").value;
+     var dbName = document.getElementById("dbToAddSeq").value;
+     var input = document.getElementById("btnFile");
+     var userid =  document.getElementById("userid").value;
+
+     var file = input.files[0];
+     var formData = new FormData();
+     formData.append('file', file);
+     formData.append('id', userid);
+     formData.append('dbName', dbName);
+
+     $.ajax({
+            type: 'POST',
+            url: '/addSequence',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(response){ //console.log(response);
+                document.getElementById("loader").setAttribute("hidden", true);
+                document.getElementById("results-input").value = response;
+                createDatabasesTable();
+            },
+            fail: function(){
+                document.getElementById("loader").setAttribute("hidden", true);
+                console.log("error agregando secuencia");
+            }
+        });
+
+}
+
+function showUploadModal(fileList, addId){
+    var dbIndex = addId.split('_')[1];
+    var db = dbs[dbIndex];
+    console.log(db);
+    var modal = document.getElementById("modalDeleteDb");
+    var title = document.getElementById("modalDelete-title");
+    var body = document.getElementById("modalDelete-body");
+    var userid =  document.getElementById("userid").value;
+    document.getElementById( "buttonDelete" ).setAttribute( "onClick", "javascript: addSequence();" );
+    var saveDb =  document.getElementById("dbToAddSeq");
+    saveDb.value = db["Name"];
+    var saveSeq=  document.getElementById("newSeqName");
+    saveSeq.value = fileList[0].name;
+    console.log(fileList[0].name);
+    title.innerHTML = "Add Sequence ";
+    body.innerHTML = "Confirm adding sequence "+ fileList[0].name +" to the database "+db["Name"]+"?";
+    $('#modalDeleteDb').modal('show');
+}
+
+
 
 function setDatabases(){
     var dbs = document.getElementById("databases").value;

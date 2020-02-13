@@ -123,9 +123,12 @@
             <input type="hidden" class="hidden" id="results-input" value="{{ results }}"/>
             <input type="hidden" class="hidden" id="msg" value="{{ msg }}"/>
             <input type="hidden" class="hidden" id="username" value="{{ username }}"/>
+            <input type="hidden" class="hidden" id="dbToDelete" value=""/>
             <input type="hidden" class="hidden" id="sequenceToDelete" value=""/>
             <input type="hidden" class="hidden" id="userid" value="{{ userid }}"/>
-
+            <input type="hidden" class="hidden" id="dbToAddSeq" value=""/>
+            <input type="hidden" class="hidden" id="newSeqName" value=""/>
+            <input type="hidden" class="hidden" id="newSeqContent" value=""/>
             <div class="ftco-blocks-cover-1">
                 <div class="ftco-cover-1 fullscreen">
                     <div class="container">
@@ -138,6 +141,11 @@
                                     <div class="container bordered" id="table-results" hidden="">
 
                                     </div>
+
+                                      <div class="form-group" hidden="true">
+                                            <input hidden="true" type="file" id="btnFile" name="file[]" /><br />
+                                            <!--<input type=file name=file webkitdirectory="" directory="" >-->
+                                      </div>
                                 </form>
                             </div>
                         </div>
@@ -174,7 +182,7 @@
                         <div class="modal-body" id="modalDelete-body">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteDatabase()">Accept</button>
+                            <button type="button" id="buttonDelete" class="btn btn-danger" data-dismiss="modal" onclick="deleteDatabase()">Accept</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="">Cancel</button>
 
                         </div>

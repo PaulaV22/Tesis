@@ -1,3 +1,5 @@
+html,body{ margin:0 !important; padding:0 !important; height:100%!important; width:100% !important; }
+
 /* Base */
 .font-size-10 {
   font-size: 10px; }
@@ -201,7 +203,7 @@
     color: #fff;
     background: #007bff; }
 
-html {
+/*html {
   overflow-x: hidden; }
 
 body {
@@ -227,7 +229,7 @@ body {
     body.offcanvas-menu:before {
       opacity: 1;
       visibility: visible; }
-
+*/
 ::-moz-selection {
   background: #000;
   color: #fff; }
@@ -1278,11 +1280,9 @@ h1, h2, h3, h4, h5,
   background-repeat: no-repeat;
   position: relative;}
   .ftco-cover-1, .ftco-cover-1 .container > .row {
-    min-height: 600px;
     padding: 0 4% 0 0;
 }
   .ftco-cover-1, .ftco-cover-1 .container > .right-row {
-    min-height: 600px;
     padding-top: 2%;
     padding-left: 14%;
 }
@@ -2027,9 +2027,12 @@ tr.hide-table-padding td {
 }
 
 .modal-body{
-    font-size: 0.8rem;
+    font-size: 1vw;
 }
 
+.modal-title{
+    font-size: 1.5vw;
+}
 .text-left{
     text-align:left;
 }
