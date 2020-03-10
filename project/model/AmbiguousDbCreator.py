@@ -134,7 +134,7 @@ class AmbiguousDbCreator:
         return True
 
     def testFails(self,db, file):
-        print("A TESTEAR DB "+db)
+        print("A TESTEAR DB AMBIGUA "+db)
         i = 0
         for f in os.listdir(db):
             if os.stat(db+"/"+f).st_size == 0:
@@ -143,12 +143,15 @@ class AmbiguousDbCreator:
         if i<6:
             return True
         if not self.hasAllFiles(db):
+            print("NO TIENE TODOS LOS ARCHIVOS")
             return True
         outputPath = "Test"+"/"+self.dbName+"/"+file
+        print("outputpath es "+outputPath)
         sb = SB.SimpleBlast(db, "salida", "salida", "fasta", outputPath)
         queryName = "queryTestBola.fa"
         queryPath = self.resourcePath("/" + queryName)
         try:
+            print("va a alinear "+ queryPath +" "+queryName)
             sb.align(queryPath, queryName)
         except:
             return True

@@ -1,9 +1,9 @@
 var dbs= []
 
 function showLoading(){
-    var seq = document.getElementById("sequence").value;
+    //var seq = document.getElementById("sequence").value;
     document.getElementById("loader").removeAttribute("hidden");
-    createTable();
+    //createTable();
 }
 
 function showMsg(){
@@ -140,23 +140,23 @@ function createDatabasesTable(){
         var cols = ["Name", "Files", "Expand"];
         var tr = thead.insertRow(-1);
             var th1 = document.createElement("th");
-            th1.innerHTML = "<b>NAME</b>";
+            th1.innerHTML = "NAME";
             tr.appendChild(th1);
 
              var th2 = document.createElement("th");
-            th2.innerHTML = "<b>FILES</b>";
+            th2.innerHTML = "FILES";
             tr.appendChild(th2);
 
              var th3 = document.createElement("th");
-            th3.innerHTML = "<b>DELETE</b>";
+            th3.innerHTML = "DELETE";
             tr.appendChild(th3);
 
              var th4 = document.createElement("th");
-            th4.innerHTML = "<b>ADD SEQUENCE</b>";
+            th4.innerHTML = "ADD SEQUENCE";
             tr.appendChild(th4);
 
              var th5 = document.createElement("th");
-            th5.innerHTML = "<b>EXPAND</b>";
+            th5.innerHTML = "EXPAND";
             tr.appendChild(th5);
 
 
@@ -249,16 +249,16 @@ function createDatabasesTable(){
             divHeaderSubRow.className="row";
             var divHeaderSubRow1 = document.createElement("div");
             divHeaderSubRow1.className="col-md-5 text-left";
-            divHeaderSubRow1.innerHTML = "<b>SEQUENCE NAME</b>";
+            divHeaderSubRow1.innerHTML = "SEQUENCE NAME";
             var divHeaderSubRow2 = document.createElement("div");
             divHeaderSubRow2.className="col-md-2 text-left";
-            divHeaderSubRow2.innerHTML= "<b>SIZE</b>"
+            divHeaderSubRow2.innerHTML= "SIZE"
             var divHeaderSubRow3 = document.createElement("div");
             divHeaderSubRow3.className="col-md-2";
-            divHeaderSubRow3.innerHTML="<b>INSPECT</b>"
+            divHeaderSubRow3.innerHTML="INSPECT"
             var divHeaderSubRow4 = document.createElement("div");
             divHeaderSubRow4.className="col-md-3 text-left";
-            divHeaderSubRow4.innerHTML= "<b>DELETE SEQUENCE</b>"
+            divHeaderSubRow4.innerHTML= "DELETE SEQUENCE"
 
             divHeaderSubRow.appendChild(divHeaderSubRow1);
             divHeaderSubRow.appendChild(divHeaderSubRow2);
@@ -488,4 +488,48 @@ function setDatabases(){
         select.appendChild(opt);
         }
     }
+}
+
+function openSideBar(){
+    var div = document.getElementById("#show-sidebar");
+    div.setAttribute("id","#close-sidebar");
+}
+
+function getContent(sequence){
+    arr = sequence.split("\n");
+    name = arr[0];
+    name = name.split(" ")[0];
+    arr.splice(0,1);
+    content = arr.join('');
+    return content;
+}
+
+function getAlignment(seq1, seq2, seq1start, seq2start){
+    var output = "";
+
+}
+function showResults(){
+   var results=document.getElementById("results-input").value;
+    if (results.length>0){
+        results = JSON.parse(results);
+        alignment = results[results.length-1]
+        array = alignment.alignment.split('>');
+        sequence1 =array[1];
+        sequence2 =array[2];
+        sequence1Name = sequence1.split('\n')[0];
+        sequence1Name = sequence1Name.split(' ')[0];
+        sequence2Name = sequence2.split('\n')[0];
+        sequence2Name = sequence2Name.split(' ')[0];
+        console.log(sequence1.split('\n',2));
+        sequence1Content = getContent(sequence1);
+        sequence2Content = getContent(sequence2);
+        divSeq1Content = document.getElementById("content1");
+        divSeq1Content.innerHTML = sequence1Content;
+        divSeq2Content = document.getElementById("content2");
+        divSeq2Content.innerHTML = sequence2Content;
+        divResults = document.getElementById("table-results");
+        divResults.removeAttribute("hidden")
+    }
+
+
 }

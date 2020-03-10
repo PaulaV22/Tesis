@@ -36,13 +36,22 @@ class HaplotypesSearcher():
     def setNewDb(self,newDb):
         self.newDb=newDb
 
-    def getResults(self,queryName,queryPath, database, numSeqs):
-        simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", database, True)
+    def getResults(self,queryName,queryPath, database, numSeqs, ambiguo):
+        db = ""
+        if ambiguo:
+            db ="DbAmbigua"
+        else:
+            db ="BlastDb"
+        simpleBlast = S.SimpleBlast(db, "salida", "salida", "fasta", "FinalResult", database, True)
         simpleBlast.align(queryPath, queryName)
-        resultsAnalizer = RA.ResultsAnalizer("FinalResult",database)
+
+        resultsAnalizer = RA.ResultsAnalizer("FinalResult",database, ambiguo)
 
         results = resultsAnalizer.getSimilarSequences(queryName,numSeqs)
+
         return results
+
+
 
     def run(self):
     #def searchHaplotypes(self):
@@ -100,12 +109,13 @@ class HaplotypesSearcher():
         ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb", "salida", "fasta", "DbAmbigua",dbPath)
         #simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", dbPath, True)
         #self.resultsAnalizer = RA.ResultsAnalizer("FinalResult", self.db, self.categories, self.categoriesPath)
+        print("llama a simple db creator make db")
         simpleDbCreator.makeDb()
         ####alinear todas las secuencias de BoLa entre si generando un archivo de salida por cada alineacion (n x n)####
         while not ready:
             try:
                 print("global blast va a alinear "+dbPath)
-                globalBlast.align("/Databases/"+dbPath)
+                globalBlast.align("Databases/"+dbPath)
                 ready = True
             except:
                 print(" hubo error y sismpledbcreator va a crear db de nuevo ")
@@ -116,6 +126,10 @@ class HaplotypesSearcher():
 
         ambiguousDbCreator.makeDb()
         #categoriesFile = self.projectPath + "/Categories/" + db + ".json"
+
+    def configureSimpleDb(self, dbPath, dbName):
+        simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta")
+        simpleDbCreator.makeDb()
 
 
     def configureDb2(self, db):
@@ -230,7 +244,7 @@ class HaplotypesSearcher():
         self.globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", dbPath)
         self.ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb" , "salida", "fasta", "DbAmbigua", dbPath)
         self.simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", dbPath, True)
-        self.resultsAnalizer = RA.ResultsAnalizer("FinalResult",dbPath)
+        self.resultsAnalizer = RA.ResultsAnalizer("FinalResult",dbPath,True)
 
 
     def getProjectPath(self):

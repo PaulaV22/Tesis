@@ -45,19 +45,19 @@
                             <span>General</span>
                         </li>
                         <li class="sidebar-dropdown">
-                            <a href="">
+                            <a href="/compare/{{ userid }}">
                                 <i class="fa fa-table"></i>
-                                <span>Find Haplotypes</span>
+                                <span>Compare</span>
                             </a>
                         </li>
-                         <li>
+                        <li>
                             <a href="/inspect/{{ userid }}"> <i
                                     class="fa fa-search"></i><span>Inspect</span></a>
-                         </li>
+                        </li>
                         <li>
-                            <a href="/align/{{ userid }}"> <i
-                                    class="fa fa-search"></i><span>Align two sequences</span></a>
-                         </li>
+                            <a href="/align/{{ userid }}">
+                                <i class="fa fa-search"></i><span>Align</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -77,50 +77,42 @@
                 <div class="container">
                     <div id="loader" class="loader" hidden=""></div>
 
-                    <div class="right-row align-items-center justify-content-center text-center">
-                        <div>
-                            <h1>Alleles Searcher</h1>
-                            <p class="mb-5">Solving SNP desambiguations</p>
+                    <div class="right-row align-items-center justify-content-center">
+                        <div class="text-center">
+                            <h1>Align Sequences</h1>
                             <form method="post">
-                                <div class="container">
-                                    <div class="form-group">
-                                        <div class="col-6">
-                                            <label>Number of results </label>
-                                            <input type="number" name="numResults" id="numResults" min="1" max="50"
-                                                   step="1" value="10">
-                                        </div>
-                                        <div class="col-6">
-                                            <label>Database</label>
-                                            <select id="selectDbs" name="selectDbs">
-                                            </select>
-                                        </div>
+                                <div class="container ">
+                                    <div class="flex-wrapper">
 
-                                    </div>
-                                    <div>
-                                        <textarea name="sequence" id="sequence" class="text-area"
-                                                  placeholder="{{ sequenceExample }}" rows="10"
-                                                  cols="85">{{ sequence }}</textarea>
+                                        <div>
+                                        <textarea name="sequence1" id="sequence1" class="text-area"
+                                                  placeholder="{{ sequenceExample1 }}" rows="10"
+                                                  cols="65">{{ sequence1 }}</textarea>
+                                        </div>
+                                        <div>
+                                        <textarea name="sequence2" id="sequence2" class="text-area"
+                                                  placeholder="{{ sequenceExample2 }}" rows="10"
+                                                  cols="65">{{ sequence2 }}</textarea>
+                                        </div>
                                     </div>
 
-                                    <button type="submit" onclick="showLoading()">Search</button>
-                                </div>
-                                <div class="container bordered" id="table-results" hidden="">
-
+                                    <button type="submit" onclick="showLoading()">Align</button>
                                 </div>
                             </form>
                         </div>
                     </div>
+                      <div class="container bordered scrollable" id="table-results" hidden="">
+                          <div id="content1"></div>
+                          <div id="content2"></div>
+
+                      </div>
                 </div>
                 <!-- END .ftco-cover-1 -->
             </div>
 
             <script>
-         setDatabases();
-         configureSideBar();
-         createTable();
-
-
-
+                 configureSideBar();
+                 showResults();
 
             </script>
 

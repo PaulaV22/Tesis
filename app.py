@@ -32,6 +32,13 @@ sequenceExample = ">HLA030F_1\n" \
                   "CCSAGGTGGACARGGTGTGCAGACACMACTACMGGGTCSGGGARAGKTTCWCYGKRMAAA" \
                   "MGGMWAAAAA"
 
+sequenceExample2 = ">HLA030F_2\n" \
+                  "GRCGRRTGTCATTTCTTCACGGGACCGAGCGGGTGCGGTTSCTGGASAGAYMCTTCTATA" \
+                  "ATGGAGAAGAGWACGTGCGCTTCGACAGCGACTGGGGCGAGTWCCGGGCGGTGACCGAGC" \
+                  "TRGGGCGGCCGGMCGCCGAGTACTGGAACAGCCAGAAGGASWTCCTGGAGSAGARGCGGG" \
+                  "CCSAGGTGGACARGGTGTGCAGACACMACTACMGGGTCSGGGARAGKTTCWCYGKRMAAA" \
+                  "MGGMWAAAAT"
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -62,13 +69,14 @@ def compare(id):
         return render_template("login.html", email="", password="", msg="Plese enter a valid user")
     else:
         if request.method == 'POST':
+            print(request.form)
             sequence = request.form['sequence']
-            database = request.form['database']
-        # print(sequence)
+            database = request.form['selectDbs']
+            print(sequence)
             if (len(sequence) > 0):
                 numResults = request.form['numResults']
                 try:
-                    results = cc.compare(sequence, numResults, database, id)
+                    results = cc.compare(sequence, numResults, database, id, True)
                     return render_template("compare.html", results=results, num=int(numResults), databases=dbs,
                                            msg="", sequence=sequence, username=user['name'], userid=id)
                 except Exception as e:
@@ -129,10 +137,26 @@ def inspect(id):
     if id is None or not user['logged']:
         return render_template("login.html", email="", password="", msg="Plese enter a valid user")
     message = ""
+    if request.method == 'POST':
+        # check if the post request has the file part
+        uploaded_files =  request.files.getlist("dbfile[]")
+        print(request.files.getlist("dbfile[]"))
+        dbName = request.form["dbname"]
+        newDb = UPLOAD_FOLDER + "/" + id + "/" + dbName
+        if os.path.exists(newDb):
+            shutil.rmtree(newDb)
+        os.makedirs(newDb)
+        for file in uploaded_files:
+            # Check if the file is one of the allowed types/extensions
+            if file and allowed_file(file.filename):
+                # Make the filename safe, remove unsupported chars
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(newDb,filename))
+        uc.addDbToUser(id,dbName)
+        cc.createDb(id,dbName)
     databases = cc.getDatabases(id)
     if databases is None:
         message="No databases added"
-
     return render_template("inspect.html",userid = id, msg=message,results=databases)
 
 @app.route('/deleteDatabase', methods=['POST'])
@@ -188,6 +212,44 @@ def addSequence():
 
 
 
-@app.route('/test', methods=['get'])
-def test():
-    return render_template("test.html")
+@app.route('/align/<id>', methods=['GET', 'POST'])
+def align(id):
+    user = uc.getUserByEmail(id)
+    dbs = cc.getDatabases(id)
+    print(dbs)
+    if id is None or not user['logged']:
+        return render_template("login.html", email="", password="", msg="Plese enter a valid user")
+    else:
+        if request.method == 'POST':
+            print(request.form)
+            sequence1 = request.form['sequence1']
+            sequence2 = request.form['sequence2']
+            print(sequence1)
+            print(sequence2)
+            if ((len(sequence1) > 0) and (len(sequence2) >0)):
+                seq1Name = sequence1.partition('\n')[0]
+                seq1Name = ''.join(e for e in seq1Name if e.isalnum())
+                seq1Name = seq1Name+".fa"
+                dbName ="align"
+                newDb = UPLOAD_FOLDER + "/" + id + "/" +dbName
+                if os.path.exists(newDb):
+                    shutil.rmtree(newDb)
+                os.makedirs(newDb)
+                seq1Path = UPLOAD_FOLDER + "/" + id + "/"+dbName+"/"+seq1Name
+                file = open(seq1Path, 'w+')
+                file.write(sequence1)
+                file.close()
+                try:
+                    cc.createSimpleDb(id, "align")
+                    results = cc.compare(sequence2, 1, dbName, id, False)
+                    print(results)
+                    cc.deleteDatabase(id,dbName)
+                    return render_template("align.html", results=results, sequence1=sequence1, sequence2=sequence2,
+                                           sequenceExample1=sequenceExample, sequenceExample2=sequenceExample2,  num=0,
+                                           databases=dbs, msg="", sequence="", username=user['name'], userid=id)
+
+                except Exception as e:
+                    print(e)
+
+        return render_template("align.html", results="", sequence1="", sequence2="", sequenceExample1= sequenceExample, sequenceExample2= sequenceExample2, num=0, databases=dbs,
+                           msg="", sequence="",username=user['name'], userid=id)

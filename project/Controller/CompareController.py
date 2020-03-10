@@ -60,7 +60,7 @@ class CompareController():
         self.dbName= dbName
         self.HS.setDb(dbName)
 
-    def compare(self, sequence, numResults, database, userId):
+    def compare(self, sequence, numResults, database, userId, ambiguo):
         if not self.HS:
             self.HS = HaplotypesSearcher()
         dbPath =userId+"/"+database
@@ -69,9 +69,7 @@ class CompareController():
         print("dbPath es "+ dbPath)
         self.HS.setDb(dbPath, database)
         seqName = sequence.partition('\n')[0]
-        seqName = seqName[1:]
-        seqName = seqName.replace("\r", "")
-        seqName = seqName.replace("\n", "")
+        seqName = ''.join(e for e in seqName if e.isalnum())
 
         seqPath = "/Temp/"+ seqName+ ".fa"
 
@@ -82,9 +80,30 @@ class CompareController():
         file.write(sequence)
         file.close()
         print(numResults)
-        results = self.HS.getResults(seqName,seqPath,dbPath,numResults)
+        results = self.HS.getResults(seqName,seqPath,dbPath,numResults, ambiguo)
         return results
-        #return []
+       # return []
+
+    def compareWithSimpleDb(self,sequence, numResults, database, userId):
+        if not self.HS:
+            self.HS = HaplotypesSearcher()
+        dbPath = userId + "/" + database
+
+        self.HS.setDb(dbPath, database)
+        seqName = sequence.partition('\n')[0]
+        seqName = ''.join(e for e in seqName if e.isalnum())
+
+        seqPath = "/Temp/" + seqName + ".fa"
+
+        file = open(seqPath, "w+")
+
+        file.write(sequence)
+        file.close()
+        print(numResults)
+        results = self.HS.getResults(seqName, seqPath, dbPath, numResults,False)
+        return results
+
+    # return []
     def showResults(self, results):
         dt = np.dtype('string', 'float', 'int')
         resultsArray = np.array(results, dtype=dt)
@@ -96,6 +115,20 @@ class CompareController():
             self.HS = HaplotypesSearcher()
         dbPath = userId+"/"+dbName
         self.HS.configureDb(dbPath,dbName)
+
+    def createDb(self, userId, dbName):
+        if not self.HS:
+            self.HS = HaplotypesSearcher()
+        dbPath = userId + "/" + dbName
+        self.HS.configureDb(dbPath, dbName)
+
+    def createSimpleDb(self, userId, dbName):
+        if not self.HS:
+            self.HS = HaplotypesSearcher()
+        dbPath = userId + "/" + dbName
+        self.HS.configureSimpleDb(dbPath, dbName)
+
+
 
     def deleteDatabase(self,id,name):
         dbPath = id+"/"+name

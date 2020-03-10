@@ -5,16 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="781b5047-df2b-4a73-b63e-6195da65885e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/align.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/Controller/CompareController.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/Controller/CompareController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/model/AmbiguousDbCreator.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/model/AmbiguousDbCreator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/model/HaplotypesSearcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/model/HaplotypesSearcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/model/SimpleDbCreator.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/model/SimpleDbCreator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/model/ResultsAnalizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/model/ResultsAnalizer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/addDb.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/addDb.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/compare.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/compare.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/inspect.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/inspect.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/users.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/model/HaplotypesSearcher.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="102" column="25" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="25" />
+            <state relative-caret-position="204">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -38,39 +41,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/addDb.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="137" column="67" selection-start-line="137" selection-start-column="61" selection-end-line="137" selection-end-column="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/inspect.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="128" column="62" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="2033" column="4" selection-start-line="2033" selection-start-column="4" selection-end-line="2033" selection-end-column="4" />
+            <state relative-caret-position="186">
+              <caret line="1032" lean-forward="true" selection-start-line="1032" selection-end-line="1032" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/compare.html">
+        <entry file="file://$PROJECT_DIR$/project/model/ResultsAnalizer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="34" selection-start-line="11" selection-end-line="12" />
+            <state relative-caret-position="208">
+              <caret line="105" column="87" selection-start-line="105" selection-start-column="87" selection-end-line="105" selection-end-column="87" />
               <folding>
-                <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/Controller/CompareController.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="121" column="13" selection-start-line="121" selection-start-column="13" selection-end-line="121" selection-end-column="13" />
+            <state relative-caret-position="136">
+              <caret line="82" column="28" selection-start-line="82" selection-start-column="28" selection-end-line="82" selection-end-column="28" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
               </folding>
@@ -88,32 +73,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/js/functions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="378" column="98" selection-start-line="378" selection-start-column="84" selection-end-line="378" selection-end-column="98" />
+            <state relative-caret-position="102">
+              <caret line="508" column="4" selection-start-line="508" selection-start-column="4" selection-end-line="508" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/model/SimpleDbCreator.py">
+        <entry file="file://$PROJECT_DIR$/templates/align.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="91" column="23" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="141">
+              <caret line="105" selection-start-line="105" selection-end-line="105" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="184" column="12" selection-start-line="184" selection-start-column="12" selection-end-line="184" selection-end-column="12" />
+            <state relative-caret-position="76">
+              <caret line="245" column="20" selection-start-line="245" selection-start-column="20" selection-end-line="245" selection-end-column="20" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
@@ -133,36 +115,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>accordionId</find>
-      <find>trash</find>
       <find>inspect</find>
-      <find>showModalDeleteDatabase</find>
-      <find>modalDe</find>
-      <find>deleteD</find>
-      <find>user</find>
-      <find>userid</find>
-      <find>useri</find>
-      <find>userI</find>
-      <find>databases</find>
-      <find>hidden</find>
-      <find>loader</find>
-      <find>FinalResult</find>
-      <find>load</find>
-      <find>showModalDelete</find>
-      <find>showModalDeleteDatabase</find>
-      <find>num</find>
-      <find>showModalDeleteSequenc</find>
-      <find>todo</find>
-      <find>restartDb</find>
-      <find>fileList.length -1</find>
-      <find>colspan</find>
-      <find>sequenceToDelete</find>
-      <find>EXPAND</find>
-      <find>plus</find>
-      <find>input.files</find>
-      <find>modal</find>
+      <find>form-g</find>
+      <find>Inp</find>
+      <find>file[]</find>
       <find>form</find>
-      <find>configureDb</find>
+      <find>addD</find>
+      <find>allowed_file</find>
+      <find>compa</find>
+      <find>createDb</find>
+      <find>align</find>
+      <find>/align</find>
+      <find>createD</find>
+      <find>btnFile</find>
+      <find>form-group</find>
+      <find>results</find>
+      <find>flex-wrapper</find>
+      <find>left</find>
+      <find>.left</find>
+      <find>creaeT</find>
+      <find>create</find>
+      <find>showloa</find>
+      <find>container</find>
+      <find>setDat</find>
+      <find>showLoad</find>
+      <find>configure</find>
+      <find>ResultsAnalizer</find>
+      <find>self.delete</find>
+      <find>getResults</find>
+      <find>compare</find>
+      <find>font-family</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -172,38 +154,39 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/project/model/AmbiguousDbCreator.py" />
         <option value="$PROJECT_DIR$/project/model/DbAdmin.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/project/model/User.py" />
         <option value="$PROJECT_DIR$/users.json" />
         <option value="$PROJECT_DIR$/templates/register.html" />
-        <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/project/Controller/UserController.py" />
         <option value="$PROJECT_DIR$/project/model/UserManager.py" />
-        <option value="$PROJECT_DIR$/templates/addDb.html" />
         <option value="$PROJECT_DIR$/project/model/GlobalBlast.py" />
-        <option value="$PROJECT_DIR$/project/model/ResultsAnalizer.py" />
         <option value="$PROJECT_DIR$/project/model/SimpleBlast.py" />
-        <option value="$PROJECT_DIR$/project/model/SimpleDbCreator.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/templates/compare.html" />
         <option value="$PROJECT_DIR$/templates/text.html" />
         <option value="$PROJECT_DIR$/templates/test.html" />
-        <option value="$PROJECT_DIR$/static/css/style.css" />
+        <option value="$PROJECT_DIR$/project/model/SimpleDbCreator.py" />
+        <option value="$PROJECT_DIR$/project/model/AmbiguousDbCreator.py" />
+        <option value="$PROJECT_DIR$/templates/login.html" />
+        <option value="$PROJECT_DIR$/templates/addDb.html" />
         <option value="$PROJECT_DIR$/templates/inspect.html" />
-        <option value="$PROJECT_DIR$/app.py" />
-        <option value="$PROJECT_DIR$/static/js/functions.js" />
+        <option value="$PROJECT_DIR$/templates/compare.html" />
         <option value="$PROJECT_DIR$/project/Controller/CompareController.py" />
         <option value="$PROJECT_DIR$/project/model/HaplotypesSearcher.py" />
+        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/templates/align.html" />
+        <option value="$PROJECT_DIR$/project/model/ResultsAnalizer.py" />
+        <option value="$PROJECT_DIR$/static/css/style.css" />
+        <option value="$PROJECT_DIR$/static/js/functions.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="949" />
-    <option name="y" value="-11" />
-    <option name="width" value="983" />
-    <option name="height" value="1043" />
+    <option name="x" value="948" />
+    <option name="y" value="-12" />
+    <option name="width" value="984" />
+    <option name="height" value="1044" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -227,46 +210,36 @@
               <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
               <item name="tesis" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="Blastdb" type="462c0819:PsiDirectoryNode" />
+              <item name="BlastResult" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
               <item name="tesis" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="Blastdb" type="462c0819:PsiDirectoryNode" />
+              <item name="FinalResult" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tesis" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="FinalResult" type="462c0819:PsiDirectoryNode" />
               <item name="paulavillanueva.22@gmail.com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesis" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="Blastdb" type="462c0819:PsiDirectoryNode" />
-              <item name="paulavillanueva.22@gmail.com" type="462c0819:PsiDirectoryNode" />
-              <item name="NEW" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesis" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="Databases" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesis" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="DbAmbigua" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tesis" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="DbAmbigua" type="462c0819:PsiDirectoryNode" />
-              <item name="prueba" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
               <item name="tesis" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tesis" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tesis" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tesis" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -282,8 +255,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Paula\PycharmProjects\tesis\static" />
       <recent name="C:\Users\Paula\PycharmProjects\tesis\templates" />
+      <recent name="C:\Users\Paula\PycharmProjects\tesis\static" />
       <recent name="C:\Users\Paula\PycharmProjects\tesis\project\model" />
       <recent name="C:\Users\Paula\PycharmProjects\tesis\project\Controller" />
       <recent name="C:\Users\Paula\PycharmProjects\tesis" />
@@ -354,40 +327,41 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19872814" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.31399047" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49602544" weight="0.3428064" />
-      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.50317967" side_tool="true" weight="0.26110125" />
-      <window_info anchor="bottom" id="Python Console" order="2" sideWeight="0.49920508" weight="0.3268206" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.10095389" side_tool="true" weight="0.44404975" />
+      <window_info anchor="bottom" id="Python Console" order="2" sideWeight="0.49841017" weight="0.3268206" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32972974" />
       <window_info anchor="bottom" id="Version Control" order="5" sideWeight="0.49920508" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.49682036" visible="true" weight="0.42451155" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.39964476" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.8990461" visible="true" weight="0.39431617" />
+      <window_info anchor="bottom" id="Debug" order="7" sideWeight="0.49920508" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="10" sideWeight="0.49920508" weight="0.3285968" />
+      <window_info anchor="bottom" id="TODO" order="10" sideWeight="0.49841017" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.19872814" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.31399047" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49761525" weight="0.3428064" />
-      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.5023847" side_tool="true" weight="0.37122557" />
-      <window_info anchor="bottom" id="Python Console" order="2" sideWeight="0.49920508" weight="0.3268206" />
+      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49602544" weight="0.3428064" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.10095389" side_tool="true" visible="true" weight="0.44404975" />
+      <window_info anchor="bottom" id="Python Console" order="2" sideWeight="0.49841017" weight="0.3268206" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32972974" />
       <window_info anchor="bottom" id="Version Control" order="5" sideWeight="0.49920508" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.49761525" weight="0.37122557" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.39964476" />
+      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.8990461" visible="true" weight="0.44404975" />
+      <window_info anchor="bottom" id="Debug" order="7" sideWeight="0.49920508" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="10" weight="0.3285968" />
+      <window_info anchor="bottom" id="TODO" order="10" sideWeight="0.49841017" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -418,6 +392,20 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -431,177 +419,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/Signal.py" />
-    <entry file="file://$PROJECT_DIR$/project/BlastResult/BoLa/DRB3_701_0">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/Categories/BoLa.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/Controller/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/Databases/BoLa/Menos_1%/DRB3_0401.fa">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/DbAmbigua/BoLa/DRB3_701_0/DRB3_701_0.nhr">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/FinalResult/BoLa/HLA030F_9/HLA030F_9_0">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/aos.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/model/MailSender.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-260" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/compare2.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-1357713728/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="289" column="4" selection-start-line="289" selection-start-column="4" selection-end-line="289" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/model/User.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="94" column="42" selection-start-line="94" selection-start-column="42" selection-end-line="94" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/Databases/12830-GE.130corregida-HLA030_B07_04.fa" />
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/flask/templating.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="124" column="4" selection-start-line="124" selection-start-column="4" selection-end-line="124" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="89" column="41" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/model/UserManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/secuencias.nhr" />
-    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/secuencias.fasta" />
-    <entry file="file://$PROJECT_DIR$/project/BlastResult/paulavillanueva.22@gmail.com/NEW/12830-GE.130corregida-HLA030_B07_04/12830-GE.130corregida-HLA030_B07_04_0">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3346">
-          <caret line="28" column="9" lean-forward="true" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/model/SimpleBlast.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/DbAmbigua/paulavillanueva.22@gmail.com/NEW/12830-GE.130corregida-HLA030_B07_04_0/12830-GE.130corregida-HLA030_B07_04_0.nin">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/DbAmbigua/paulavillanueva.22@gmail.com/NEW/12830-GE.130corregida-HLA030_B07_04_0/12830-GE.130corregida-HLA030_B07_04_0.nhr">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/DbAmbigua/paulavillanueva.22@gmail.com/NEW/12830-GE.130corregida-HLA030_B07_04_0/12830-GE.130corregida-HLA030_B07_04_0.fasta">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="62" lean-forward="true" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/fontawesome-free-5.12.0-web/js/all.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/fontawesome-free-5.12.0-web/css/fontawesome.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="41496" selection-start-line="4" selection-start-column="41487" selection-end-line="4" selection-end-column="41496" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/font-awesome-4.7.0/css/font-awesome.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="115" selection-start-column="115" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/fontawesome-free-5.12.0-web/svgs/solid/print.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/model/ResultsAnalizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-97">
-          <caret line="76" column="35" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/model/AmbiguousDbCreator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-720">
-          <caret line="96" column="28" selection-start-line="96" selection-start-column="12" selection-end-line="96" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/model/DbAdmin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1550">
-          <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/model/GlobalBlast.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -622,16 +439,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" column="67" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="67" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project/Controller/Controller.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-414">
@@ -648,53 +455,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/DB1/secuencias.fasta">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/BlastResult/paulavillanueva.22@gmail.com/DB1/5919-386-HLA030_2011-05-09_H01/5919-386-HLA030_2011-05-09_H01_0">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/compare.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="34" selection-start-line="11" selection-end-line="12" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="2033" column="4" selection-start-line="2033" selection-start-column="4" selection-end-line="2033" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/functions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="378" column="98" selection-start-line="378" selection-start-column="84" selection-end-line="378" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/inspect.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="128" column="62" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/Controller/CompareController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="121" column="13" selection-start-line="121" selection-start-column="13" selection-end-line="121" selection-end-column="13" />
-          <folding>
-            <element signature="e#1#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/DB1/secuencias.fasta" />
+    <entry file="file://$PROJECT_DIR$/project/BlastResult/paulavillanueva.22@gmail.com/DB1/5919-386-HLA030_2011-05-09_H01/5919-386-HLA030_2011-05-09_H01_0" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/tokenize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -702,40 +464,226 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/model/HaplotypesSearcher.py">
+    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/PUEBA1234/secuencias.fasta" />
+    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/NEW2/secuencias.fasta">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="102" column="25" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="25" />
+        <state relative-caret-position="-210" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/BlastResult/paulavillanueva.22@gmail.com/NEW2/12849-COT.1981-HLA030_E09_15/12849-COT.1981-HLA030_E09_15_0" />
+    <entry file="file://$PROJECT_DIR$/project/BlastResult/paulavillanueva.22@gmail.com/PUEBA1234/12849-COT.1981-HLA030_E09_15/12849-COT.1981-HLA030_E09_15_0" />
+    <entry file="file://$PROJECT_DIR$/project/Databases/paulavillanueva.22@gmail.com/NEW2/12849-COT.1981-HLA030_E09_15.fa" />
+    <entry file="file://$PROJECT_DIR$/project/DbAmbigua/paulavillanueva.22@gmail.com/new4/12850-COT.1983-HLA030_F09_18_0/12850-COT.1983-HLA030_F09_18_0.fasta" />
+    <entry file="file://$PROJECT_DIR$/project/BlastResult/paulavillanueva.22@gmail.com/new4/12850-COT.1983-HLA030_F09_18/12850-COT.1983-HLA030_F09_18_0" />
+    <entry file="file://$PROJECT_DIR$/project/Databases/paulavillanueva.22@gmail.com/new4/12850-COT.1983-HLA030_F09_18.fa" />
+    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/new4/secuencias.fasta" />
+    <entry file="file://$PROJECT_DIR$/project/DbAmbigua/paulavillanueva.22@gmail.com/new123/queryTest2_0/queryTest2_0.fasta" />
+    <entry file="file://$PROJECT_DIR$/project/DbAmbigua/paulavillanueva.22@gmail.com/new123/queryTest_0/queryTest_0.fasta" />
+    <entry file="file://$PROJECT_DIR$/project/DbAmbigua/paulavillanueva.22@gmail.com/new123/queryTestBoLa_0/queryTestBoLa_0.fasta" />
+    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/new123/secuencias.fasta" />
+    <entry file="file://$PROJECT_DIR$/project/model/AmbiguousDbCreator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="151" column="37" selection-start-line="151" selection-start-column="25" selection-end-line="151" selection-end-column="37" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/project/model/DbAdmin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-289">
+          <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/DbAmbigua/paulavillanueva.22@gmail.com/NEW3/DRB3_0102_0/DRB3_0102_0.fasta">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/project/model/SimpleDbCreator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="91" column="23" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="23" />
+        <state relative-caret-position="161">
+          <caret line="68" column="22" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="22" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="67" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="67" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Blastdb/BoLa/Mas_frecuentes/secuencias.fasta">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/addDb.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="137" column="67" selection-start-line="137" selection-start-column="61" selection-end-line="137" selection-end-column="67" />
+        <state relative-caret-position="782">
+          <caret line="103" column="33" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Databases/prueba/S2.fa">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Databases/paulavillanueva.22@gmail.com/asd/DRB3_1101.fa">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Databases/paulavillanueva.22@gmail.com/asd/DRB3_1002.fa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/inspect.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="114" column="39" selection-start-line="114" selection-start-column="39" selection-end-line="114" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Databases/paulavillanueva.22@gmail.com/asd/DRB3_1001.fa">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Databases/paulavillanueva.22@gmail.com/align/DRB30102.fa">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/align/secuencias.nhr">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Blastdb/paulavillanueva.22@gmail.com/align/secuencias.fasta">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/FinalResult/paulavillanueva.22@gmail.com/new/DRB30102/DRB30102_0">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="105" column="15" selection-start-line="105" selection-start-column="7" selection-end-line="105" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/FinalResult/paulavillanueva.22@gmail.com/align/DRB30102/DRB30102_0">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-694" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/FinalResult/paulavillanueva.22@gmail.com/new/DRB30102/DRB30102_3">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="49" column="11" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/scss/style.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/compare.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="112" column="22" selection-start-line="112" selection-start-column="22" selection-end-line="112" selection-end-column="22" />
+          <folding>
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/model/HaplotypesSearcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/model/SimpleBlast.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="35" column="27" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/Controller/CompareController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="82" column="28" selection-start-line="82" selection-start-column="28" selection-end-line="82" selection-end-column="28" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="184" column="12" selection-start-line="184" selection-start-column="12" selection-end-line="184" selection-end-column="12" />
+        <state relative-caret-position="76">
+          <caret line="245" column="20" selection-start-line="245" selection-start-column="20" selection-end-line="245" selection-end-column="20" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/align.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/FinalResult/paulavillanueva.22@gmail.com/align/12849COT1981HLA030/12849COT1981HLA030_0">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="1032" lean-forward="true" selection-start-line="1032" selection-end-line="1032" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/model/ResultsAnalizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="105" column="87" selection-start-line="105" selection-start-column="87" selection-end-line="105" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="508" column="4" selection-start-line="508" selection-start-column="4" selection-end-line="508" selection-end-column="4" />
         </state>
       </provider>
     </entry>

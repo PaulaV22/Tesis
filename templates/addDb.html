@@ -28,89 +28,70 @@
 </head>
 
 <body>
-<!-- Sidebar -->
-<div class="page-wrapper chiller-theme toggled">
-    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-        <i class="fas fa-bars"></i>
-    </a>
-    <nav id="sidebar" class="sidebar-wrapper">
-        <div class="sidebar-content">
-            <div class="sidebar-brand">
-                <a href="">welcome</a>
-                <div id="close-sidebar">
-                    <i class="fas fa-times"></i>
+<div class="row">
+    <!-- Sidebar -->
+
+    <div class="column left page-wrapper chiller-theme toggled">
+        <a id="close-sidebar" class="btn btn-sm btn-dark" onclick="openSideBar()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="">welcome</a>
                 </div>
-            </div>
-            <div class="sidebar-header">
-                <div class="user-pic">
-                    <img class="img-responsive img-rounded"
-                         src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-                         alt="User picture">
-                </div>
-                <div class="user-info">
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img class="img-responsive img-rounded"
+                             src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                             alt="User picture">
+                    </div>
+                    <div class="user-info">
           <span class="user-name" id="usernameSpan">
             <strong></strong>
           </span>
-                    <a class="user-status fa fa-circle" href="">Edit profile</a>
+                        <a class="user-status" href="">Edit profile</a>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>General</span>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="/compare/{{ userid }}">
+                                <i class="fa fa-table"></i>
+                                <span>Compare sequences</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-database"></i>
+                                <span>Administrate data</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="/inspect/{{ userid }}"> <i
+                                                class="fa fa-search"></i><span>Inspect</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/addDatabase/{{ userid }}"><i
+                                                class="fa fa-plus"></i><span>Add</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="sidebar-menu">
-                <ul>
-                    <li class="header-menu">
-                        <span>General</span>
-                    </li>
-                    <li class="sidebar-dropdown">
-                        <a href="/compare/{{ userid }}">
-                            <i class="fa fa-tachometer-alt"></i>
-                            <span>Compare sequences</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown">
-                        <a href="#">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span>Administrate data</span>
-                        </a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li>
-                                    <a href="#">Inspect</a>
-                                </li>
-                                <li>
-                                    <a href="/addDatabase/{{ userid }}">New
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">Delete</a>
-                                </li>
-                                <li>
-                                    <a href="#">Edit</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- sidebar-content  -->
-        <div class="sidebar-footer">
-
-        </div>
-    </nav>
+        </nav>
+    </div>
 
 
     <!-- Page content -->
-    <div class="">
+    <div class="column right">
         <div class="site-wrap">
-
-            <div class="site-mobile-menu site-navbar-target">
-                <div class="site-mobile-menu-header">
-                    <div class="site-mobile-menu-close mt-3">
-                        <span class="icon-close2 js-menu-toggle"></span>
-                    </div>
-                </div>
-                <div class="site-mobile-menu-body"></div>
-            </div>
-
             <input type="hidden" class="hidden" id="results-input" value="{{ results }}"/>
             <input type="hidden" class="hidden" id="msg" value="{{ msg }}"/>
             <input type="hidden" class="hidden" id="username" value="{{ username }}"/>
@@ -130,7 +111,7 @@
                                             <input type="text" id="dbname" name="dbname">
                                         </div>
                                         <div class="form-group">
-                                            <input type="file" multiple="" name="file[]" /><br />
+                                            <input type="file" multiple="" name="file[]"/><br/>
 
                                             <!--<input type=file name=file webkitdirectory="" directory="" >-->
                                         </div>
