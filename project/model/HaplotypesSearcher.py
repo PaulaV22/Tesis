@@ -28,6 +28,7 @@ class HaplotypesSearcher():
         """ Get absolute path to resource, works for dev and for PyInstaller """
         base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         output = base_path + relative_path
+        output = output.replace("\\", "/")
         return output
 
     def setOption(self,option):

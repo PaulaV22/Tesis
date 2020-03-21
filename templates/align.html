@@ -47,23 +47,22 @@
                         <li class="sidebar-dropdown">
                             <a href="/compare/{{ userid }}">
                                 <i class="fa fa-table"></i>
-                                <span>Compare</span>
+                                <span>Find Haplotypes</span>
                             </a>
                         </li>
-                        <li>
+                         <li>
                             <a href="/inspect/{{ userid }}"> <i
-                                    class="fa fa-search"></i><span>Inspect</span></a>
-                        </li>
+                                    class="fa fa-database"></i><span>Inspect</span></a>
+                         </li>
                         <li>
-                            <a href="/align/{{ userid }}">
-                                <i class="fa fa-search"></i><span>Align</span></a>
-                        </li>
+                            <a href="/align/{{ userid }}"> <i
+                                    class="fa fa-search"></i><span>Align two sequences</span></a>
+                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
-
 
     <!-- Page content -->
     <div class="column right">
@@ -80,22 +79,21 @@
                     <div class="right-row align-items-center justify-content-center">
                         <div class="text-center">
                             <h1>Align Sequences</h1>
+                            <p class="mb-5">Align and compare two sequences in .fa format</p>
                             <form method="post">
                                 <div class="container ">
                                     <div class="flex-wrapper">
-
                                         <div>
                                         <textarea name="sequence1" id="sequence1" class="text-area"
                                                   placeholder="{{ sequenceExample1 }}" rows="10"
-                                                  cols="65">{{ sequence1 }}</textarea>
+                                                  cols="55">{{ sequence1 }}</textarea>
                                         </div>
                                         <div>
                                         <textarea name="sequence2" id="sequence2" class="text-area"
                                                   placeholder="{{ sequenceExample2 }}" rows="10"
-                                                  cols="65">{{ sequence2 }}</textarea>
+                                                  cols="55">{{ sequence2 }}</textarea>
                                         </div>
                                     </div>
-
                                     <button type="submit" onclick="showLoading()">Align</button>
                                 </div>
                             </form>
@@ -104,18 +102,14 @@
                       <div class="container bordered scrollable" id="table-results" hidden="">
                           <div id="content1"></div>
                           <div id="content2"></div>
-
                       </div>
                 </div>
                 <!-- END .ftco-cover-1 -->
             </div>
-
             <script>
                  configureSideBar();
                  showResults();
-
             </script>
-
         </div>
     </div>
 </div>

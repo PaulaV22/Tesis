@@ -10,7 +10,10 @@ class CompareController():
     def __init__(self):
         self.HS = HaplotypesSearcher()
         #self.dbList = self.getDatabases()
-        self.dbName = self.HS.getDatabases()[0]
+        self.dbs = self.HS.getDatabases()
+        self.dbName = ""
+        if len(self.dbs)>0:
+            self.dbName = self.dbs[0]
 
     def resourcePath(self, relative_path):
         """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -21,6 +24,8 @@ class CompareController():
     def getDatabases(self, id):
         output = []
         dbs= self.resourcePath("/Databases/"+id)
+        if not os.path.exists(dbs):
+            os.mkdir(dbs)
         if len(os.listdir(dbs)) == 0:
             salidaJson = json.dumps(output)
             print(salidaJson)

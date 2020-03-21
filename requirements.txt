@@ -1,0 +1,4 @@
+biopython
+flask
+numpy
+flask_debug

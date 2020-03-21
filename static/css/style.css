@@ -368,7 +368,7 @@ h1, h2, h3, h4, h5,
 
   .ftco-cover-1 > .container {
     position: relative;
-    margin-top: 2%;
+    padding: 2% 5%;
   }
   .ftco-cover-1.fullscreen {
     position: absolute;
@@ -997,11 +997,11 @@ select{
 }
 
 .column.left{
-    width:15%;
+    width:20%;
 }
 
 .column.right{
-    width:85%;
+    width:80%;
     padding-top: 20px;
 }
 
@@ -1011,8 +1011,7 @@ th{
 
 .flex-container{
     display: flex;
-    justify-content: space-evenly;
-    padding: 0 8%;
+    justify-content: space-around;
 }
 
 .left-container{

@@ -506,12 +506,23 @@ function getContent(sequence){
 
 function getAlignment(seq1, seq2, seq1start, seq2start){
     var output = "";
-
 }
+
+function min (val1,val2){
+    if (val1>=val2) return val2;
+    return val1;
+}
+
+function max(val1,val2){
+    if (val1>=val2) return val1;
+    return val2;
+}
+
 function showResults(){
    var results=document.getElementById("results-input").value;
     if (results.length>0){
         results = JSON.parse(results);
+        console.log(results)
         alignment = results[results.length-1]
         array = alignment.alignment.split('>');
         sequence1 =array[1];
@@ -523,6 +534,46 @@ function showResults(){
         console.log(sequence1.split('\n',2));
         sequence1Content = getContent(sequence1);
         sequence2Content = getContent(sequence2);
+
+        queryStart = alignment.queryStart;
+        hitStart = alignment.hitStart;
+        var length= 50;
+        var iteration = 0;
+
+        /*for (var k= 0; k < sequence1.length || k < sequence2.length; k++) {
+            for (var j= 0; j <= length; j++) {
+             queryStart = queryStart +j;
+             hitStart = hitStart +j;
+             substringLimitLow = k + n * length;
+             substringLimitTop = k + n * length + length - 1;
+             querySubSeq = sequence1Content[]
+             querySubEnd = queryStart + length;
+             hitSubEnd = hitEnd + length;
+             n ++;
+            }
+
+        }*/
+
+        var middleSeq ="";
+
+        for (var j =0; j <= max(sequence1.length, sequence2.length); j++) {
+            if (subseq1[j] && subseq2[j]){
+                if (subseq1[j] == subseq2[j]){
+                    middleSeq = middleSeq + "|";
+                }else{
+                    middleSeq = middleSeq + " ";
+                }
+            }
+            middleSeq = middleSeq + " ";
+        }
+        var chunkedSeq1 = sequence1Content.match(/.{1,50}/g);
+        var chunkedSeq2 = sequence2Content.match(/.{1,50}/g);
+        var chunkedMiddle = middleSeq.match(/.{1,50}/g);
+
+        console.log(chunkedSeq1);
+        console.log(chunkedSeq2);
+        console.log(chunkedMiddle);
+
         divSeq1Content = document.getElementById("content1");
         divSeq1Content.innerHTML = sequence1Content;
         divSeq2Content = document.getElementById("content2");

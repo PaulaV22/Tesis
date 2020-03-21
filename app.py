@@ -1,7 +1,7 @@
 from flask import Flask, url_for, request, render_template, redirect
 from project.Controller.CompareController import CompareController as CC
 from project.Controller.UserController import UserController as UC
-from flask_debug import Debug
+#from flask_debug import Debug
 from werkzeug.utils import secure_filename
 import os
 import shutil
@@ -13,9 +13,8 @@ ALLOWED_EXTENSIONS = {'fasta','fa'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-app = Flask(__name__)
-Debug(app)
-app.run(debug=True)
+
+
 cc = CC()
 uc = UC()
 # route and method to access to the index view.
@@ -38,6 +37,7 @@ sequenceExample2 = ">HLA030F_2\n" \
                   "TRGGGCGGCCGGMCGCCGAGTACTGGAACAGCCAGAAGGASWTCCTGGAGSAGARGCGGG" \
                   "CCSAGGTGGACARGGTGTGCAGACACMACTACMGGGTCSGGGARAGKTTCWCYGKRMAAA" \
                   "MGGMWAAAAT"
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -135,7 +135,7 @@ def addDatabase(id):
 def inspect(id):
     user = uc.getUserByEmail(id)
     if id is None or not user['logged']:
-        return render_template("login.html", email="", password="", msg="Plese enter a valid user")
+        return render_template("login.html", email="", password="",username=user['name'], msg="Plese enter a valid user")
     message = ""
     if request.method == 'POST':
         # check if the post request has the file part
@@ -157,7 +157,7 @@ def inspect(id):
     databases = cc.getDatabases(id)
     if databases is None:
         message="No databases added"
-    return render_template("inspect.html",userid = id, msg=message,results=databases)
+    return render_template("inspect.html",userid = id,username=user['name'], msg=message,results=databases)
 
 @app.route('/deleteDatabase', methods=['POST'])
 def deleteDatabase():
@@ -218,7 +218,7 @@ def align(id):
     dbs = cc.getDatabases(id)
     print(dbs)
     if id is None or not user['logged']:
-        return render_template("login.html", email="", password="", msg="Plese enter a valid user")
+        return render_template("login.html", email="", password="",username=user['name'], msg="Plese enter a valid user")
     else:
         if request.method == 'POST':
             print(request.form)
@@ -253,3 +253,7 @@ def align(id):
 
         return render_template("align.html", results="", sequence1="", sequence2="", sequenceExample1= sequenceExample, sequenceExample2= sequenceExample2, num=0, databases=dbs,
                            msg="", sequence="",username=user['name'], userid=id)
+
+
+if __name__ == '__main__':
+    app.run()

@@ -76,7 +76,8 @@ class ResultsAnalizer():
                 for hits in result:
                     i = i+1
                     hsp = hits[0]
-
+                    print("HSP")
+                    print(hsp)
                     id = hsp.hit.id
                     score = hsp.bitscore
                     evalue = hsp.evalue
@@ -89,7 +90,6 @@ class ResultsAnalizer():
                         id = self.getStandarName(id)
                         complementary = self.getComplementary(id)
                     alignment = hsp.fragment.aln
-                    print(hsp)
                     if not (complementary in sequences.keys()):
                         #sequences[id] = [score * weight, evalue, positives, align_length, percent*weight]
                         sequences[id] = [score, evalue, positives, align_length, percent,alignment.format("fasta"),
