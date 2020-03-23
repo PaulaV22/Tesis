@@ -523,48 +523,42 @@ function showResults(){
     if (results.length>0){
         results = JSON.parse(results);
         console.log(results)
-        alignment = results[results.length-1]
-        array = alignment.alignment.split('>');
-        sequence1 =array[1];
-        sequence2 =array[2];
-        sequence1Name = sequence1.split('\n')[0];
+        var alignment = results[results.length-1]
+
+        var score =  alignment.score;
+        var evalue = alignment.evalue;
+        var similarity = alignment.similarity;
+
+
+        var array = alignment.alignment.split('>');
+        var sequence1 =array[1];
+        var sequence2 =array[2];
+        var sequence1Name = sequence1.split('\n')[0];
         sequence1Name = sequence1Name.split(' ')[0];
-        sequence2Name = sequence2.split('\n')[0];
+        var sequence2Name = sequence2.split('\n')[0];
         sequence2Name = sequence2Name.split(' ')[0];
         console.log(sequence1.split('\n',2));
-        sequence1Content = getContent(sequence1);
-        sequence2Content = getContent(sequence2);
+        var sequence1Content = getContent(sequence1);
+        var sequence2Content = getContent(sequence2);
 
-        queryStart = alignment.queryStart;
-        hitStart = alignment.hitStart;
+        var seq1start = alignment.queryStart;
+        var seq2start = alignment.hitStart;
         var length= 50;
         var iteration = 0;
 
-        /*for (var k= 0; k < sequence1.length || k < sequence2.length; k++) {
-            for (var j= 0; j <= length; j++) {
-             queryStart = queryStart +j;
-             hitStart = hitStart +j;
-             substringLimitLow = k + n * length;
-             substringLimitTop = k + n * length + length - 1;
-             querySubSeq = sequence1Content[]
-             querySubEnd = queryStart + length;
-             hitSubEnd = hitEnd + length;
-             n ++;
-            }
-
-        }*/
-
         var middleSeq ="";
 
-        for (var j =0; j <= max(sequence1.length, sequence2.length); j++) {
-            if (subseq1[j] && subseq2[j]){
-                if (subseq1[j] == subseq2[j]){
+        for (var j =0; j < max(sequence1Content.length, sequence2Content.length); j++) {
+            if (sequence1Content[j] && sequence2Content[j]){
+                if (sequence1Content[j] == sequence2Content[j]){
                     middleSeq = middleSeq + "|";
                 }else{
-                    middleSeq = middleSeq + " ";
+                    middleSeq = middleSeq + ".";
                 }
+            }else{
+                middleSeq = middleSeq + ".";
+
             }
-            middleSeq = middleSeq + " ";
         }
         var chunkedSeq1 = sequence1Content.match(/.{1,50}/g);
         var chunkedSeq2 = sequence2Content.match(/.{1,50}/g);
@@ -573,12 +567,82 @@ function showResults(){
         console.log(chunkedSeq1);
         console.log(chunkedSeq2);
         console.log(chunkedMiddle);
+        var divResults = document.getElementById("table-results");
 
-        divSeq1Content = document.getElementById("content1");
+        for (var i =0; i < chunkedMiddle.length; i++) {
+            var s1name = document.createElement("div");
+            s1name.setAttribute("class", "col-md-3");
+            var s1content = document.createElement("div");
+            s1content.setAttribute("class", "col-md-8");
+            var s1end = document.createElement("div");
+            s1end.setAttribute("class", "col-md-1");
+            var seq1StartValue="";
+            if (chunkedSeq1[i]){
+                s1content.innerHTML = chunkedSeq1[i];
+                seq1StartValue = seq1start + chunkedSeq1[i].length *i+1;
+                s1end.innerHTML = seq1StartValue-1 + chunkedSeq1[i].length;
+            }else{
+                s1content.innerHTML = " ";
+                seq1StartValue =" "
+                s1end.innerHTML = " ";
+            }
+
+            s1name.innerHTML = sequence1Name +"   "+ seq1StartValue;
+
+            var row1 = document.createElement("div");
+            row1.setAttribute("class","row");
+            row1.appendChild(s1name);
+            row1.appendChild(s1content);
+            row1.appendChild(s1end);
+
+            var middle1 = document.createElement("div");
+            middle1.setAttribute("class", "col-md-3");
+            var middle2 = document.createElement("div");
+            middle2.setAttribute("class", "col-md-8");
+            middle2.innerHTML = chunkedMiddle[i];
+            var middle3 = document.createElement("div");
+            middle3.setAttribute("class", "col-md-1");
+
+
+            var row2 = document.createElement("div");
+            row2.setAttribute("class","row");
+            row2.appendChild(middle1);
+            row2.appendChild(middle2);
+            row2.appendChild(middle3);
+
+            var s2name = document.createElement("div");
+            s2name.setAttribute("class", "col-md-3");
+            var s2content = document.createElement("div");
+            s2content.setAttribute("class", "col-md-8");
+            var s2end = document.createElement("div");
+            s2end.setAttribute("class", "col-md-1");
+            var seq2StartValue="";
+            if (chunkedSeq2[i]){
+                s2content.innerHTML = chunkedSeq2[i];
+                seq2StartValue = seq2start + chunkedSeq2[i].length *i+1;
+                s2end.innerHTML = seq2StartValue-1 + chunkedSeq2[i].length;
+            }else{
+                s2content.innerHTML = " ";
+                seq2StartValue =" "
+                s2end.innerHTML = " ";
+            }
+            s2name.innerHTML = sequence2Name +"   "+ seq2StartValue;
+
+            var row3 = document.createElement("div");
+            row3.setAttribute("class","row");
+            row3.appendChild(s2name);
+            row3.appendChild(s2content);
+            row3.appendChild(s2end);
+
+            divResults.appendChild(row1);
+            divResults.appendChild(row2);
+            divResults.appendChild(row3);
+
+        }
+        /*divSeq1Content = document.getElementById("content1");
         divSeq1Content.innerHTML = sequence1Content;
         divSeq2Content = document.getElementById("content2");
-        divSeq2Content.innerHTML = sequence2Content;
-        divResults = document.getElementById("table-results");
+        divSeq2Content.innerHTML = sequence2Content;*/
         divResults.removeAttribute("hidden")
     }
 
