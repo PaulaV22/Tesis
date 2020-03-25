@@ -66,7 +66,6 @@ class UserManager():
                 jsonUser['name'] = user['name']
                 jsonUser['password'] = user['password']
                 jsonUser['logged'] = user['logged']
-                jsonUser['dbs'] = user['dbs']
             self.users[i] = json.dumps(jsonUser)
         with open("users.json", mode='w', encoding='utf-8') as f:
             json.dump(self.users, f)

@@ -126,7 +126,7 @@ def addDatabase(id):
                 # Make the filename safe, remove unsupported chars
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(newDb,filename))
-        uc.addDbToUser(id,dbName)
+        #uc.addDbToUser(id,dbName)
         cc.createDb(id,dbName)
     return render_template("addDb.html",userid = id, msg=message)
 
@@ -152,7 +152,7 @@ def inspect(id):
                 # Make the filename safe, remove unsupported chars
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(newDb,filename))
-        uc.addDbToUser(id,dbName)
+        #uc.addDbToUser(id,dbName)
         cc.createDb(id,dbName)
     databases = cc.getDatabases(id)
     if databases is None:
@@ -253,6 +253,43 @@ def align(id):
 
         return render_template("align.html", results="", sequence1="", sequence2="", sequenceExample1= sequenceExample, sequenceExample2= sequenceExample2, num=0, databases=dbs,
                            msg="", sequence="",username=user['name'], userid=id)
+
+
+@app.route('/logout/<id>', methods=['GET', 'POST'])
+def logout(id):
+    user = uc.getUserByEmail(id)
+    if not user is None:
+        user['logged'] = False
+        uc.saveUser(user)
+        return render_template("login.html", email="", password="", msg="")
+    else:
+        message = "The user is not registered"
+        return render_template("login.html", email=id, password="", msg=message)
+
+
+@app.route('/edit/<id>', methods=['GET', 'POST'])
+def edit(id):
+    email = id
+    message = ""
+    user = uc.getUserByEmail(id)
+    if (user):
+        name = user['name']
+        password = user['password']
+        if request.method == 'POST':
+            name = request.form['name']
+            password = request.form['password']
+            user['name'] = name
+            user['password'] = password
+            user['logged'] = True
+            try:
+                uc.saveUser(user)
+                message = "Changes successfully saved"
+            except Exception as e:
+                print(e)
+                message = e
+        return render_template("editprofile.html", userid=id, msg=message, name=name, email=email, password=password)
+    else:
+        return render_template("login.html", email="", password="", username="", msg="Plese enter a valid user")
 
 
 if __name__ == '__main__':

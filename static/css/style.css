@@ -3,7 +3,7 @@ html,body{ margin:0 !important; padding:0 !important; height:100%!important; wid
 
 body {
   font-size: 0.9rem;
-  background: linear-gradient(45deg, #757575 0%, #98989852 100%) fixed;
+  background: linear-gradient(45deg, #636363 0%, #91919166 100%) fixed;
   overflow-y: scroll;
 }
 
@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5,
 
 .site-footer {
     position: absolute;
-    padding: 2em 0;
+    padding: 1rem 0;
     background: #333333;
     bottom: 0;
     width: 100%;
@@ -60,9 +60,13 @@ h1, h2, h3, h4, h5,
   width: 100%;
   padding: 1rem; }
   @media (max-width: 991.98px) {
-    .site-navbar {
+  .toggle{
+    display:block;
+  }
+  .site-navbar {
       padding-top: 3rem;
-      padding-bottom: 3rem; } }
+      padding-bottom: 3rem; }
+  }
   .site-navbar .toggle-button {
     position: absolute;
     right: 0px; }
@@ -387,7 +391,7 @@ h1, h2, h3, h4, h5,
       .ftco-cover-1.overlay, .ftco-cover-1.fullscreen p a {
         color: #fff;
         text-decoration: underline;
-        font-weight: 700; }
+        font-weight: 400; }
         .ftco-cover-1.overlay, .ftco-cover-1.fullscreen p a:hover {
           text-decoration: none; }
     .ftco-cover-1.overlay, .ftco-cover-1.fullscreen form .form-control,
@@ -611,13 +615,14 @@ select{
 /*----------------sidebar-wrapper----------------*/
 
 .sidebar-wrapper {
-  width: 260px;
+  width:  100%;
   height: 100%;
   max-height: 100%;
-  position: fixed;
+  position: relative;
   top: 0;
   left: -300px;
   z-index: 999;
+  padding-left: 0.5rem;
 }
 
 .sidebar-wrapper ul {
@@ -669,15 +674,17 @@ select{
 }
 
 .sidebar-wrapper .sidebar-header .user-pic {
-  float: left;
-  width: 60px;
-  padding: 2px;
-  border-radius: 12px;
-  margin-right: 15px;
-  overflow: hidden;
+    float: left;
+    width: 60px;
+    padding: 2px;
+    border-radius: 50px;
+    margin-right: 10px;
+    border: 3px solid #c7c7c9;
+    overflow: hidden;
 }
 
 .sidebar-wrapper .sidebar-header .user-pic img {
+  filter: brightness(0.8);
   object-fit: cover;
   height: 100%;
   width: 100%;
@@ -685,6 +692,7 @@ select{
 
 .sidebar-wrapper .sidebar-header .user-info {
   float: left;
+  display:grid;
 }
 
 .sidebar-wrapper .sidebar-header .user-info > span {
@@ -972,7 +980,6 @@ select{
 
 .general-container{
     position: relative;
-    height: 100%;
 }
 
 .row {
@@ -1029,5 +1036,37 @@ th{
     overflow-y:none;
     overflow-x:scroll;
     font-family: "Courier New", Courier, monospace;
-
 }
+
+.separated{
+    margin:1rem 0;
+}
+
+form .container.spaced{
+   margin: 3rem;
+}
+
+.long-input{
+    width:100%;
+}
+
+.toggle{
+    display:none;
+    width: 40%;
+    text-align: center;
+    padding: 10px 10px 10px 20px;
+}
+
+.displayed{
+    display:block;
+}
+
+@media (max-width: 910px) {
+    .toggle{
+        display:block;
+    }
+    .sidebar-wrapper{
+        display:none;
+    }
+}
+

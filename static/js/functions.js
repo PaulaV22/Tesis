@@ -1,4 +1,5 @@
-var dbs= []
+var dbs= [];
+
 
 function showLoading(){
     //var seq = document.getElementById("sequence").value;
@@ -351,6 +352,7 @@ function showModal(name, content){
     title.innerHTML = name;
     body.innerHTML = content;
     $('#modalSequences').modal('show');
+
          // initializes and invokes show immediately
 }
 
@@ -491,8 +493,8 @@ function setDatabases(){
 }
 
 function openSideBar(){
-    var div = document.getElementById("#show-sidebar");
-    div.setAttribute("id","#close-sidebar");
+    var div = document.getElementById("sidebar");
+    div.classList.add("displayed");
 }
 
 function getContent(sequence){
@@ -520,6 +522,7 @@ function max(val1,val2){
 
 function showResults(){
    var results=document.getElementById("results-input").value;
+   var divResults = document.getElementById("table-results");
     if (results.length>0){
         results = JSON.parse(results);
         console.log(results)
@@ -529,7 +532,23 @@ function showResults(){
         var evalue = alignment.evalue;
         var similarity = alignment.similarity;
 
+        var firstRow = document.createElement("div");
+        firstRow.setAttribute("class","row separated");
+        var c1 = document.createElement("div");
+        c1.setAttribute("class","col-md-4");
+        c1.innerHTML = "<b>SCORE: </b>"+score;
+        var c2 = document.createElement("div");
+        c2.setAttribute("class","col-md-4");
+        c2.innerHTML = "<b>E-VALUE: </b>"+ evalue;
+        var c3 = document.createElement("div");
+        c3.setAttribute("class","col-md-4");
+        c3.innerHTML = "<b>SIMILARITY: </b>" +similarity;
 
+        firstRow.appendChild(c1);
+        firstRow.appendChild(c2);
+        firstRow.appendChild(c3);
+
+        divResults.appendChild(firstRow);
         var array = alignment.alignment.split('>');
         var sequence1 =array[1];
         var sequence2 =array[2];
@@ -567,7 +586,6 @@ function showResults(){
         console.log(chunkedSeq1);
         console.log(chunkedSeq2);
         console.log(chunkedMiddle);
-        var divResults = document.getElementById("table-results");
 
         for (var i =0; i < chunkedMiddle.length; i++) {
             var s1name = document.createElement("div");
@@ -637,12 +655,7 @@ function showResults(){
             divResults.appendChild(row1);
             divResults.appendChild(row2);
             divResults.appendChild(row3);
-
         }
-        /*divSeq1Content = document.getElementById("content1");
-        divSeq1Content.innerHTML = sequence1Content;
-        divSeq2Content = document.getElementById("content2");
-        divSeq2Content.innerHTML = sequence2Content;*/
         divResults.removeAttribute("hidden")
     }
 

@@ -4,10 +4,10 @@
 <head>
     <title>Alleles Searcher</title>
     <meta charset="utf-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="/static/js/functions.js"></script>
 </head>
 
@@ -27,14 +27,15 @@
                 <div class="sidebar-header">
                     <div class="user-pic">
                         <img class="img-responsive img-rounded"
-                             src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                             src="{{ url_for('static', filename='images/FAVPNG_avatar-icon-human-icon-person-icon_u2sqMuvB.png') }}"
                              alt="User picture">
                     </div>
                     <div class="user-info">
-          <span class="user-name" id="usernameSpan">
-            <strong></strong>
-          </span>
-                        <a class="user-status" href="">Edit profile</a>
+                      <span class="user-name" id="usernameSpan">
+                        <strong></strong>
+                      </span>
+                        <a class="user-status" href="/edit/{{ userid }}">Edit profile</a>
+                        <a class="user-status" href="/logout/{{ userid }}">Logout</a>
                     </div>
                 </div>
                 <div class="sidebar-menu">

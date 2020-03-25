@@ -11,8 +11,8 @@
     <script type="text/javascript" src="/static/js/functions.js"></script>
 
 </head>
-
 <body>
+
 
 <div class="row">
     <!-- Sidebar -->
@@ -69,50 +69,64 @@
     <div class="column right">
         <div class="site-wrap">
 
+            <input type="hidden" class="hidden" id="userid" value="{{ userid }}"/>
             <input type="hidden" class="hidden" id="results-input" value="{{ results }}"/>
             <input type="hidden" class="hidden" id="msg" value="{{ msg }}"/>
-            <input type="hidden" class="hidden" id="username" value="{{ username }}"/>
-            <input type="hidden" class="hidden" id="databases" value="{{ databases }}"/>
+
             <div class="ftco-cover-1 fullscreen">
                 <div class="container">
-                    <div id="loader" class="loader" hidden=""></div>
+                        <div id="loader" class="loader" hidden=""></div>
 
-                    <div class="right-row align-items-center justify-content-center">
-                        <div class="text-center">
-                            <h1>Align Sequences</h1>
-                            <p class="mb-5">Align and compare two sequences in .fa format</p>
+                    <div class="row align-items-center justify-content-center text-center">
+                        <div style="width: 70%;">
+                            <h1>Edit user</h1>
+                            <p>Edit your name or password </p>
                             <form method="post">
-                                <div class="container ">
-                                    <div class="flex-wrapper">
-                                        <div>
-                                        <textarea name="sequence1" id="sequence1" class="text-area"
-                                                  placeholder="{{ sequenceExample1 }}" rows="10"
-                                                  cols="55">{{ sequence1 }}</textarea>
+                                <div class="container spaced">
+                                    <div class="form-group">
+                                        <div class="col-3">
+                                            <label>Email </label>
                                         </div>
-                                        <div>
-                                        <textarea name="sequence2" id="sequence2" class="text-area"
-                                                  placeholder="{{ sequenceExample2 }}" rows="10"
-                                                  cols="55">{{ sequence2 }}</textarea>
+                                        <div class="col-6">
+                                            <input  class="long-input" disabled="true" type="text" name="email" id="email"  value="{{ email }}" required>
                                         </div>
                                     </div>
-                                    <button style="margin: 1rem 0;" type="submit" onclick="showLoading()">Align</button>
+                                    <div class="form-group">
+                                        <div class="col-3">
+                                            <label>Name </label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input  class="long-input" type="text" name="name" id="name"  value="{{ name }}"required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-3">
+                                            <label>Password</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="long-input" type="password" placeholder="********" name="password" value="{{ password }}"
+                                             id="password" required pattern="\w{6}" title="6 character password">
+                                        </div>
+                                    </div>
+                                    <button type="submit">Save changes</button>
                                 </div>
                             </form>
+                            <div class="container bordered" id="message">
+                                <label id="lblmessage"></label>
+                            </div>
                         </div>
                     </div>
-                      <div class="container bordered scrollable" id="table-results" hidden="">
-
-                      </div>
                 </div>
-                <!-- END .ftco-cover-1 -->
             </div>
-            <script>
-                 configureSideBar();
-                 showResults();
-            </script>
+        <!-- END .ftco-cover-1 -->
         </div>
     </div>
 </div>
+
+    <script>
+         showMessage();
+    </script>
+
 </body>
 
 </html>
