@@ -29,7 +29,31 @@
 
 
 <body>
+<div class="top-bar">
+    <div class="flex-row">
+        <div class="bar-left">
+<!--            <a id="menu" class="margin-left" onclick="openSideBar()">
+                <i class="fa fa-bars"></i>
+             </a>-->
+            <a class="margin-left" href="">ALELLES SEARCHER</a>
+        </div>
+
+       <div class="user-icon">
+            <img class="user-icon-img" onclick="showUserMenu()"
+                 src="{{ url_for('static', filename='images/FAVPNG_avatar-icon-human-icon-person-icon_u2sqMuvB.png') }}"
+               alt="User picture">
+       </div>
+    </div>
+</div>
+
+<div  id="user-menu" class="user-menu" hidden="true">
+    <p>Signed in as <b>{{ username }}</b></p>
+    <a class="user-status" href="/edit/{{ userid }}">Edit profile</a>
+    <a class="user-status" href="/logout/{{ userid }}">Logout</a>
+</div>
+
 <div class="row">
+
 
     <!-- Sidebar -->
     <div id="left-panel" class="column left page-wrapper chiller-theme toggled">
@@ -38,41 +62,46 @@
         </a>
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
-                <div class="sidebar-brand">
-                    <a href="">welcome</a>
-                </div>
-                <div class="sidebar-header">
-                    <div class="user-pic">
-                        <img class="img-responsive img-rounded"
-                             src="{{ url_for('static', filename='images/FAVPNG_avatar-icon-human-icon-person-icon_u2sqMuvB.png') }}"
-                           alt="User picture">
-                    </div>
-                    <div class="user-info">
-                      <span class="user-name" id="usernameSpan">
-                        <strong></strong>
-                      </span>
-                        <a class="user-status" href="/edit/{{ userid }}">Edit profile</a>
-                        <a class="user-status" href="/logout/{{ userid }}">Logout</a>
-                    </div>
-                </div>
                 <div class="sidebar-menu">
-                    <ul>
-                        <li class="header-menu">
-                            <span>General</span>
+                   <ul>
+                        <li class="sidebar-dropdown">
+                            <a class="menu" href="/compare/{{ userid }}">
+                                <i class="fa fa-home"></i>
+                                <span>WELCOME</span>
+                            </a>
                         </li>
+                   </ul>
+                </div>
+
+                <div class="sidebar-menu bordered">
+                    <ul>
                         <li class="sidebar-dropdown">
                             <a href="/compare/{{ userid }}">
                                 <i class="fa fa-table"></i>
-                                <span>Haplofinder</span>
+                                <span>Compare</span>
                             </a>
                         </li>
                         <li>
+                            <a href="/align/{{ userid }}"> <i
+                                    class="fa fa-search"></i><span>Align</span></a>
+                        </li>
+                        <li>
                             <a href="/inspect/{{ userid }}"> <i
-                                    class="fa fa-database"></i><span>Database</span></a>
+                                    class="fa fa-database"></i><span>Admin</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                 <div class="sidebar-menu bordered">
+                    <ul>
+
+                        <li>
+                            <a href="/inspect/{{ userid }}"> <i
+                                    class="fa fa-info-circle"></i><span>About us</span></a>
                         </li>
                         <li>
                             <a href="/align/{{ userid }}"> <i
-                                    class="fa fa-search"></i><span>Alignment</span></a>
+                                    class="fa fa-envelope"></i><span>Contact</span></a>
                         </li>
                     </ul>
                 </div>

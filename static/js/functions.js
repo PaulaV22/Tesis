@@ -97,20 +97,15 @@ jQuery(function ($) {
       .addClass("active");
   }
 });
-$("#close-sidebar").click(function() {
-  $(".page-wrapper").removeClass("toggled");
-});
-$("#show-sidebar").click(function() {
-  $(".page-wrapper").addClass("toggled");
-});
+
 
 });
 
 function configureSideBar(){
-    var username = document.getElementById("username").value;
+  /*  var username = document.getElementById("username").value;
     console.log(username);
     var span = document.getElementById("usernameSpan");
-    span.innerHTML = username;
+    span.innerHTML = username; */
 }
 
 function createSelectOption(){
@@ -495,6 +490,10 @@ function setDatabases(){
 function openSideBar(){
     var div = document.getElementById("sidebar");
     div.classList.add("displayed");
+    var div2 = document.getElementById("left-panel");
+    div2.classList.add("toggled");
+    var button = document.getElementById("close-sidebar");
+    button.setAttribute("hidden", "true");
 }
 
 function getContent(sequence){
@@ -658,6 +657,15 @@ function showResults(){
         }
         divResults.removeAttribute("hidden")
     }
+}
 
+function showUserMenu(){
+    var menu = document.getElementById("user-menu");
+    if (menu.getAttribute('hidden') == null) {
+        menu.setAttribute('hidden', "true");
 
+    }
+    else{
+       menu.removeAttribute("hidden");
+    }
 }
