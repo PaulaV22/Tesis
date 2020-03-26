@@ -23,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="997" column="24" selection-start-line="997" selection-start-column="24" selection-end-line="997" selection-end-column="24" />
+            <state relative-caret-position="123">
+              <caret line="1016" column="12" selection-start-line="1016" selection-start-column="12" selection-end-line="1016" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -156,7 +156,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-12" />
     <option name="y" value="-12" />
     <option name="width" value="981" />
@@ -283,13 +283,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.26709062" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.26709062" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49602544" weight="0.3428064" />
-      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.10095389" side_tool="true" visible="true" weight="0.19360569" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" sideWeight="0.49523053" visible="true" weight="0.3428064" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.5047695" side_tool="true" visible="true" weight="0.3428064" />
       <window_info anchor="bottom" id="Python Console" order="2" sideWeight="0.49841017" weight="0.3268206" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32972974" />
@@ -622,8 +621,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="997" column="24" selection-start-line="997" selection-start-column="24" selection-end-line="997" selection-end-column="24" />
+        <state relative-caret-position="123">
+          <caret line="1016" column="12" selection-start-line="1016" selection-start-column="12" selection-end-line="1016" selection-end-column="12" />
         </state>
       </provider>
     </entry>

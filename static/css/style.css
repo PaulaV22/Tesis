@@ -3,7 +3,7 @@ html,body{ margin:0 !important; padding:0 !important; height:100%!important; wid
 
 body {
   font-size: 0.9rem;
-  background: linear-gradient(45deg, #636363 0%, #91919166 100%) fixed;
+  background: linear-gradient(45deg, #c0c0c0 0%, #91919166 100%) fixed;
   overflow-y: scroll;
 }
 
