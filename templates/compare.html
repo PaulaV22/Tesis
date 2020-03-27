@@ -4,64 +4,111 @@
 <head>
     <title>Alleles Searcher</title>
     <meta charset="utf-8">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/icomoon/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/flaticon/font/flaticon.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='fontawesome-free-5.12.0-web/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script type="text/javascript" src="/static/js/functions.js"></script>
 </head>
 
-<body>
 
-<div class="row">
-    <!-- Sidebar -->
-    <div class="column left page-wrapper chiller-theme toggled">
-        <a id="close-sidebar" class="btn btn-sm btn-dark" onclick="openSideBar()">
+<body>
+<div class="top-bar">
+    <div class="flex-row">
+        <div class="bar-left">
+<!--            <a id="menu" class="margin-left" onclick="openSideBar()">
+                <i class="fa fa-bars"></i>
+             </a>-->
+            <a class="margin-left" href="">ALELLES SEARCHER</a>
+        </div>
+
+       <div class="user-icon">
+            <img class="user-icon-img" onclick="showUserMenu()"
+                 src="{{ url_for('static', filename='images/FAVPNG_avatar-icon-human-icon-person-icon_u2sqMuvB.png') }}"
+               alt="User picture">
+       </div>
+    </div>
+</div>
+
+<div  id="user-menu" class="user-menu" hidden="true">
+    <p>Signed in as <b>{{ username }}</b></p>
+    <a class="user-status" href="/edit/{{ userid }}">Edit profile</a>
+    <a class="user-status" href="/logout/{{ userid }}">Logout</a>
+</div>
+
+<!-- Sidebar -->
+
+<div id="left-panel" class="column left page-wrapper chiller-theme toggled">
+        <a id="close-sidebar" class="btn btn-sm btn-dark toggle" onclick="openSideBar()">
             <i class="fa fa-bars"></i>
         </a>
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
-                <div class="sidebar-brand">
-                    <a href="">welcome</a>
-                </div>
-                <div class="sidebar-header">
-                    <div class="user-pic">
-                        <img class="img-responsive img-rounded"
-                             src="{{ url_for('static', filename='images/FAVPNG_avatar-icon-human-icon-person-icon_u2sqMuvB.png') }}"
-                             alt="User picture">
-                    </div>
-                    <div class="user-info">
-                      <span class="user-name" id="usernameSpan">
-                        <strong></strong>
-                      </span>
-                        <a class="user-status" href="/edit/{{ userid }}">Edit profile</a>
-                        <a class="user-status" href="/logout/{{ userid }}">Logout</a>
-                    </div>
-                </div>
                 <div class="sidebar-menu">
-                    <ul>
-                        <li class="header-menu">
-                            <span>General</span>
-                        </li>
+                   <ul>
                         <li class="sidebar-dropdown">
-                            <a href="">
-                                <i class="fa fa-table"></i>
-                                <span>Find Haplotypes</span>
+                            <a class="menu" href="/compare/{{ userid }}">
+                                <i class="fa fa-home"></i>
+                                <span>WELCOME</span>
                             </a>
                         </li>
-                         <li>
-                            <a href="/inspect/{{ userid }}"> <i
-                                    class="fa fa-database"></i><span>Inspect</span></a>
-                         </li>
+                   </ul>
+                </div>
+
+                <div class="sidebar-menu bordered">
+                    <ul>
+                        <li class="sidebar-dropdown">
+                            <a href="/compare/{{ userid }}">
+                                <i class="fa fa-table"></i>
+                                <span>Compare</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="/align/{{ userid }}"> <i
-                                    class="fa fa-search"></i><span>Align two sequences</span></a>
-                         </li>
+                                    class="fa fa-search"></i><span>Align</span></a>
+                        </li>
+                        <li>
+                            <a href="/inspect/{{ userid }}"> <i
+                                    class="fa fa-database"></i><span>Admin</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                 <div class="sidebar-menu bordered">
+                    <ul>
+
+                        <li>
+                            <a href="/inspect/{{ userid }}"> <i
+                                    class="fa fa-info-circle"></i><span>About us</span></a>
+                        </li>
+                        <li>
+                            <a href="/align/{{ userid }}"> <i
+                                    class="fa fa-envelope"></i><span>Contact</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
+
+<div class="row">
+
 
     <!-- Page content -->
     <div class="column right">

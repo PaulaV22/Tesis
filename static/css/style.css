@@ -4,7 +4,7 @@ html,body{ margin:0 !important; padding:0 !important; height:100%!important; wid
 body {
   font-size: 0.9rem;
   background: linear-gradient(45deg, #c0c0c0 0%, #91919166 100%) fixed;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 a {
@@ -351,9 +351,8 @@ h1, h2, h3, h4, h5,
 
 .top-bar {
   padding: .5rem 1.5rem;
-
   background: #31353D;
-  max-height: 65px;
+  height: 8vh;
   }
 .top-bar a {
     color: #ced4da !important; }
@@ -595,7 +594,7 @@ select{
 /*----------------page-wrapper----------------*/
 
 .page-wrapper {
-  height: 100vh;
+    height: -webkit-fill-available;
 }
 
 .page-wrapper .theme {
@@ -615,6 +614,7 @@ select{
 .page-wrapper.toggled .sidebar-wrapper {
   left: 0px;
   font-size:11px;
+  padding: 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -989,12 +989,13 @@ select{
 }
 
 .row {
-    display: -webkit-box;
-    display: -ms-flexbox;
+    min-height: 92vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    width:100%;
+    margin:0;
 }
 
 /* Clear floats after the columns */
@@ -1010,11 +1011,11 @@ select{
 }
 
 .column.left{
-    width:8%;
+    width:6%;
 }
 
 .column.right{
-    width:92%;
+    width:100%;
     padding-top: 20px;
 }
 
