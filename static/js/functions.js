@@ -242,7 +242,7 @@ function createDatabasesTable(){
             //hidden row header
             var divHeaderRow = document.createElement("div");
             var divHeaderSubRow = document.createElement("div");
-            divHeaderSubRow.className="row";
+            divHeaderSubRow.className="flex-row";
             var divHeaderSubRow1 = document.createElement("div");
             divHeaderSubRow1.className="col-md-5 text-left";
             divHeaderSubRow1.innerHTML = "SEQUENCE NAME";
@@ -253,7 +253,7 @@ function createDatabasesTable(){
             divHeaderSubRow3.className="col-md-2";
             divHeaderSubRow3.innerHTML="INSPECT"
             var divHeaderSubRow4 = document.createElement("div");
-            divHeaderSubRow4.className="col-md-3 text-left";
+            divHeaderSubRow4.className="col-md-3";
             divHeaderSubRow4.innerHTML= "DELETE SEQUENCE"
 
             divHeaderSubRow.appendChild(divHeaderSubRow1);
@@ -269,7 +269,7 @@ function createDatabasesTable(){
                var fileInfo = fileList[k]
                var divRow = document.createElement("div");
                var divSubRow = document.createElement("div");
-               divSubRow.className="row";
+               divSubRow.className="flex-row";
                var divSubRow1 = document.createElement("div");
                divSubRow1.className="col-md-5 text-left";
                divSubRow1.innerHTML = fileInfo["name"];

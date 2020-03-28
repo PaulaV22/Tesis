@@ -55,7 +55,7 @@ def index():
             return redirect(url_for('compare', id=email))
 
         else:
-            message = "The user is not registered"
+            message = "Invalid username or password"
             return render_template("login.html", email=email, password=password, msg=message)
     return render_template("login.html", email=email, password=password, msg=message)
 
@@ -261,11 +261,7 @@ def logout(id):
     if not user is None:
         user['logged'] = False
         uc.saveUser(user)
-        return render_template("login.html", email="", password="", msg="")
-    else:
-        message = "The user is not registered"
-        return render_template("login.html", email=id, password="", msg=message)
-
+    return redirect('/')
 
 @app.route('/edit/<id>', methods=['GET', 'POST'])
 def edit(id):
