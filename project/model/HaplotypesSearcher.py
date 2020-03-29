@@ -129,8 +129,10 @@ class HaplotypesSearcher():
         #categoriesFile = self.projectPath + "/Categories/" + db + ".json"
 
     def configureSimpleDb(self, dbPath, dbName):
+        print("To create simple db")
         simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta")
         simpleDbCreator.makeDb()
+        print("Simple db created "+dbName)
 
 
     def configureDb2(self, db):

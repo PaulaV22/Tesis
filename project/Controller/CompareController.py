@@ -40,18 +40,13 @@ class CompareController():
                     size = size/1000
                     if size<0:
                         size = 1
-                   # print(size)
-
                     size = str(size)+ "kb"
                     openedFile= open(filePath,'r')
                     content = openedFile.read()
                     openedFile.close()
                     fileList.append({'name':file, 'size':size, 'content':content})
                 output.append({'Name':dirName, 'Files':len(fileList),'FileList':fileList})
-        #for dir in os.listdir(dbs):
-            #filesList = os.listdir(dir)
         salidaJson = json.dumps(output)
-        print(salidaJson)
         return salidaJson
 
     def getDb(self):
@@ -140,7 +135,6 @@ class CompareController():
         print("va a borrar "+dbPath)
         HS = HaplotypesSearcher()
         result = HS.deleteDb(dbPath,True)
-        print (result)
         return result
 
 

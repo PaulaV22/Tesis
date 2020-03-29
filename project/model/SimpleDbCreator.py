@@ -65,7 +65,11 @@ class SimpleDbCreator:
             # ver este comando que es el que tiene problemas
             #print (dbpath1)
             #print (dbpath2)
-            command = 'powershell.exe makeblastdb -in ' + dbpath1 + ' -out ' + dbpath2 + ' -parse_seqids -dbtype nucl'
+            command=""
+            if os.name == 'nt':
+                command = 'powershell.exe makeblastdb -in ' + dbpath1 + ' -out ' + dbpath2 + ' -parse_seqids -dbtype nucl'
+            else:
+                command = 'makeblastdb -in ' + dbpath1 + ' -out ' + dbpath2 + ' -parse_seqids -dbtype nucl'
             subprocess.Popen(command)
             print (subprocess.check_output(command))
 
@@ -83,6 +87,7 @@ class SimpleDbCreator:
         dbPath = self.resourcePath('/'+self.newDb)
         dbPath= dbPath.replace(" ","_")
         self.createFolder(dbPath)
+        print("Created folder "+dbPath)
         # recorro los archivos y guardo las secuencias en un arreglo. Para cada directorio de las secuencias documentadas
         # creo el archivo secuencias.fasta para poder crear la base de datos en cada subdirectorio
         for bases, dirs, files in os.walk(self.filesPath):
