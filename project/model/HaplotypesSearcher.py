@@ -38,11 +38,12 @@ class HaplotypesSearcher():
         self.newDb=newDb
 
     def getResults(self,queryName,queryPath, database, numSeqs, ambiguo):
+        print("GET RESULTS")
         db = ""
         if ambiguo:
             db ="DbAmbigua"
         else:
-            db ="BlastDb"
+            db ="Blastdb"
         simpleBlast = S.SimpleBlast(db, "salida", "salida", "fasta", "FinalResult", database, True)
         simpleBlast.align(queryPath, queryName)
 
@@ -163,7 +164,7 @@ class HaplotypesSearcher():
 
     def deleteDb(self,db,total=True):
         Database = self.resourcePath('/Databases/' + db)
-        BlastDb = self.resourcePath('/BlastDb/' + db)
+        Blastdb = self.resourcePath('/Blastdb/' + db)
         BlastResult = self.resourcePath('/BlastResult/' + db)
         DbAmbigua = self.resourcePath('/DbAmbigua/' + db)
         FinalResult = self.resourcePath('/FinalResult/' + db)
@@ -174,9 +175,9 @@ class HaplotypesSearcher():
                 print("error deleting from Database")
                 pass
         try:
-            shutil.rmtree(BlastDb)
+            shutil.rmtree(Blastdb)
         except:
-            print("error deleting from BlastDb")
+            print("error deleting from Blastdb")
             pass
         try:
             shutil.rmtree(BlastResult)

@@ -128,16 +128,27 @@
                     <div class="right-row align-items-center justify-content-center text-center">
                         <div>
                             <h1>Database Management</h1>
-                            <p class="mb-5">Create a database uploading files with .fa extension</p>
+                            <p class="mb-4">Create a database uploading files with .fa extension</p>
                             <form method=post enctype=multipart/form-data>
                                 <div class="left-container">
-                                    <div class="flex-container">
-                                        <input type="text" placeholder="Database Name" id="dbname" name="dbname">
-                                        <input type="file" multiple="" name="dbfile[]"/><br/>
-                                        <input type=submit value=Upload onclick="showLoading()">
+                                    <div class="jumbotron">
+                                        <div class="inspect-container">
+                                        <div class="form-group">
+                                            <h5>Create a new database</h5>
+                                             <input type="text" class="form-control separated" placeholder="Database Name" id="dbname" name="dbname">
+                                            <input type="file" class="form-control-file separated" multiple="" name="dbfile[]"/><br/>
+                                            <input type=submit class="btn btn-dark" value="Create database" onclick="showLoading()">
+                                        </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </form>
+                            <div class="left-container">
+                                <h5>Your Databases</h5>
+
+                            </div>
+
                             <div class="container bordered" id="table-results" hidden="">
 
                             </div>

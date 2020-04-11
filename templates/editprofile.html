@@ -13,57 +13,82 @@
 </head>
 <body>
 
+<div class="top-bar">
+    <div class="flex-row">
+        <div class="bar-left">
+<!--            <a id="menu" class="margin-left" onclick="openSideBar()">
+                <i class="fa fa-bars"></i>
+             </a>-->
+            <a class="margin-left" href="">ALELLES SEARCHER</a>
+        </div>
 
-<div class="row">
-    <!-- Sidebar -->
+       <div class="user-icon">
+            <img class="user-icon-img" onclick="showUserMenu()"
+                 src="{{ url_for('static', filename='images/FAVPNG_avatar-icon-human-icon-person-icon_u2sqMuvB.png') }}"
+               alt="User picture">
+       </div>
+    </div>
+</div>
 
-    <div class="column left page-wrapper chiller-theme toggled">
-        <a id="close-sidebar" class="btn btn-sm btn-dark" onclick="openSideBar()">
-            <i class="fa fa-bars"></i>
-        </a>
+<div  id="user-menu" class="user-menu" hidden="true">
+    <p>Signed in as <b>{{ username }}</b></p>
+    <a class="user-status" href="/edit/{{ userid }}">Edit profile</a>
+    <a class="user-status" href="/logout/{{ userid }}">Logout</a>
+</div>
+
+<!-- Sidebar -->
+
+<div id="left-panel" class="column left page-wrapper chiller-theme toggled">
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
-                <div class="sidebar-brand">
-                    <a href="">welcome</a>
-                </div>
-                <div class="sidebar-header">
-                    <div class="user-pic">
-                        <img class="img-responsive img-rounded"
-                             src="{{ url_for('static', filename='images/FAVPNG_avatar-icon-human-icon-person-icon_u2sqMuvB.png') }}"
-                             alt="User picture">
-                    </div>
-                    <div class="user-info">
-                      <span class="user-name" id="usernameSpan">
-                        <strong></strong>
-                      </span>
-                        <a class="user-status" href="/edit/{{ userid }}">Edit profile</a>
-                        <a class="user-status" href="/logout/{{ userid }}">Logout</a>
-                    </div>
-                </div>
                 <div class="sidebar-menu">
-                    <ul>
-                        <li class="header-menu">
-                            <span>General</span>
+                   <ul>
+                        <li class="sidebar-dropdown">
+                            <a class="menu" href="/compare/{{ userid }}">
+                                <i class="fa fa-home"></i>
+                                <span>WELCOME</span>
+                            </a>
                         </li>
+                   </ul>
+                </div>
+
+                <div class="sidebar-menu bordered">
+                    <ul>
                         <li class="sidebar-dropdown">
                             <a href="/compare/{{ userid }}">
                                 <i class="fa fa-table"></i>
-                                <span>Find Haplotypes</span>
+                                <span>Compare</span>
                             </a>
                         </li>
-                         <li>
-                            <a href="/inspect/{{ userid }}"> <i
-                                    class="fa fa-database"></i><span>Inspect</span></a>
-                         </li>
                         <li>
                             <a href="/align/{{ userid }}"> <i
-                                    class="fa fa-search"></i><span>Align two sequences</span></a>
-                         </li>
+                                    class="fa fa-search"></i><span>Align</span></a>
+                        </li>
+                        <li>
+                            <a href="/inspect/{{ userid }}"> <i
+                                    class="fa fa-database"></i><span>Admin</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                 <div class="sidebar-menu bordered">
+                    <ul>
+
+                        <li>
+                            <a href="/inspect/{{ userid }}"> <i
+                                    class="fa fa-info-circle"></i><span>About us</span></a>
+                        </li>
+                        <li>
+                            <a href="/align/{{ userid }}"> <i
+                                    class="fa fa-envelope"></i><span>Contact</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
+
+<div class="row">
 
     <!-- Page content -->
     <div class="column right">
@@ -75,44 +100,34 @@
 
             <div class="ftco-cover-1 fullscreen">
                 <div class="container">
-                        <div id="loader" class="loader" hidden=""></div>
+                    <div id="loader" class="loader" hidden=""></div>
 
-                    <div class="row align-items-center justify-content-center text-center">
-                        <div style="width: 70%;">
+                <div class="box align-items-center justify-content-center text-center login-container">
+                    <div class="login-form">
                             <h1>Edit user</h1>
-                            <p>Edit your name or password </p>
+                            <p class="mb-4">Edit your name or password </p>
                             <form method="post">
-                                <div class="container spaced">
+                                <div class="container">
                                     <div class="form-group">
-                                        <div class="col-3">
-                                            <label>Email </label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input  class="long-input" disabled="true" type="text" name="email" id="email"  value="{{ email }}" required>
-                                        </div>
+                                        <label>Email</label>
+                                        <input class="form-control" disabled="true" type="text" name="email" id="email"  value="{{ email }}" required>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-3">
-                                            <label>Name </label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input  class="long-input" type="text" name="name" id="name"  value="{{ name }}"required>
-                                        </div>
+                                        <label>Name </label>
+                                        <input class="form-control" type="text" name="name" id="name"  value="{{ name }}"required>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-3">
-                                            <label>Password</label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input class="long-input" type="password" placeholder="********" name="password" value="{{ password }}"
-                                             id="password" required pattern="\w{6}" title="6 character password">
-                                        </div>
+                                        <label>Password</label>
+                                        <input class="form-control" type="password" placeholder="********" name="password" value="{{ password }}"
+                                         id="password" required pattern="\w{6}" title="6 character password">
                                     </div>
-                                    <button type="submit">Save changes</button>
+                                    <div class="centered">
+                                        <button class="btn btn-dark" type="submit">Save changes</button>
+                                    </div>
                                 </div>
                             </form>
-                            <div class="container bordered" id="message">
-                                <label id="lblmessage"></label>
+                             <div class="container bordered " id="message">
+                                <h6 id="lblmessage"></h6>
                             </div>
                         </div>
                     </div>

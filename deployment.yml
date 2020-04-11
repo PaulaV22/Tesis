@@ -1,16 +1,14 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: tesis
+ name: tesis
+ labels:
+   app: tesis
 spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: tesis
-    spec:
-      containers:
-      - name: tesis
-        image: tesis:1
-        ports:
-        - containerPort: 5000
+ type: NodePort
+ ports:
+ - port: 5000
+   name: http
+   nodePort: 30080
+ selector:
+   app: <YOUR_PRIVATE_IMAGE_NAME>

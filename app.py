@@ -210,46 +210,34 @@ def addSequence():
 
 @app.route('/align/<id>', methods=['GET', 'POST'])
 def align(id):
-    print("llega a align")
     user = uc.getUserByEmail(id)
     dbs = cc.getDatabases(id)
-    print("obtuvo dbs")
-    print("id es " +id)
     if id is None or not user['logged']:
         return render_template("login.html", email="", password="",username=user['name'], msg="Plese enter a valid user")
     else:
-        print("request method "+request.method)
         if request.method == 'POST':
             sequence1 = request.form['sequence1']
             sequence2 = request.form['sequence2']
-            print(sequence1)
-            print(sequence2)
             if ((len(sequence1) > 0) and (len(sequence2) >0)):
-                print("entro al if")
                 seq1Name = sequence1.partition('\n')[0]
                 seq1Name = ''.join(e for e in seq1Name if e.isalnum())
                 seq1Name = seq1Name+".fa"
                 dbName ="align"
                 newDb = UPLOAD_FOLDER + "/" + id + "/" +dbName
-                print("va a remover al db temporal")
                 if os.path.exists(newDb):
                     shutil.rmtree(newDb)
-                print("va a crearla de nuevo")
                 os.makedirs(newDb)
-                print("app.py created folder "+newDb)
                 seq1Path = UPLOAD_FOLDER + "/" + id + "/"+dbName+"/"+seq1Name
                 file = open(seq1Path, 'w+')
                 file.write(sequence1)
                 file.close()
                 try:
-                    print("app.py to create simple db")
                     cc.createSimpleDb(id, "align")
                     print("simple db created app.py. to see results")
                     results = cc.compare(sequence2, 1, dbName, id, False)
-                    print("app.py results")
                     print(results)
                     cc.deleteDatabase(id,dbName)
-                    print("app.py temporal align db deleted")
+                    #print("app.py Temporal align db deleted")
                     return render_template("align.html", results=results, sequence1=sequence1, sequence2=sequence2,
                                            sequenceExample1=sequenceExample, sequenceExample2=sequenceExample2,  num=0,
                                            databases=dbs, msg="", sequence="", username=user['name'], userid=id)

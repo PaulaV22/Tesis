@@ -2,6 +2,7 @@ from Bio import SeqIO
 import os
 import subprocess
 import sys
+import shlex
 
 
 # ESTA CLASE CREA UNA BASE DE DATOS BLAST A PARTIR DE ARCHIVOS DE SECUENCIAS.
@@ -63,16 +64,19 @@ class SimpleDbCreator:
 
             #print 'secuencias.fasta esta en ' + dbpath1
             # ver este comando que es el que tiene problemas
-            #print (dbpath1)
-            #print (dbpath2)
-            command=""
             if os.name == 'nt':
                 command = 'powershell.exe makeblastdb -in ' + dbpath1 + ' -out ' + dbpath2 + ' -parse_seqids -dbtype nucl'
+                subprocess.Popen(command)
+                print(subprocess.check_output(command))
             else:
-                command = 'makeblastdb -in ' + dbpath1 + ' -out ' + dbpath2 + ' -parse_seqids -dbtype nucl'
-            subprocess.Popen(command)
-            print (subprocess.check_output(command))
+                inParam = "-in "+dbpath1
+                outParam = "-out "+dbpath2
+                fullCommand = 'makeblastdb -in ' + dbpath1 + ' -out ' + dbpath2 + ' -parse_seqids -dbtype nucl'
+                print("FULL COMMAND IS "+ fullCommand)
+                command = subprocess.Popen(shlex.split(fullCommand))
 
+                #command = subprocess.Popen(['makeblastdb', inParam, outputName,'-parse_seqids','-dbtype nucl'], stdout=subprocess.PIPE)
+                output = command.communicate()
 
     def setFilesPath (self, filesPath):
         self.filesPath = filesPath
@@ -87,7 +91,6 @@ class SimpleDbCreator:
         dbPath = self.resourcePath('/'+self.newDb)
         dbPath= dbPath.replace(" ","_")
         self.createFolder(dbPath)
-        print("Created folder "+dbPath)
         # recorro los archivos y guardo las secuencias en un arreglo. Para cada directorio de las secuencias documentadas
         # creo el archivo secuencias.fasta para poder crear la base de datos en cada subdirectorio
         for bases, dirs, files in os.walk(self.filesPath):
@@ -95,8 +98,8 @@ class SimpleDbCreator:
             sequences = []
             array = subdirectory.split('/')
             print(array)
-            user = array[2]
-            dbName = array[3]
+            user = array[len(array)-2]
+            dbName = array[len(array)-1]
 
             newSubFolder = self.resourcePath("/"+self.newDb + "/" + user+ "/"+dbName)
             newSubFolder = newSubFolder.replace(" ", "_")

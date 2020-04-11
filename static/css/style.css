@@ -3,7 +3,7 @@ html,body{ margin:0 !important; padding:0 !important; height:100%!important; wid
 
 body {
   font-size: 0.9rem;
-  background: linear-gradient(45deg, #c0c0c0 0%, #91919166 100%) fixed;
+  background: linear-gradient(45deg, #c0c0c0 0%, #9191911f 100%) fixed;
   overflow-y: hidden;
 }
 
@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase; }
-
+/*
 .form-control {
   height: 55px;
   background: #fff !important;
@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5,
     border-color: #007bff; }
   .form-control:hover, .form-control:active, .form-control:focus {
     -webkit-box-shadow: none !important;
-    box-shadow: none !important; }
+    box-shadow: none !important; }*/
 
 .site-footer {
     position: absolute;
@@ -340,12 +340,12 @@ h1, h2, h3, h4, h5,
   .by:hover {
     border-bottom: 1px dotted #007bff; }
 
-.form-control {
+/*.form-control {
   border: none;
   border: 1px solid #e6e6e6; }
   .form-control:hover, .form-control:active, .form-control:focus {
     border: 1px solid #666666; }
-
+*/
 .slide {
   min-height: 900px;
   background-size: cover; }
@@ -353,7 +353,7 @@ h1, h2, h3, h4, h5,
 .top-bar {
   padding: .5rem 1.5rem;
   background: #31353D;
-  height: 8vh;
+  height: 50px;
   }
 .top-bar a {
     color: #ced4da !important; }
@@ -397,7 +397,8 @@ h1, h2, h3, h4, h5,
 
   .ftco-cover-1 > .container {
     position: relative;
-    padding: 2% 5%;
+    /* padding: 2% 5%; */
+    height: 100%;
   }
   .ftco-cover-1.fullscreen {
     position: absolute;
@@ -408,12 +409,9 @@ h1, h2, h3, h4, h5,
    .ftco-cover-1.overlay{
     height:100%;
    }
-  .ftco-cover-1.overlay, .ftco-cover-1.fullscreen h1 {
-      color: #fff; }
-    .ftco-cover-1.overlay, .ftco-cover-1.fullscreen p {
-      color: #fff; }
+
+
       .ftco-cover-1.overlay, .ftco-cover-1.fullscreen p a {
-        color: #fff;
         text-decoration: underline;
         font-weight: 400; }
         .ftco-cover-1.overlay, .ftco-cover-1.fullscreen p a:hover {
@@ -436,9 +434,14 @@ h1, h2, h3, h4, h5,
     color: #007bff; }
 
 .bordered{
-    margin-top: 3% !important;
+    margin-top: 15px !important;
 }
 
+.alert{
+    position: relative;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+}
 .loader {
     position: fixed;
     width:100%;
@@ -473,10 +476,28 @@ h1, h2, h3, h4, h5,
     animation: spin .8s linear infinite;
 }
 
-.form-group{
+.flex-buttons{
+    margin: 0rem 6rem;
+    display: flex;
+    justify-content: space-between;
+}
+/*.form-group{
     display:flex !important;
     margin-left: 2%;
     margin-right: 3%;
+}*/
+
+.login-form{
+    width: 40%;
+    color:#31353D;
+    font-size: 14px;
+}
+.login-form form{
+    text-align:left;
+}
+
+.login-form form .form-group{
+    margin-bottom: .5rem;
 }
 
 #cover-spin {
@@ -612,6 +633,7 @@ select{
 .page-wrapper .theme.chiller-theme {
   background: #1e2229;
 }
+
 
 /*----------------toggeled sidebar----------------*/
 
@@ -990,6 +1012,7 @@ select{
 
 .general-container{
     position: relative;
+    height: calc(100vh - 150px);
 }
 
 .row {
@@ -1015,7 +1038,7 @@ select{
 }
 
 .column.left{
-    width:6%;
+    width: 75px;;
 }
 
 .column.right{
@@ -1034,7 +1057,7 @@ th{
 
 .left-container{
     text-align:left;
-    padding: 15px;
+    padding:5px 15px;
 }
 
 .flex-wrapper{
@@ -1060,6 +1083,7 @@ form .container.spaced{
 .long-input{
     width:100%;
 }
+
 
 .toggle{
     display:none;
@@ -1105,8 +1129,7 @@ color: #ced4da;
 }
 
 .login-container{
-    top: 3rem;
-    position: absolute;
+    height: 100%;
 }
 
 .footer-img{
@@ -1114,7 +1137,73 @@ width:140px;
 height:70px;
 }
 
-@media (max-width: 910px) {
-
+.box{
+   display: -webkit-box;
 }
 
+.margin{
+    margin: 0 10%;
+}
+
+.margin-bottom{
+   margin-bottom:1rem;
+}
+
+.inspect-container{
+    width:40%
+}
+
+.jumbotron{
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #3e444aa8;
+}
+
+
+.centered{
+    text-align:center;
+    margin: 1rem 0;
+}
+@media (max-width: 1000px) {
+    .flex-wrapper {
+        display: block;
+        justify-content: space-around;
+    }
+    .form-group {
+        display: block !important;
+    }
+
+    .col-6 {
+        -ms-flex: 0 0 50%;
+        max-width: 100%;
+        text-align: left;
+    }
+
+    .text-area{
+        overflow: auto;
+        resize: vertical;
+        max-width: 100%!important;
+    }
+
+    .flex-container {
+        display: block;
+        justify-content: space-around;
+    }
+
+    .alignment{
+        font-size: small;
+        min-width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 800px) {
+  .alignment{
+        font-size: xx-small;;
+    }
+  .container{
+    margin:0;
+    width:100%;
+    min-width:100%;
+  }
+}

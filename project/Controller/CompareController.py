@@ -64,44 +64,45 @@ class CompareController():
         if not self.HS:
             self.HS = HaplotypesSearcher()
         dbPath =userId+"/"+database
-        print("userId es "+ userId)
 
         print("dbPath es "+ dbPath)
         self.HS.setDb(dbPath, database)
         seqName = sequence.partition('\n')[0]
         seqName = ''.join(e for e in seqName if e.isalnum())
 
-        seqPath = "/Temp/"+ seqName+ ".fa"
+        seqPath = "/Temporal/"+ seqName+ ".fa"
 
         tempFile = self.resourcePath(seqPath)
-        print(tempFile)
-        file = open(seqPath, "w+")
-
-        file.write(sequence)
-        file.close()
-        print(numResults)
-        results = self.HS.getResults(seqName,seqPath,dbPath,numResults, ambiguo)
+        print("TEMP FILE IN PATH "+tempFile)
+        with open(tempFile, "w+") as file:
+            file.write(sequence)
+            file.close()
+        results = self.HS.getResults(seqName,tempFile,dbPath,numResults, ambiguo)
+        try:
+            os.remove(tempFile)
+        except Exception as e:
+            print(e)
         return results
-       # return []
+        #return []
 
-    def compareWithSimpleDb(self,sequence, numResults, database, userId):
-        if not self.HS:
-            self.HS = HaplotypesSearcher()
-        dbPath = userId + "/" + database
-
-        self.HS.setDb(dbPath, database)
-        seqName = sequence.partition('\n')[0]
-        seqName = ''.join(e for e in seqName if e.isalnum())
-
-        seqPath = "/Temp/" + seqName + ".fa"
-
-        file = open(seqPath, "w+")
-
-        file.write(sequence)
-        file.close()
-        print(numResults)
-        results = self.HS.getResults(seqName, seqPath, dbPath, numResults,False)
-        return results
+    # def compareWithSimpleDb(self,sequence, numResults, database, userId):
+    #     if not self.HS:
+    #         self.HS = HaplotypesSearcher()
+    #     dbPath = userId + "/" + database
+    #
+    #     self.HS.setDb(dbPath, database)
+    #     seqName = sequence.partition('\n')[0]
+    #     seqName = ''.join(e for e in seqName if e.isalnum())
+    #
+    #     seqPath = "/Temp/" + seqName + ".fa"
+    #
+    #     file = open(seqPath, "w+")
+    #
+    #     file.write(sequence)
+    #     file.close()
+    #     print(numResults)
+    #     results = self.HS.getResults(seqName, seqPath, dbPath, numResults,False)
+    #     return results
 
     # return []
     def showResults(self, results):

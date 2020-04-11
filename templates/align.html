@@ -117,7 +117,7 @@
             <input type="hidden" class="hidden" id="username" value="{{ username }}"/>
             <input type="hidden" class="hidden" id="databases" value="{{ databases }}"/>
             <div class="ftco-cover-1 fullscreen">
-                <div class="container">
+                <div class="container alignment">
                     <div id="loader" class="loader" hidden=""></div>
 
                     <div class="right-row align-items-center justify-content-center">
@@ -130,12 +130,12 @@
                                         <div>
                                         <textarea name="sequence1" id="sequence1" class="text-area"
                                                   placeholder="{{ sequenceExample1 }}" rows="10"
-                                                  cols="55">{{ sequence1 }}</textarea>
+                                                  cols="70">{{ sequence1 }}</textarea>
                                         </div>
                                         <div>
                                         <textarea name="sequence2" id="sequence2" class="text-area"
                                                   placeholder="{{ sequenceExample2 }}" rows="10"
-                                                  cols="55">{{ sequence2 }}</textarea>
+                                                  cols="70">{{ sequence2 }}</textarea>
                                         </div>
                                     </div>
                                     <button style="margin: 1rem 0;" type="submit" onclick="showLoading()">Align</button>
@@ -143,10 +143,11 @@
                             </form>
                         </div>
                     </div>
-                      <div class="container bordered scrollable" id="table-results" hidden="">
+                     <div class="container alignment bordered scrollable" id="table-results" hidden="">
 
-                      </div>
+                    </div>
                 </div>
+
                 <!-- END .ftco-cover-1 -->
             </div>
             <script>

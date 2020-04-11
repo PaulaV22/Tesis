@@ -32,21 +32,21 @@
 <div class="top-bar">
     <div class="flex-row">
         <div class="bar-left">
-<!--            <a id="menu" class="margin-left" onclick="openSideBar()">
-                <i class="fa fa-bars"></i>
-             </a>-->
+            <!--            <a id="menu" class="margin-left" onclick="openSideBar()">
+                            <i class="fa fa-bars"></i>
+                         </a>-->
             <a class="margin-left" href="">ALELLES SEARCHER</a>
         </div>
 
-       <div class="user-icon">
+        <div class="user-icon">
             <img class="user-icon-img" onclick="showUserMenu()"
                  src="{{ url_for('static', filename='images/FAVPNG_avatar-icon-human-icon-person-icon_u2sqMuvB.png') }}"
-               alt="User picture">
-       </div>
+                 alt="User picture">
+        </div>
     </div>
 </div>
 
-<div  id="user-menu" class="user-menu" hidden="true">
+<div id="user-menu" class="user-menu" hidden="true">
     <p>Signed in as <b>{{ username }}</b></p>
     <a class="user-status" href="/edit/{{ userid }}">Edit profile</a>
     <a class="user-status" href="/logout/{{ userid }}">Logout</a>
@@ -55,57 +55,57 @@
 <!-- Sidebar -->
 
 <div id="left-panel" class="column left page-wrapper chiller-theme toggled">
-        <a id="close-sidebar" class="btn btn-sm btn-dark toggle" onclick="openSideBar()">
-            <i class="fa fa-bars"></i>
-        </a>
-        <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content">
-                <div class="sidebar-menu">
-                   <ul>
-                        <li class="sidebar-dropdown">
-                            <a class="menu" href="/compare/{{ userid }}">
-                                <i class="fa fa-home"></i>
-                                <span>WELCOME</span>
-                            </a>
-                        </li>
-                   </ul>
-                </div>
-
-                <div class="sidebar-menu bordered">
-                    <ul>
-                        <li class="sidebar-dropdown">
-                            <a href="/compare/{{ userid }}">
-                                <i class="fa fa-table"></i>
-                                <span>Compare</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/align/{{ userid }}"> <i
-                                    class="fa fa-search"></i><span>Align</span></a>
-                        </li>
-                        <li>
-                            <a href="/inspect/{{ userid }}"> <i
-                                    class="fa fa-database"></i><span>Admin</span></a>
-                        </li>
-                    </ul>
-                </div>
-
-                 <div class="sidebar-menu bordered">
-                    <ul>
-
-                        <li>
-                            <a href="/inspect/{{ userid }}"> <i
-                                    class="fa fa-info-circle"></i><span>About us</span></a>
-                        </li>
-                        <li>
-                            <a href="/align/{{ userid }}"> <i
-                                    class="fa fa-envelope"></i><span>Contact</span></a>
-                        </li>
-                    </ul>
-                </div>
+    <a id="close-sidebar" class="btn btn-sm btn-dark toggle" onclick="openSideBar()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="sidebar-dropdown">
+                        <a class="menu" href="/compare/{{ userid }}">
+                            <i class="fa fa-home"></i>
+                            <span>WELCOME</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-    </div>
+
+            <div class="sidebar-menu bordered">
+                <ul>
+                    <li class="sidebar-dropdown">
+                        <a href="/compare/{{ userid }}">
+                            <i class="fa fa-table"></i>
+                            <span>Compare</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/align/{{ userid }}"> <i
+                                class="fa fa-search"></i><span>Align</span></a>
+                    </li>
+                    <li>
+                        <a href="/inspect/{{ userid }}"> <i
+                                class="fa fa-database"></i><span>Admin</span></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu bordered">
+                <ul>
+
+                    <li>
+                        <a href="/inspect/{{ userid }}"> <i
+                                class="fa fa-info-circle"></i><span>About us</span></a>
+                    </li>
+                    <li>
+                        <a href="/align/{{ userid }}"> <i
+                                class="fa fa-envelope"></i><span>Contact</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
 
 <div class="row">
 
@@ -122,13 +122,13 @@
                 <div class="container">
                     <div id="loader" class="loader" hidden=""></div>
 
-                    <div class="right-row align-items-center justify-content-center text-center">
+                    <div class="right-row align-items-center justify-content-center text-center margin">
                         <div>
                             <h1>Alleles Searcher</h1>
-                            <p class="mb-5">Solve SNP desambiguations</p>
+                            <p class="mb-4">Solve SNP desambiguations</p>
                             <form method="post">
                                 <div class="container">
-                                    <div class="form-group">
+                                    <div class="flex-row margin-bottom">
                                         <div class="col-6">
                                             <label>Number of results </label>
                                             <input type="number" name="numResults" id="numResults" min="1" max="50"
@@ -143,8 +143,7 @@
                                     </div>
                                     <div>
                                         <textarea name="sequence" id="sequence" class="text-area"
-                                                  placeholder="{{ sequenceExample }}" rows="10"
-                                                  cols="85">{{ sequence }}</textarea>
+                                                  placeholder="{{ sequenceExample }}" rows="10" cols="85">{{ sequence }}</textarea>
                                     </div>
 
                                     <button type="submit" onclick="showLoading()">Search</button>
@@ -162,6 +161,8 @@
              setDatabases();
              configureSideBar();
              createTable();
+
+
             </script>
         </div>
     </div>
