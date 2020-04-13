@@ -1,5 +1,14 @@
 var dbs= [];
+var columns1 = [{title: "SCORE", dataKey: "SCORE"}, {title: "EVALUE", dataKey: "EVALUE"},{title: "SIMILARITY", dataKey: "SIMILARITY"},]
+var rows1 = [];
+var columns2 = [
+            {title: "Name", dataKey: "Name"},
+            {title: "Start", dataKey: "Start"},
+            {title: "Alignment", dataKey: "Alignment"},
+            {title: "End", dataKey: "End"},
 
+        ];
+var rows2 = [];
 
 function showLoading(){
     //var seq = document.getElementById("sequence").value;
@@ -519,7 +528,150 @@ function max(val1,val2){
     return val2;
 }
 
-function showResults(){
+function showResults_(){
+   var results=document.getElementById("results-input").value;
+   var divResults = document.getElementById("table-results");
+    if (results.length>0){
+        results = JSON.parse(results);
+        console.log(results)
+        var alignment = results[results.length-1]
+
+        var score =  alignment.score;
+        var evalue = alignment.evalue;
+        var similarity = alignment.similarity;
+
+        //var txtContent = "";
+        var firstRow = document.createElement("div");
+        firstRow.setAttribute("class","flex-row separated");
+        var c1 = document.createElement("div");
+        c1.setAttribute("class","col-md-4");
+        c1.innerHTML = "<b>SCORE: </b>"+score;
+        var c2 = document.createElement("div");
+        c2.setAttribute("class","col-md-4");
+        c2.innerHTML = "<b>E-VALUE: </b>"+ evalue;
+        var c3 = document.createElement("div");
+        c3.setAttribute("class","col-md-4");
+        c3.innerHTML = "<b>SIMILARITY: </b>" +similarity;
+
+        firstRow.appendChild(c1);
+        firstRow.appendChild(c2);
+        firstRow.appendChild(c3);
+
+       // txtContent = txtContent + "SCORE: "+socre + "\t" + "E-VALUE: "+ evalue + "\t" +"SIMILARITY: "+ similarity + "\v";
+
+        divResults.appendChild(firstRow);
+        var array = alignment.alignment.split('>');
+        var sequence1 =array[1];
+        var sequence2 =array[2];
+        var sequence1Name = sequence1.split('\n')[0];
+        sequence1Name = sequence1Name.split(' ')[0];
+        var sequence2Name = sequence2.split('\n')[0];
+        sequence2Name = sequence2Name.split(' ')[0];
+        console.log(sequence1.split('\n',2));
+        var sequence1Content = getContent(sequence1);
+        var sequence2Content = getContent(sequence2);
+
+        var seq1start = alignment.queryStart;
+        var seq2start = alignment.hitStart;
+        var length= 50;
+        var iteration = 0;
+
+        var middleSeq ="";
+
+        for (var j =0; j < max(sequence1Content.length, sequence2Content.length); j++) {
+            if (sequence1Content[j] && sequence2Content[j]){
+                if (sequence1Content[j] == sequence2Content[j]){
+                    middleSeq = middleSeq + "|";
+                }else{
+                    middleSeq = middleSeq + ".";
+                }
+            }else{
+                middleSeq = middleSeq + ".";
+
+            }
+        }
+        var chunkedSeq1 = sequence1Content.match(/.{1,50}/g);
+        var chunkedSeq2 = sequence2Content.match(/.{1,50}/g);
+        var chunkedMiddle = middleSeq.match(/.{1,50}/g);
+
+        for (var i =0; i < chunkedMiddle.length; i++) {
+            var s1name = document.createElement("div");
+            s1name.setAttribute("class", "col-md-3");
+            var s1content = document.createElement("div");
+            s1content.setAttribute("class", "col-md-7");
+            var s1end = document.createElement("div");
+            s1end.setAttribute("class", "col-md-2");
+            var seq1StartValue="";
+            if (chunkedSeq1[i]){
+                s1content.innerHTML = chunkedSeq1[i];
+                seq1StartValue = seq1start + chunkedSeq1[i].length *i+1;
+                s1end.innerHTML = seq1StartValue-1 + chunkedSeq1[i].length;
+            }else{
+                s1content.innerHTML = " ";
+                seq1StartValue =" "
+                s1end.innerHTML = " ";
+            }
+
+            s1name.innerHTML = sequence1Name +"   "+ seq1StartValue;
+
+            var row1 = document.createElement("div");
+            row1.setAttribute("class","flex-row");
+            row1.appendChild(s1name);
+            row1.appendChild(s1content);
+            row1.appendChild(s1end);
+
+           // txtContent = txtContent + s1name + "\t"
+            var middle1 = document.createElement("div");
+            middle1.setAttribute("class", "col-md-3");
+            var middle2 = document.createElement("div");
+            middle2.setAttribute("class", "col-md-7");
+            middle2.innerHTML = chunkedMiddle[i];
+            var middle3 = document.createElement("div");
+            middle3.setAttribute("class", "col-md-2");
+
+
+            var row2 = document.createElement("div");
+            row2.setAttribute("class","flex-row");
+            row2.appendChild(middle1);
+            row2.appendChild(middle2);
+            row2.appendChild(middle3);
+
+            var s2name = document.createElement("div");
+            s2name.setAttribute("class", "col-md-3");
+            var s2content = document.createElement("div");
+            s2content.setAttribute("class", "col-md-7");
+            var s2end = document.createElement("div");
+            s2end.setAttribute("class", "col-md-2");
+            var seq2StartValue="";
+            if (chunkedSeq2[i]){
+                s2content.innerHTML = chunkedSeq2[i];
+                seq2StartValue = seq2start + chunkedSeq2[i].length *i+1;
+                s2end.innerHTML = seq2StartValue-1 + chunkedSeq2[i].length;
+            }else{
+                s2content.innerHTML = " ";
+                seq2StartValue =" "
+                s2end.innerHTML = " ";
+            }
+            s2name.innerHTML = sequence2Name +"   "+ seq2StartValue;
+
+            var row3 = document.createElement("div");
+            row3.setAttribute("class","flex-row");
+            row3.appendChild(s2name);
+            row3.appendChild(s2content);
+            row3.appendChild(s2end);
+
+            divResults.appendChild(row1);
+            divResults.appendChild(row2);
+            divResults.appendChild(row3);
+        }
+        divResults.removeAttribute("hidden");
+        var divDownload = document.getElementById("downloadResults");
+        divDownload.removeAttribute("hidden");
+
+    }
+}
+
+function showResults__(){
    var results=document.getElementById("results-input").value;
    var divResults = document.getElementById("table-results");
     if (results.length>0){
@@ -582,12 +734,30 @@ function showResults(){
         var chunkedSeq2 = sequence2Content.match(/.{1,50}/g);
         var chunkedMiddle = middleSeq.match(/.{1,50}/g);
 
-        console.log(chunkedSeq1);
-        console.log(chunkedSeq2);
-        console.log(chunkedMiddle);
+        var table = document.createElement("table");
+        table.setAttribute("id", "table_results");
+        table.setAttribute("class", "table table-striped");
+        var thead = document.createElement("thead");
+        var th = thead.insertRow(-1);
+        var th1 = document.createElement("th");
+        th1.innerHTML = "Name";
+        th.appendChild(th1);
+        var th2= document.createElement("th");
+        th2.innerHTML = "Start";
+        th.appendChild(th2);
+        var th3 = document.createElement("th");
+        th3.innerHTML = "Alignment";
+        th.appendChild(th3);
+        var th4 = document.createElement("th");
+        th4.innerHTML = "End";
+        th.appendChild(th4);
+        table.appendChild(thead);
+
+        var tbody = document.createElement("tbody");
+        table.appendChild(tbody);
 
         for (var i =0; i < chunkedMiddle.length; i++) {
-            var s1name = document.createElement("div");
+           /* var s1name = document.createElement("div");
             s1name.setAttribute("class", "col-md-3");
             var s1content = document.createElement("div");
             s1content.setAttribute("class", "col-md-7");
@@ -603,8 +773,206 @@ function showResults(){
                 seq1StartValue =" "
                 s1end.innerHTML = " ";
             }
+            s1name.innerHTML = sequence1Name +"   "+ seq1StartValue;
+*/
+            var tr1 = tbody.insertRow(-1);
+
+            var s1name = tr1.insertCell(-1);
+            var s1start = tr1.insertCell(-1);
+            var s1content = tr1.insertCell(-1);
+            var s1end = tr1.insertCell(-1);
+
+            if (chunkedSeq1[i]){
+                s1content.innerHTML = chunkedSeq1[i];
+                seq1StartValue = seq1start + chunkedSeq1[i].length *i+1;
+                s1end.innerHTML = seq1StartValue-1 + chunkedSeq1[i].length;
+            }else{
+                s1content.innerHTML = " ";
+                seq1StartValue =" "
+                s1end.innerHTML = " ";
+            }
+            s1name.innerHTML = sequence1Name;
+            s1start.innerHTML = seq1StartValue;
+
+/*            var row1 = document.createElement("div");
+            row1.setAttribute("class","flex-row");
+            row1.appendChild(s1name);
+            row1.appendChild(s1content);
+            row1.appendChild(s1end);*/
+
+           // txtContent = txtContent + s1name + "\t"
+            /*var middle1 = document.createElement("div");
+            middle1.setAttribute("class", "col-md-3");
+            var middle2 = document.createElement("div");
+            middle2.setAttribute("class", "col-md-7");
+            middle2.innerHTML = chunkedMiddle[i];
+            var middle3 = document.createElement("div");
+            middle3.setAttribute("class", "col-md-2");
+
+
+            var row2 = document.createElement("div");
+            row2.setAttribute("class","flex-row");
+            row2.appendChild(middle1);
+            row2.appendChild(middle2);
+            row2.appendChild(middle3);*/
+
+
+            var tr2 = tbody.insertRow(-1);
+            var middleName = tr2.insertCell(-1);
+            var middleStart = tr2.insertCell(-1);
+            var middleContent = tr2.insertCell(-1);
+            var middleEnd = tr2.insertCell(-1);
+
+            middleName.innerHTML="";
+            middleStart.innerHTML="";
+            middleContent.innerHTML=chunkedMiddle[i];
+            middleEnd.innerHTML="";
+
+          /*  var s2name = document.createElement("div");
+            s2name.setAttribute("class", "col-md-3");
+            var s2content = document.createElement("div");
+            s2content.setAttribute("class", "col-md-7");
+            var s2end = document.createElement("div");
+            s2end.setAttribute("class", "col-md-2");
+            var seq2StartValue="";
+            if (chunkedSeq2[i]){
+                s2content.innerHTML = chunkedSeq2[i];
+                seq2StartValue = seq2start + chunkedSeq2[i].length *i+1;
+                s2end.innerHTML = seq2StartValue-1 + chunkedSeq2[i].length;
+            }else{
+                s2content.innerHTML = " ";
+                seq2StartValue =" "
+                s2end.innerHTML = " ";
+            }
+            s2name.innerHTML = sequence2Name +"   "+ seq2StartValue;
+
+            var row3 = document.createElement("div");
+            row3.setAttribute("class","flex-row");
+            row3.appendChild(s2name);
+            row3.appendChild(s2content);
+            row3.appendChild(s2end);
+
+            divResults.appendChild(row1);
+            divResults.appendChild(row2);
+            divResults.appendChild(row3);*/
+
+            var tr3 = tbody.insertRow(-1);
+
+            var s2name = tr3.insertCell(-1);
+            var s2start = tr3.insertCell(-1);
+            var s2content = tr3.insertCell(-1);
+            var s2end = tr3.insertCell(-1);
+            if (chunkedSeq2[i]){
+                s2content.innerHTML = chunkedSeq2[i];
+                seq2StartValue = seq2start + chunkedSeq2[i].length *i+1;
+                s2end.innerHTML = seq2StartValue-1 + chunkedSeq2[i].length;
+            }else{
+                s2content.innerHTML = " ";
+                seq2StartValue =" "
+                s2end.innerHTML = " ";
+            }
+            s2name.innerHTML = sequence2Name;
+            s2start.innerHTML = seq2StartValue;
+        }
+        table.setAttribute("style",'font-family: "Courier New", Courier, monospace; font-size: 14px;');
+        divResults.appendChild(table);
+        divResults.removeAttribute("hidden");
+        var divDownload = document.getElementById("downloadResults");
+        divDownload.removeAttribute("hidden");
+
+    }
+}
+
+function showResults(){
+   var results=document.getElementById("results-input").value;
+   var divResults = document.getElementById("table-results");
+    if (results.length>0){
+        results = JSON.parse(results);
+        console.log(results)
+        var alignment = results[results.length-1]
+
+        var score =  alignment.score;
+        var evalue = alignment.evalue;
+        var similarity = alignment.similarity;
+
+        //var txtContent = "";
+        var firstRow = document.createElement("div");
+        firstRow.setAttribute("class","flex-row separated");
+        var c1 = document.createElement("div");
+        c1.setAttribute("class","col-md-4");
+        c1.innerHTML = "<b>SCORE: </b>"+score;
+        var c2 = document.createElement("div");
+        c2.setAttribute("class","col-md-4");
+        c2.innerHTML = "<b>E-VALUE: </b>"+ evalue;
+        var c3 = document.createElement("div");
+        c3.setAttribute("class","col-md-4");
+        c3.innerHTML = "<b>SIMILARITY: </b>" +similarity;
+
+        firstRow.appendChild(c1);
+        firstRow.appendChild(c2);
+        firstRow.appendChild(c3);
+        var r = {"SCORE": score, "EVALUE":evalue, "SIMILARITY": similarity};
+        console.log(r);
+        rows1.push(r);
+
+        divResults.appendChild(firstRow);
+        var array = alignment.alignment.split('>');
+        var sequence1 =array[1];
+        var sequence2 =array[2];
+        var sequence1Name = sequence1.split('\n')[0];
+        sequence1Name = sequence1Name.split(' ')[0];
+        var sequence2Name = sequence2.split('\n')[0];
+        sequence2Name = sequence2Name.split(' ')[0];
+        console.log(sequence1.split('\n',2));
+        var sequence1Content = getContent(sequence1);
+        var sequence2Content = getContent(sequence2);
+
+        var seq1start = alignment.queryStart;
+        var seq2start = alignment.hitStart;
+        var length= 50;
+        var iteration = 0;
+
+        var middleSeq ="";
+
+        for (var j =0; j < max(sequence1Content.length, sequence2Content.length); j++) {
+            if (sequence1Content[j] && sequence2Content[j]){
+                if (sequence1Content[j] == sequence2Content[j]){
+                    middleSeq = middleSeq + "|";
+                }else{
+                    middleSeq = middleSeq + ".";
+                }
+            }else{
+                middleSeq = middleSeq + ".";
+
+            }
+        }
+        var chunkedSeq1 = sequence1Content.match(/.{1,50}/g);
+        var chunkedSeq2 = sequence2Content.match(/.{1,50}/g);
+        var chunkedMiddle = middleSeq.match(/.{1,50}/g);
+
+        for (var i =0; i < chunkedMiddle.length; i++) {
+            var s1name = document.createElement("div");
+            s1name.setAttribute("class", "col-md-3");
+            var s1content = document.createElement("div");
+            s1content.setAttribute("class", "col-md-7");
+            var s1end = document.createElement("div");
+            s1end.setAttribute("class", "col-md-2");
+            var seq1StartValue="";
+            var s1contentValue="";
+            var s1endValue ="";
+            if (chunkedSeq1[i]){
+                s1contentValue= chunkedSeq1[i];
+                seq1StartValue = seq1start + chunkedSeq1[i].length *i+1;
+                s1endValue = seq1StartValue-1 + chunkedSeq1[i].length;
+            }else{
+                s1contentValue = " ";
+                seq1StartValue =" "
+                s1endValue = " ";
+            }
 
             s1name.innerHTML = sequence1Name +"   "+ seq1StartValue;
+            s1content.innerHTML = s1contentValue;
+            s1end.innerHTML = s1endValue;
 
             var row1 = document.createElement("div");
             row1.setAttribute("class","flex-row");
@@ -633,18 +1001,21 @@ function showResults(){
             s2content.setAttribute("class", "col-md-7");
             var s2end = document.createElement("div");
             s2end.setAttribute("class", "col-md-2");
+            var s2contentValue="";
             var seq2StartValue="";
+            var s2endValue = "";
             if (chunkedSeq2[i]){
-                s2content.innerHTML = chunkedSeq2[i];
+                s2contentValue = chunkedSeq2[i];
                 seq2StartValue = seq2start + chunkedSeq2[i].length *i+1;
-                s2end.innerHTML = seq2StartValue-1 + chunkedSeq2[i].length;
+                s2endValue = seq2StartValue-1 + chunkedSeq2[i].length;
             }else{
-                s2content.innerHTML = " ";
+                s2contentValue = " ";
                 seq2StartValue =" "
-                s2end.innerHTML = " ";
+                s2endValue = " ";
             }
             s2name.innerHTML = sequence2Name +"   "+ seq2StartValue;
-
+            s2content.innerHTML = s2contentValue;
+            s2end.innerHTML = s2endValue;
             var row3 = document.createElement("div");
             row3.setAttribute("class","flex-row");
             row3.appendChild(s2name);
@@ -654,8 +1025,17 @@ function showResults(){
             divResults.appendChild(row1);
             divResults.appendChild(row2);
             divResults.appendChild(row3);
+            var r1 = {"Name": sequence1Name, "Start": seq1StartValue, "Alignment": s1contentValue, "End":s1endValue };
+            var r2 = {"Name": " ", "Start": " ", "Alignment": chunkedMiddle[i], "End": " "};
+            var r3 = {"Name": sequence2Name, "Start": seq2StartValue, "Alignment": s2contentValue, "End":s2endValue};
+            rows2.push(r1);
+            rows2.push(r2);
+            rows2.push(r3);
         }
-        divResults.removeAttribute("hidden")
+        divResults.removeAttribute("hidden");
+        var divDownload = document.getElementById("downloadResults");
+        divDownload.removeAttribute("hidden");
+
     }
 }
 
@@ -672,4 +1052,131 @@ function showUserMenu(){
 
 function toLogin(){
 window.location.replace('/');
+}
+
+function downloadInnerHtml2() {
+    var data = [],fontSize = 11,height = 0,doc;
+
+    doc = new jsPDF('p', 'pt', 'a4', true);
+    doc.setFont("courier", "normal");
+    doc.setFontSize(fontSize);
+    doc.text(50,100,"hi table");
+    for (var insert = 0; insert <= 20; insert++) {
+		data.push({
+			"name" : "jspdf plugin",
+			"version" : insert,
+			"author" : "Prashanth Nelli",
+			"Designation" : "AngularJs Developer"
+		});
+	}
+	height = doc.drawTable(data, {xstart:10,ystart:10,tablestart:70,marginleft:50});
+	doc.text(50, height + 20, 'hi world');
+	doc.save("some-file.pdf");
+}
+
+function downloadInnerHtml_() {
+
+        var pdf = new jsPDF('p', 'pt', 'letter');
+
+        source = $('#table-results')[0];
+        pdf.setFont("courier new monospace");
+        pdf.setFontSize(11);
+
+        specialElementHandlers = {
+            // element with id of "bypass" - jQuery style selector
+            '#bypassme': function (element, renderer) {
+                // true = "handled elsewhere, bypass text extraction"
+                return true
+            }
+        };
+        margins = {
+            top: 80,
+            bottom: 60,
+            left: 30,
+            width: 800
+        };
+        // all coords and widths are in jsPDF instance's declared units
+        // 'inches' in this case
+        pdf.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left, // x coord
+            margins.top, { // y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+
+            function (dispose) {
+                // dispose: object with X, Y of the last line add to the PDF
+                //          this allow the insertion of new lines after html
+                pdf.save('Test.pdf');
+            }, margins
+        );
+    }
+
+
+function downloadInnerHtml(){
+const doc = new jsPDF('p', 'pt');
+// according to jspdf, PTSans must be base64 font, full string is on jsPDF/examples/js/basic.js
+
+doc.setFont('Courier', '');
+doc.setFontSize(11);
+
+doc.autoTable(columns1, rows1, {
+    theme: 'grid',
+    styles: {
+        fontSize: 10,
+        font: 'Courier'
+    },
+    headStyles:{
+        valign: 'middle',
+        halign : 'center'
+    },
+    columnStyles: {
+        SCORE: {
+            halign: "center",
+            font: 'Courier',
+        },
+        EVALUE: {
+            halign: "center",
+            font: 'Courier'
+        },
+        SIMILARITY: {
+            halign: "center",
+            font: 'Courier'
+        }
+    },
+    cellWidth: 'auto'
+});
+
+doc.autoTable(columns2, rows2, {
+    theme: 'plain',
+    styles: {
+        fontSize: 10,
+        font: 'Courier'
+    },
+    columnStyles: {
+        font: 'Courier',
+        Name: {
+            halign: "center",
+            font: 'Courier'
+        },
+        Start: {
+            halign: "center",
+            font: 'Courier'
+        },
+        Alignment: {
+            halign: "left",
+            font: 'Courier'
+        },
+         End: {
+            halign: "center",
+            font: 'Courier'
+        }
+    },
+    tableWidth: 'wrap',
+    showHeader: 'always',
+});
+
+console.log(doc.getFontList());
+doc.save('alignment-result.pdf');
 }

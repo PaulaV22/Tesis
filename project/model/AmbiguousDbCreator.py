@@ -116,22 +116,20 @@ class AmbiguousDbCreator:
     def printAmbiguousPos(self):
         print(self.ambiguousPos)
 
-    def hasAllFiles(self,db):
-        if not any(fname.endswith('.fasta') for fname in os.listdir(db)):
-            return False
-        if not any(fname.endswith('.nhr') for fname in os.listdir(db)):
-            return False
-        if not any(fname.endswith('.nin') for fname in os.listdir(db)):
-            return False
-        if not any(fname.endswith('.nog') for fname in os.listdir(db)):
-            return False
-        if not any(fname.endswith('.nsd') for fname in os.listdir(db)):
-            return False
-        if not any(fname.endswith('.nsi') for fname in os.listdir(db)):
-            return False
-        if not any(fname.endswith('.nsq') for fname in os.listdir(db)):
-            return False
+    def hasAllFilesWithExt(self, db, ext):
+        for e in ext:
+            if not any(fname.endswith(e) for fname in os.listdir(db)):
+                return False
         return True
+
+    def hasAllFiles(self,db):
+        ext = []
+        if os.name == 'nt':
+            ext= ['.fasta', '.nhr', '.nin','.nog', '.nsd','.nsi', '.nsq' ]
+        else:
+            ext= ['.fasta', '.nhr', '.nin','.nog', '.not','.ntf', '.ndb', '.nos','.nsq', '.nto' ]
+        return self.hasAllFilesWithExt(db, ext);
+
 
     def testFails(self,db, file):
         print("A TESTEAR DB AMBIGUA "+db)

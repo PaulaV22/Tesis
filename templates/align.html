@@ -24,6 +24,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+
+    <script src="https://unpkg.com/jspdf-autotable"></script>
+
+    <script type="text/javascript" src="/static/js/jspdf.plugin.table.js"></script>
+
     <script type="text/javascript" src="/static/js/functions.js"></script>
 </head>
 
@@ -130,21 +137,25 @@
                                         <div>
                                         <textarea name="sequence1" id="sequence1" class="text-area"
                                                   placeholder="{{ sequenceExample1 }}" rows="10"
-                                                  cols="70">{{ sequence1 }}</textarea>
+                                                  cols="68">{{ sequence1 }}</textarea>
                                         </div>
                                         <div>
                                         <textarea name="sequence2" id="sequence2" class="text-area"
                                                   placeholder="{{ sequenceExample2 }}" rows="10"
-                                                  cols="70">{{ sequence2 }}</textarea>
+                                                  cols="68">{{ sequence2 }}</textarea>
                                         </div>
                                     </div>
-                                    <button style="margin: 1rem 0;" type="submit" onclick="showLoading()">Align</button>
+                                    <button style="margin: 1rem 0;" class="btn btn-secondary" type="submit" onclick="showLoading()">Align</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                      <div class="container alignment bordered scrollable" id="table-results" hidden="">
 
+                    </div>
+
+                    <div id="downloadResults" class="centered" hidden="">
+                        <button type="button" class="btn btn-secondary" onclick="downloadInnerHtml()">Save PDF</button>
                     </div>
                 </div>
 

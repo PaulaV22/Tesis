@@ -69,8 +69,7 @@ class SimpleDbCreator:
                 subprocess.Popen(command)
                 print(subprocess.check_output(command))
             else:
-                inParam = "-in "+dbpath1
-                outParam = "-out "+dbpath2
+
                 fullCommand = 'makeblastdb -in ' + dbpath1 + ' -out ' + dbpath2 + ' -parse_seqids -dbtype nucl'
                 print("FULL COMMAND IS "+ fullCommand)
                 command = subprocess.Popen(shlex.split(fullCommand))

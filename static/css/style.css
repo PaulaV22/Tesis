@@ -477,7 +477,7 @@ h1, h2, h3, h4, h5,
 }
 
 .flex-buttons{
-    margin: 0rem 6rem;
+    margin: 2rem 6rem;
     display: flex;
     justify-content: space-between;
 }
@@ -996,6 +996,7 @@ select{
 
 .modal-body{
     font-size: 1vw;
+    white-space: pre;
 }
 
 .modal-title{
@@ -1164,6 +1165,14 @@ height:70px;
     text-align:center;
     margin: 1rem 0;
 }
+
+.edit-container{
+    width:40%;
+}
+
+.edit-container form{
+   text-align:left;
+}
 @media (max-width: 1000px) {
     .flex-wrapper {
         display: block;
@@ -1190,7 +1199,7 @@ height:70px;
         justify-content: space-around;
     }
 
-    .alignment{
+    .container.alignment.bordered.scrollable{
         font-size: small;
         min-width: 100%;
         margin: 0;
@@ -1198,12 +1207,15 @@ height:70px;
 }
 
 @media (max-width: 800px) {
-  .alignment{
+  .container.alignment.bordered.scrollable{
         font-size: xx-small;;
     }
   .container{
     margin:0;
     width:100%;
     min-width:100%;
+  }
+  .flex-buttons{
+    margin:2rem 0;
   }
 }

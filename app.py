@@ -277,7 +277,7 @@ def edit(id):
             except Exception as e:
                 print(e)
                 message = e
-        return render_template("editprofile.html", userid=id, msg=message, name=name, email=email, password=password)
+        return render_template("editprofile.html", userid=id, msg=message, username=name, email=email, password=password)
     else:
         return render_template("login.html", email="", password="", username="", msg="Plese enter a valid user")
 
