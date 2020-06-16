@@ -1,9 +1,5 @@
-
-import numpy as np
-from project.model.HaplotypesSearcher import HaplotypesSearcher
-from project.model.UserManager import UserManager as UM
-import os
-import sys
+from project.Manager.UserManager import UserManager as UM
+from flask_login import LoginManager
 
 class UserController():
 
@@ -13,12 +9,9 @@ class UserController():
     def addUser(self, name, email, password):
         self.userManager.addUser(name,email,password)
 
-    def getUser(self,email,password):
-        user= self.userManager.getUser(email)
-        if not user is None:
-            if user['password']==password:
-                return user
-        return None
+    def getUser(self,email):
+        return  self.userManager.getUser(email)
+
 
     def getUserByEmail(self,email):
         return self.userManager.getUser(email)

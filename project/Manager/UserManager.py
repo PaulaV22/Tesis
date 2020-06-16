@@ -48,7 +48,7 @@ class UserManager():
             print(user)
             jsonUser = json.loads(user)
             if jsonUser['email'] == email:
-                return jsonUser
+                return User(jsonUser['name'], jsonUser['email'], jsonUser['password'])
         return None
 
     def getUserDbs(self,email):

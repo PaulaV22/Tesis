@@ -477,9 +477,8 @@ h1, h2, h3, h4, h5,
 }
 
 .flex-buttons{
-    margin: 2rem 6rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 /*.form-group{
     display:flex !important;
@@ -1216,6 +1215,15 @@ height:70px;
     min-width:100%;
   }
   .flex-buttons{
-    margin:2rem 0;
+    display: grid;
+    grid-gap: 10px;
+   }
+
+   .login-form {
+    width: 100%;
+   }
+
+  .inspect-container {
+    width: 100%;
   }
 }
