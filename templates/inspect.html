@@ -135,9 +135,10 @@
                                         <div class="inspect-container">
                                         <div class="form-group">
                                             <h5>Create a new database</h5>
-                                             <input type="text" class="form-control separated" placeholder="Database Name" id="dbname" name="dbname">
-                                            <input type="file" class="form-control-file separated" multiple="" name="dbfile[]"/><br/>
-                                            <input type=submit class="btn btn-dark" value="Create database" onclick="showLoading()">
+                                            <input type="text" class="form-control separated" placeholder="Database Name"
+                                                   required id="dbname" name="dbname">
+                                            <input id="dbfiles" type="file" required class="form-control-file separated" multiple="" name="dbfile[]"/><br/>
+                                            <input id="submit" type=submit class="btn btn-dark" value="Create database" onclick="showLoading()">
                                         </div>
                                         </div>
                                     </div>
@@ -201,6 +202,7 @@
                 </div>
             </div>
             <script>
+                controlUploadButton()
                 configureSideBar();
                 createDatabasesTable();
             </script>

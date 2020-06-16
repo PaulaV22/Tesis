@@ -104,18 +104,15 @@
                             <div>
                                 <h1>New database</h1>
                                 <p class="mb-5">Upload files with .fa extension</p>
-                                <form method=postgit add .ainer">
-                                        <div class="form-group">
-                                            <label>Database name</label>
-                                            <input type="text" id="dbname" name="dbname" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="file" multiple="" name="file[]"/><br/>
-
-                                            <!--<input type=file name=file webkitdirectory="" directory="" >-->
-                                        </div>
+                                <form method="post">
+                                    <div class="form-group">
+                                        <label>Database name</label>
+                                        <input type="text" id="dbname" name="dbname" required="true">
                                     </div>
-                                    <input type=submit value=Upload>
+                                    <div class="form-group">
+                                        <input type="file" multiple="" name="file[]"/><br/>
+                                    </div>
+                                    <button id="uploadDb" type="submit">Upload</button>
                                 </form>
                             </div>
                         </div>

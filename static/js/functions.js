@@ -1180,3 +1180,24 @@ doc.autoTable(columns2, rows2, {
 console.log(doc.getFontList());
 doc.save('alignment-result.pdf');
 }
+
+
+function controlUploadButton(){
+    var dbname = document.getElementById('dbname');
+    var files = document.getElementById('dbfiles');
+
+    dbname.addEventListener('change', validateForm);
+    files.addEventListener('change', validateForm);
+    validateForm();
+}
+
+function validateForm(){
+  var submit = document.getElementById('submit');
+  var dbname = document.getElementById('dbname').value;
+  var files = document.getElementById('dbfiles').value;
+
+  if(dbname==="" || files.length==0)
+    submit.setAttribute("disabled",true);
+  else
+    submit.removeAttribute("disabled");
+}
