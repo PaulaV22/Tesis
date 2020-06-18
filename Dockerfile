@@ -14,7 +14,7 @@ RUN  python -m venv venv
 CMD  ["source venv/bin/activate"]
 RUN apt-get install ca-certificates
 
-RUN pip install --upgrade pip
+RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 RUN tar zxvpf ncbi-blast-2.10.0+-x64-linux.tar.gz

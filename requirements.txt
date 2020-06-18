@@ -2,3 +2,4 @@ biopython
 flask
 numpy
 flask_debug
+flask_login

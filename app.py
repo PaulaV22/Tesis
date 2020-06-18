@@ -64,11 +64,7 @@ def index():
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    email = ""
-    password = ""
-    message = "UNAUTHORIZED: Invalid username or password"
-    print(message)
-    return render_template("login.html", email=email, password=password, msg=message)
+    return redirect('/')
 
 @app.route('/compare/<id>', methods=['GET', 'POST'])
 @login_required
