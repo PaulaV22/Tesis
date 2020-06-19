@@ -50,7 +50,7 @@ class HaplotypesSearcher():
         resultsAnalizer = RA.ResultsAnalizer("FinalResult",database, ambiguo)
 
         results = resultsAnalizer.getSimilarSequences(queryName,numSeqs)
-
+        self.deleteDb(database, False, False)
         return results
 
 
@@ -127,6 +127,7 @@ class HaplotypesSearcher():
         print(" ambiguousdbcreator va a makeDb ")
 
         ambiguousDbCreator.makeDb()
+        self.deleteDb(dbPath, False, False)
         #categoriesFile = self.projectPath + "/Categories/" + db + ".json"
 
     def configureSimpleDb(self, dbPath, dbName):
@@ -158,11 +159,11 @@ class HaplotypesSearcher():
             json.dump(categories, f)
 
     def restartDb(self,userDb, dbName):
-        self.deleteDb(userDb, False)
+        self.deleteDb(userDb, True, False)
         print("termino de borrar. Va a configureDb con "+ userDb +" "+dbName)
         self.configureDb(userDb, dbName)
 
-    def deleteDb(self,db,total=True):
+    def deleteDb(self,db,ambigua=True, total=True):
         Database = self.resourcePath('/Databases/' + db)
         Blastdb = self.resourcePath('/Blastdb/' + db)
         BlastResult = self.resourcePath('/BlastResult/' + db)
@@ -184,11 +185,12 @@ class HaplotypesSearcher():
         except:
             print("error deleting from BlastResult")
             pass
-        try:
-            shutil.rmtree(DbAmbigua)
-        except:
-            print("error deleting from DbAmbigua")
-            pass
+        if ambigua:
+            try:
+                shutil.rmtree(DbAmbigua)
+            except:
+                print("error deleting from DbAmbigua")
+                pass
         try:
             shutil.rmtree(FinalResult)
         except:
@@ -256,21 +258,3 @@ class HaplotypesSearcher():
 
 searcher = HaplotypesSearcher()
 searcher.getDatabases()
-#searcher.configureDb("BoLa")
-#searcher.setCategoryToFilesInDb('BoLa', 'Mas_frecuentes', "ALTA")
-#searcher.setCategoryToFilesInDb('BoLa', 'Menos_1%', "MEDIA")
-#searcher.setCategoryToFilesInDb('BoLa', 'Menos_2%', "MEDIA")
-#searcher.setCategoryToFilesInDb('BoLa', 'No_encontrados', "BAJA")
-
-#searcher.searchHaplotypes()
-
-#searcher.congifureDb()
-#searcher.deleteSequence("BoLa", "DERB3_4501.fa")
-#
-#searcher.deleteSeq("BoLa","C:\Users\Paula\PycharmProjects\Haplotypes\BoLa\Mas_frecuentes\DRB3_2705.fa")
-#searcher.addSeq("C:\Users\Paula\PycharmProjects\Haplotypes\BoLa\Mas_frecuentes","BoLa", "DRB3_2705",
-                          #"GGAGTATTATAAGAGAGAGTGTCATTTCTTCAACGGGACCGAGCGGGTGCGGTTCCTGGACAGATGCTACACTAATGGAGAAGAGACCGTGCGCTTCGACAGCGACTGGGGCGAGTTCCGGGCGGTGACCGAGCTAGGGCGGCCGGACGCCGAGTACTGGAACAGCCAGAAGGACTTCCTGGAGGAGAGGCGGGCCGCGGTGGACAGGGTGTGCAGACACAACTACGGGGTCGTGGAGAGTTTCACTGTG")
-#searcher.probarGlobalComparator()
-#searcher.probarSimpleDbCreator()
-#searcher.probarAmbiguousDbCreator()
-

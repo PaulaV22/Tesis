@@ -50,6 +50,7 @@
     <p>Signed in as <b>{{ username }}</b></p>
     <a class="user-status" href="/edit/{{ userid }}">Edit profile</a>
     <a class="user-status" href="/logout/{{ userid }}">Logout</a>
+
 </div>
 
 <!-- Sidebar -->
@@ -146,7 +147,7 @@
                                                   placeholder="{{ sequenceExample }}" rows="10" cols="85">{{ sequence }}</textarea>
                                     </div>
 
-                                    <button type="submit" onclick="showLoading()">Search</button>
+                                    <button class="btn btn-dark" type="submit" onclick="showLoading()">Search</button>
                                 </div>
                                 <div class="container bordered" id="table-results" hidden="">
 

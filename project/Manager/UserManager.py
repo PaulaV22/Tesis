@@ -22,10 +22,11 @@ class UserManager():
         for user in self.users:
             print(user)
             jsonUser = json.loads(user)
-            print(jsonUser)
             if (jsonUser['email'] == email):
                 raise Exception('The user already exists')
         newUser = User(name,email,password)
+        newUser.password = newUser.set_password(password)
+        print(newUser)
         self.users.append(newUser.toJson())
         with open("users.json", mode='w', encoding='utf-8') as f:
             json.dump(self.users, f)
@@ -58,14 +59,14 @@ class UserManager():
         return user.dbs
 
     def saveUser(self,user):
+        userInstance = user(user['email'],user['name'], user['password'])
         for i in range(len(self.users)):
             u = self.users[i]
             jsonUser = json.loads(u)
             print(jsonUser)
             if (jsonUser['email'] == user['email']):
                 jsonUser['name'] = user['name']
-                jsonUser['password'] = user['password']
-                jsonUser['logged'] = user['logged']
+                jsonUser['password'] = userInstance.set_password(user['password'])
             self.users[i] = json.dumps(jsonUser)
         with open("users.json", mode='w', encoding='utf-8') as f:
             json.dump(self.users, f)

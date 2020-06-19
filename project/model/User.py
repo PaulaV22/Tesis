@@ -7,7 +7,7 @@ class User(UserMixin):
     def __init__(self, name, email, password):
         self.email = email
         self.name = name
-        self.password = generate_password_hash(password)
+        self.password = password
         self.dbs = []
         #self.is_anonymous = False
         self.is_admin = False
@@ -27,7 +27,9 @@ class User(UserMixin):
 
 
     def set_password(self, password):
-        self.password = generate_password_hash(password)
+        pswd = generate_password_hash(password)
+        return pswd
+
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
