@@ -1,6 +1,7 @@
 import project.model.SimpleDbCreator as SC
 import project.model.SimpleBlast as S
 from project.model import AmbiguousDbCreator as AC, GlobalBlast as GC
+from project.model import DbAdmin as DbAdmin
 import project.model.ResultsAnalizer as RA
 import os
 import shutil
@@ -22,6 +23,7 @@ class HaplotypesSearcher():
             os.makedirs(self.categoriesPath)
         self.option="compare"
         self.newDb=None
+        self.dbAdmin = DbAdmin.DbAdmin()
         #self.dbAdmin = DB.DbAdmin()
 
     def resourcePath(self,relative_path):
@@ -50,30 +52,8 @@ class HaplotypesSearcher():
         resultsAnalizer = RA.ResultsAnalizer("FinalResult",database, ambiguo)
 
         results = resultsAnalizer.getSimilarSequences(queryName,numSeqs)
-        self.deleteDb(database, False, False)
+        self.dbAdmin.deleteDb(database, False, False)
         return results
-
-
-
-    def run(self):
-    #def searchHaplotypes(self):
-        if self.option=="compare":
-            #queryPath = self.projectPath + "/" +self.queryName
-            queryPath = self.resourcePath("/"+self.queryName)
-            # alinear y obtener resultados de la query deseada
-            self.simpleBlast.align(queryPath, self.queryName)
-            results = self.resultsAnalizer.getSimilarSequences(self.numSeqs)
-            return results
-            #return results
-        if self.option=="configuredb":
-            self.configureDb(self.newDb)
-
-        if self.option=="deletedb":
-            self.deleteDb(self.db)
-        if self.option=="deleteSeq":
-            self.deleteSeq(self.db, self.sequenceToDelete)
-        if self.option=="addSeq":
-            self.addSeq(self.path,self.db,self.newSeqName, self.newSeqContent)
 
     def setAddSeqValues(self, path, content,name):
         self.path = path
@@ -102,40 +82,6 @@ class HaplotypesSearcher():
     def deleteseqAdmin (self, db, sequence):
         self.dbAdmin.deleteSequence(self.projectPath,db,sequence)
 
-    def configureDb(self, dbPath, dbName):
-        ####crear la bd con los archivos originales de BoLa####
-        ready = False
-        simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta")
-
-        globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", dbPath)
-        ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb", "salida", "fasta", "DbAmbigua",dbPath)
-        #simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", dbPath, True)
-        #self.resultsAnalizer = RA.ResultsAnalizer("FinalResult", self.db, self.categories, self.categoriesPath)
-        print("llama a simple db creator make db")
-        simpleDbCreator.makeDb()
-        ####alinear todas las secuencias de BoLa entre si generando un archivo de salida por cada alineacion (n x n)####
-        while not ready:
-            try:
-                print("global blast va a alinear "+dbPath)
-                globalBlast.align("Databases/"+dbPath)
-                ready = True
-            except:
-                print(" hubo error y sismpledbcreator va a crear db de nuevo ")
-                simpleDbCreator.makeDb()
-                ready = False
-        ####armar la base de datos con las posibles combinaciones (Nuevadb)####
-        print(" ambiguousdbcreator va a makeDb ")
-
-        ambiguousDbCreator.makeDb()
-        self.deleteDb(dbPath, False, False)
-        #categoriesFile = self.projectPath + "/Categories/" + db + ".json"
-
-    def configureSimpleDb(self, dbPath, dbName):
-        print("To create simple db")
-        simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta")
-        simpleDbCreator.makeDb()
-        print("Simple db created "+dbName)
-
 
     def configureDb2(self, db):
         ####crear la bd con los archivos originales de BoLa####
@@ -157,76 +103,6 @@ class HaplotypesSearcher():
 
         with open(categoriesFile, mode='w+') as f:
             json.dump(categories, f)
-
-    def restartDb(self,userDb, dbName):
-        self.deleteDb(userDb, True, False)
-        print("termino de borrar. Va a configureDb con "+ userDb +" "+dbName)
-        self.configureDb(userDb, dbName)
-
-    def deleteDb(self,db,ambigua=True, total=True):
-        Database = self.resourcePath('/Databases/' + db)
-        Blastdb = self.resourcePath('/Blastdb/' + db)
-        BlastResult = self.resourcePath('/BlastResult/' + db)
-        DbAmbigua = self.resourcePath('/DbAmbigua/' + db)
-        FinalResult = self.resourcePath('/FinalResult/' + db)
-        if total:
-            try:
-                shutil.rmtree(Database)
-            except:
-                print("error deleting from Database")
-                pass
-        try:
-            shutil.rmtree(Blastdb)
-        except:
-            print("error deleting from Blastdb")
-            pass
-        try:
-            shutil.rmtree(BlastResult)
-        except:
-            print("error deleting from BlastResult")
-            pass
-        if ambigua:
-            try:
-                shutil.rmtree(DbAmbigua)
-            except:
-                print("error deleting from DbAmbigua")
-                pass
-        try:
-            shutil.rmtree(FinalResult)
-        except:
-            print("error deleting from FinalResult")
-            return "Error in a deletion"
-        print("borro todo")
-        return "Deleted ok"
-
-    def deleteSeq(self, userDb, dbName, seqPath):
-        try:
-            os.remove(seqPath)
-            self.restartDb(userDb, dbName)
-        except:
-            print("La carpeta no existe")
-        self.configureDb(userDb,dbName)
-        return "removed ok"
-
-
-    def addSeq(self, path,db, name, seq):
-        file = open(path+"/"+name+".fa", "w")
-        file.write(">"+name + os.linesep)
-        file.write(seq)
-        file.close()
-        self.restartDb(db)
-
-    def setCategoryToFilesInDb(self, db, folder, category):
-        folderPath = self.resourcePath("/Databases/"+db+"/"+folder)
-        categoriesFile = self.resourcePath("/Categories/"+db+".json")
-        with open(categoriesFile, mode='r') as json_file:
-            data = json.load(json_file)
-        for bases, dirs, files in os.walk(folderPath):
-            for file in files:
-                #newJson = '{"'+os.path.basename(file.name)+'" : "'+self.categories[category]+'"}'
-                data[file[:-3]] = category
-        with open(categoriesFile, 'w') as f:  # writing JSON object
-            json.dump(data, f)
 
     def getDatabases(self):
         output = []

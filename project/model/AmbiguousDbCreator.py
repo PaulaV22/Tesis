@@ -6,6 +6,8 @@ from Bio.SeqRecord import SeqRecord
 import os
 from Bio import SearchIO
 import sys
+from project.model import DbCreator as DBC
+
 # ESTA CLASE USA EL RESULTADO DE LA ALINEACION DE LAS SECUENCIAS HECHA POR SEARCHER. POR CADA COMPARACION GENERA UNA
 # NUEVA SECUENCIA TENIENDO EN CUENTA QUE LAS DIFERENCIAS ENTRE LAS SECUENCIAS PUEDE SIGNIFICAR UN PUNTO POLIMORFICO
 # EN LAS POSICIONES DONDE SE ENCUENTRAN DIFERENCIAS SE REEMPLAZAN POR LA LETRA QUE REPRESENTA ESA COMBINACION
@@ -18,17 +20,13 @@ import sys
 # ARCHIVOS GENERADOS POR ESTA CLASE
 
 
-class AmbiguousDbCreator:
+class AmbiguousDbCreator(DBC.DbCreator):
 
     def __init__(self, filesPath, intermediateDb, outputFile, outputFormat, newDb, dbName):
         # recibe (BlastResult, Nuevadb, salida, fasta, "DbAmbigua", "BoLa")
         #self.projectPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.filesPath = self.resourcePath("/"+filesPath +"/" + dbName)
         self.intermediateDb = intermediateDb
-        self.outputFile = outputFile
-        self.outputFormat =outputFormat
-        self.newDb = newDb
-        self.dbName= dbName
+        DBC.DbCreator.__init__(self, filesPath, newDb, dbName, outputFile, outputFormat)
         self.sc = SC.SimpleDbCreator(intermediateDb, newDb, dbName, outputFile, outputFormat)
         self.ambiguousPos= dict()
         # super(AmbiguousDbCreator, self).__init__(dbPath, newDb, outputFile, outputFormat)
@@ -39,7 +37,7 @@ class AmbiguousDbCreator:
         output = base_path + relative_path
         return output
 
-    def getNitrogenBase(self, q, h, i, queryid, hitid):
+    def getBase(self, q, h, i, queryid, hitid):
         if q == h:
             return q
         else:
@@ -77,7 +75,7 @@ class AmbiguousDbCreator:
             newSeq = Seq("", IUPAC.ambiguous_dna)
             for i, (q, h) in enumerate(zip(querySeq, hitSeq)):
             #for q, h in zip(querySeq, hitSeq):
-                nitrogenBase = self.getNitrogenBase(q, h, i, query.id, hit.id)
+                nitrogenBase = self.getBase(q, h, i, query.id, hit.id)
                 append = Seq(nitrogenBase, IUPAC.ambiguous_dna)
                 newSeq = newSeq + append
             newSeqId = query.id + "-" + hit.id
@@ -106,7 +104,7 @@ class AmbiguousDbCreator:
                 db = sequencePath
                 self.sc.setOutputFile(file)
                #para evitar que se genere mal alguna base de datos y el error aparezca en etapas posteriores
-                while(self.testFails(db, file)):
+                while(self.testDbFails(db, file)):
                     self.sc.makeBlastDb(db)
 
 
@@ -131,7 +129,7 @@ class AmbiguousDbCreator:
         return self.hasAllFilesWithExt(db, ext);
 
 
-    def testFails(self,db, file):
+    def testDbFails(self,db, file):
         print("A TESTEAR DB AMBIGUA "+db)
         i = 0
         for f in os.listdir(db):

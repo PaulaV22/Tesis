@@ -3,6 +3,8 @@ from flask_login import LoginManager, UserMixin, current_user, login_required, l
 from werkzeug.urls import url_parse
 from project.Controller.CompareController import CompareController as CC
 from project.Controller.UserController import UserController as UC
+from project.Controller.AdminController import AdminController as AC
+
 #from flask_debug import Debug
 from werkzeug.utils import secure_filename
 import os
@@ -19,7 +21,7 @@ app.config['SECRET_KEY'] ='7\xa5\xeb\xe52\xa8@]\x02 |/\xc7\xbal\x83'
 login_manager = LoginManager(app)
 cc = CC()
 uc = UC()
-
+ac = AC()
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -70,7 +72,7 @@ def unauthorized():
 @login_required
 def compare(id):
     user = uc.getUser(id)
-    dbs = cc.getDatabases(id)
+    dbs = ac.getDatabases(id)
     if request.method == 'POST':
         sequence = request.form['sequence']
         database = request.form['selectDbs']
@@ -127,7 +129,7 @@ def addDatabase(id):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(newDb,filename))
         #uc.addDbToUser(id,dbName)
-        cc.createDb(id,dbName)
+        ac.createDb(id,dbName)
     return render_template("addDb.html",userid = id, msg=message)
 
 
@@ -152,8 +154,8 @@ def inspect(id):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(newDb,filename))
         #uc.addDbToUser(id,dbName)
-        cc.createDb(id,dbName)
-    databases = cc.getDatabases(id)
+        ac.createDb(id,dbName)
+    databases = ac.getDatabases(id)
     if databases is None:
         message="No databases added"
     return render_template("inspect.html",userid = id,username=user.name, msg=message,results=databases)
@@ -163,8 +165,8 @@ def inspect(id):
 def deleteDatabase():
     id = request.form['id']
     name =  request.form['name']
-    cc.deleteDatabase(id,name)
-    databases = cc.getDatabases(id)
+    ac.deleteDatabase(id,name)
+    databases = ac.getDatabases(id)
     return databases
 
 @app.route('/deleteSequence', methods=['POST'])
@@ -173,8 +175,8 @@ def deleteSequence():
     id = request.form['id']
     db = request.form['dbName']
     sequenceName =  request.form['sequenceName']
-    cc.deleteSequence(id, db, sequenceName)
-    databases = cc.getDatabases(id)
+    ac.deleteSequence(id, db, sequenceName)
+    databases = ac.getDatabases(id)
     return databases
 
 @app.route('/addSequence', methods=['POST'])
@@ -190,8 +192,8 @@ def addSequence():
                 # Make the filename safe, remove unsupported chars
             filename = secure_filename(uploaded_file.filename)
             uploaded_file.save(os.path.join(newFilePath, filename))
-    cc.restartDb(id, dbName)
-    databases = cc.getDatabases(id)
+    ac.restartDb(id, dbName)
+    databases = ac.getDatabases(id)
     return databases
 
 
@@ -201,7 +203,7 @@ def addSequence():
 @login_required
 def align(id):
     user = uc.getUserByEmail(id)
-    dbs = cc.getDatabases(id)
+    dbs = ac.getDatabases(id)
     if request.method == 'POST':
         sequence1 = request.form['sequence1']
         sequence2 = request.form['sequence2']
@@ -219,11 +221,11 @@ def align(id):
             file.write(sequence1)
             file.close()
             try:
-                cc.createSimpleDb(id, "align")
+                ac.createSimpleDb(id, "align")
                 print("simple db created app.py. to see results")
                 results = cc.compare(sequence2, 1, dbName, id, False)
                 print(results)
-                cc.deleteDatabase(id,dbName)
+                ac.deleteDatabase(id,dbName)
                 #print("app.py Temporal align db deleted")
                 return render_template("align.html", results=results, sequence1=sequence1, sequence2=sequence2,
                                        sequenceExample1=sequenceExample, sequenceExample2=sequenceExample2,  num=0,

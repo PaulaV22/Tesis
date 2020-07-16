@@ -1,13 +1,13 @@
 import os
 from project.model import HaplotypesSearcher as HaplotypeSearcher
+from project.model import DbAdmin as DbAdmin
 import sys
 
 class Controller():
-    def __init__(self, window):
-        self.window = window
+    def __init__(self):
         #self.projectPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.HS = HaplotypeSearcher()
-        self.dbList = self.getDatabases()
+        self.HS = HaplotypeSearcher.HaplotypesSearcher()
+        self.dbAdmin = DbAdmin.DbAdmin()
         self.dbName =""
 
     def resourcePath(self,relative_path):
@@ -26,15 +26,3 @@ class Controller():
             output.append(dir)
         output.sort()
         return output
-
-
-    def getDb(self):
-        self.dbList = self.getDatabases()
-        selectedIndex = self.window.selectDatabase.currentIndex()
-        dbName = self.dbList[selectedIndex]
-        return dbName
-
-
-    def setDb(self, dbName):
-        self.dbName= dbName
-        self.HS.setDb(dbName)

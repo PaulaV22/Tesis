@@ -4,6 +4,7 @@ import subprocess
 import sys
 import shlex
 
+from project.model import DbCreator as DBC
 
 # ESTA CLASE CREA UNA BASE DE DATOS BLAST A PARTIR DE ARCHIVOS DE SECUENCIAS.
 # PARA ESO RECIBE:
@@ -14,18 +15,10 @@ import shlex
 #       4: OUTPUT FORMAT ES FASTA
 
 
-class SimpleDbCreator:
+class SimpleDbCreator(DBC.DbCreator):
     def __init__(self, filesPath, newDb, dbName, outputFile, outputFormat):
-        #self.projectPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        # directorio donde se encuentran las secuencias individuales
-        self.filesPath = self.resourcePath("/"+ filesPath)
-        # directorio donde se creara la base de datos
-        self.newDb = newDb
-        #Nommbre de la base de datos seleccionada
-        self.dbName = dbName
-        # archivo intermedio usado para crear la base de datos
-        self.outputFile = outputFile
-        self.outputFormat = outputFormat
+        DBC.DbCreator.__init__(self, filesPath, newDb, dbName, outputFile, outputFormat)
+
 
     def resourcePath(self,relative_path):
         """ Get absolute path to resource, works for dev and for PyInstaller """
