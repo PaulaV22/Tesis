@@ -8,7 +8,7 @@ from project.Controller.Controller import Controller
 from project.model import DbAdmin as DbAdmin
 
 
-class AdminController(Controller):
+class DbAdminController(Controller):
 
     def __init__(self):
         Controller.__init__(self)

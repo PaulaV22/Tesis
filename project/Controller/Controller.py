@@ -8,7 +8,6 @@ class Controller():
         #self.projectPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.HS = HaplotypeSearcher.HaplotypesSearcher()
         self.dbAdmin = DbAdmin.DbAdmin()
-        self.dbName =""
 
     def resourcePath(self,relative_path):
         """ Get absolute path to resource, works for dev and for PyInstaller """

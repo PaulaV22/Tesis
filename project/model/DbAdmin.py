@@ -12,17 +12,17 @@ class DbAdmin:
 
     def __init__(self, dbName=None):
         if (dbName):
-            self.db=dbName
+            self.database=dbName
         else:
-            self.db = "BoLa"
+            self.database = "BoLa"
         self.projectPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.categories  = {"ALTA": 1, "MEDIA": 1, "BAJA": 1}
         self.categoriesPath = self.projectPath+"/Categories"
-        self.setDb(self.db, dbName)
+        self.setDb(self.database, dbName)
         if not os.path.exists(self.categoriesPath):
             os.makedirs(self.categoriesPath)
         self.newDb=None
-        #self.dbAdmin = DB.DbAdmin()
+        #self.databaseAdmin = DB.DbAdmin()
 
     def resourcePath(self,relative_path):
         """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -32,7 +32,7 @@ class DbAdmin:
         return output
 
     def setDb(self, dbPath, dbName):
-        self.db = dbPath
+        self.database = dbPath
         self.simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb",
                                                   dbName, "secuencias", "fasta")
         self.globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", dbPath)
@@ -47,7 +47,7 @@ class DbAdmin:
         globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", dbPath)
         ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb", "salida", "fasta", "DbAmbigua",dbPath)
         #simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", dbPath, True)
-        #self.resultsAnalizer = RA.ResultsAnalizer("FinalResult", self.db, self.categories, self.categoriesPath)
+        #self.resultsAnalizer = RA.ResultsAnalizer("FinalResult", self.database, self.categories, self.categoriesPath)
         print("llama a simple db creator make db")
         simpleDbCreator.makeDb()
         ####alinear todas las secuencias de BoLa entre si generando un archivo de salida por cada alineacion (n x n)####

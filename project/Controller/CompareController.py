@@ -46,16 +46,3 @@ class CompareController(Controller):
             print(e)
         return results
         #return []
-
-    def showResults(self, results):
-        dt = np.dtype('string', 'float', 'int')
-        resultsArray = np.array(results, dtype=dt)
-        return resultsArray
-        # self.drawTable(results)
-
-    def createDb(self,userId,dbName):
-        if not self.HS:
-            self.HS = HaplotypesSearcher()
-        dbPath = userId+"/"+dbName
-        self.HS.configureDb(dbPath,dbName)
-

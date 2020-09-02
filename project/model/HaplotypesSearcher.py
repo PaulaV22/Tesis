@@ -16,13 +16,9 @@ class HaplotypesSearcher():
         else:
             self.db = "BoLa"
         self.projectPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.categories  = {"ALTA": 1, "MEDIA": 1, "BAJA": 1}
-        self.categoriesPath = self.projectPath+"/Categories"
+
         self.setDb(self.db, dbName)
-        if not os.path.exists(self.categoriesPath):
-            os.makedirs(self.categoriesPath)
-        self.option="compare"
-        self.newDb=None
+
         self.dbAdmin = DbAdmin.DbAdmin()
         #self.dbAdmin = DB.DbAdmin()
 
@@ -33,11 +29,6 @@ class HaplotypesSearcher():
         output = output.replace("\\", "/")
         return output
 
-    def setOption(self,option):
-        self.option=option
-
-    def setNewDb(self,newDb):
-        self.newDb=newDb
 
     def getResults(self,queryName,queryPath, database, numSeqs, ambiguo):
         print("GET RESULTS")
@@ -83,27 +74,6 @@ class HaplotypesSearcher():
         self.dbAdmin.deleteSequence(self.projectPath,db,sequence)
 
 
-    def configureDb2(self, db):
-        ####crear la bd con los archivos originales de BoLa####
-        ready = False
-        self.simpleDbCreator.makeDb()
-        ####alinear todas las secuencias de BoLa entre si generando un archivo de salida por cada alineacion (n x n)####
-        while not ready:
-            try:
-                self.globalBlast.align("/Databases/"+db)
-                ready = True
-            except:
-                self.simpleDbCreator.makeDb()
-                ready = False
-        ####armar la base de datos con las posibles combinaciones (Nuevadb)####
-        self.ambiguousDbCreator.makeDb()
-        categories = {}
-        #categoriesFile = self.projectPath + "/Categories/" + db + ".json"
-        categoriesFile = self.resourcePath("/Categories/" + db + ".json")
-
-        with open(categoriesFile, mode='w+') as f:
-            json.dump(categories, f)
-
     def getDatabases(self):
         output = []
         dbs= self.resourcePath("\Databases")
@@ -132,5 +102,3 @@ class HaplotypesSearcher():
     def getProjectPath(self):
         return self.projectPath
 
-searcher = HaplotypesSearcher()
-searcher.getDatabases()

@@ -21,39 +21,6 @@ class ResultsAnalizer():
         output = base_path + relative_path
         return output
 
-    def mini(self, weight1, weight2):
-        if (weight1>weight2):
-            return weight2
-        return weight1
-
-    #def getWeight(self, sequenceId, sequencesCategories, file):
-    #    seq1 = sequenceId.split('-')[0]
-    #    seq2 = sequenceId.split('-')[1]
-    #    seq1Id = seq1.replace("*", "_")
-    #    seq2Id = seq2.replace("*", "_")
-    #    if ("DRB3*902/DRB3*1103" in sequenceId):
-    #        weight1 = sequencesCategories.get(seq1Id)
-    #        weight2 = sequencesCategories.get(seq2Id)
-    #        if (weight1 is None) and (weight2 is None):
-    #            return 1
-    #        if not (weight1 is None) and (weight2 is None):
-    #            return self.categories.get(weight1)
-    #        if not (weight2 is None) and (weight1 is None):
-    #            return self.categories(weight2)
-    #        if not (weight1 is None) and not (weight2 is None):
-    #            return self.mini(self.categories.get(weight1), self.categories.get(weight2))
-    #    else:
-    #        weight1 = sequencesCategories.get(seq1Id)
-    #        weight2 = sequencesCategories.get(seq2Id)
-    #        if (weight1 is None) and (weight2 is None):
-    #            return 1
-    #        if not (weight1 is None) and (weight2 is None):
-    #            return self.categories.get(weight1)
-    #        if not (weight2 is None) and (weight1 is None):
-    #            return self.categories(weight2)
-    #        if not (weight1 is None) and not (weight2 is None):
-    #            return self.mini(self.categories.get(weight1), self.categories.get(weight2))
-
     def getStandarName(self,id):
         id = id.replace("_", "*")
         id = id.replace("/", "-")

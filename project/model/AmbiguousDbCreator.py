@@ -7,7 +7,7 @@ import os
 from Bio import SearchIO
 import sys
 from project.model import DbCreator as DBC
-
+import shutil
 # ESTA CLASE USA EL RESULTADO DE LA ALINEACION DE LAS SECUENCIAS HECHA POR SEARCHER. POR CADA COMPARACION GENERA UNA
 # NUEVA SECUENCIA TENIENDO EN CUENTA QUE LAS DIFERENCIAS ENTRE LAS SECUENCIAS PUEDE SIGNIFICAR UN PUNTO POLIMORFICO
 # EN LAS POSICIONES DONDE SE ENCUENTRAN DIFERENCIAS SE REEMPLAZAN POR LA LETRA QUE REPRESENTA ESA COMBINACION
@@ -27,6 +27,7 @@ class AmbiguousDbCreator(DBC.DbCreator):
         #self.projectPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.intermediateDb = intermediateDb
         DBC.DbCreator.__init__(self, filesPath, newDb, dbName, outputFile, outputFormat)
+        self.filesPath = self.filesPath + "/" + dbName
         self.sc = SC.SimpleDbCreator(intermediateDb, newDb, dbName, outputFile, outputFormat)
         self.ambiguousPos= dict()
         # super(AmbiguousDbCreator, self).__init__(dbPath, newDb, outputFile, outputFormat)
@@ -86,6 +87,9 @@ class AmbiguousDbCreator(DBC.DbCreator):
 
     def makeDb(self):
         #self.sc.createFolder(self.intermediateDb)
+        newAmbDb = self.resourcePath("/"+self.newDb + "/" + self.dbName)
+        if os.path.exists(newAmbDb) and os.path.isdir(newAmbDb):
+            shutil.rmtree(newAmbDb)
         for bases, dirs, files in os.walk(self.filesPath):
             #SI NO CREA BIEN LA BBDD AMBIGUA VER DE DESCOMENTAR ESTO QUE CREABA UNA CARPETA DEMAS SIN USO PARA LAUEBA
             # newFolderPath = self.newDb + "/" + bases
@@ -106,6 +110,7 @@ class AmbiguousDbCreator(DBC.DbCreator):
                #para evitar que se genere mal alguna base de datos y el error aparezca en etapas posteriores
                 while(self.testDbFails(db, file)):
                     self.sc.makeBlastDb(db)
+        shutil.rmtree(self.resourcePath("/Test"+"/"+self.dbName))
 
 
     def getAmbiguousPos(self):
@@ -151,4 +156,5 @@ class AmbiguousDbCreator(DBC.DbCreator):
             sb.align(queryPath, queryName)
         except:
             return True
+        shutil.rmtree(self.resourcePath('/'+outputPath))
         return False
