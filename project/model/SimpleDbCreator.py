@@ -5,6 +5,8 @@ import sys
 import shlex
 
 from project.model import DbCreator as DBC
+import project.model.SimpleBlast as SB
+import shutil
 
 # ESTA CLASE CREA UNA BASE DE DATOS BLAST A PARTIR DE ARCHIVOS DE SECUENCIAS.
 # PARA ESO RECIBE:
@@ -16,8 +18,9 @@ from project.model import DbCreator as DBC
 
 
 class SimpleDbCreator(DBC.DbCreator):
-    def __init__(self, filesPath, newDb, dbName, outputFile, outputFormat):
+    def __init__(self, filesPath, newDb, dbName, outputFile, outputFormat, ambiguous):
         DBC.DbCreator.__init__(self, filesPath, newDb, dbName, outputFile, outputFormat)
+        self.ambiguous = ambiguous
 
 
     def resourcePath(self,relative_path):
@@ -66,7 +69,6 @@ class SimpleDbCreator(DBC.DbCreator):
                 fullCommand = 'makeblastdb -in ' + dbpath1 + ' -out ' + dbpath2 + ' -parse_seqids -dbtype nucl'
                 print("FULL COMMAND IS "+ fullCommand)
                 command = subprocess.Popen(shlex.split(fullCommand))
-
                 #command = subprocess.Popen(['makeblastdb', inParam, outputName,'-parse_seqids','-dbtype nucl'], stdout=subprocess.PIPE)
                 output = command.communicate()
 
@@ -90,10 +92,10 @@ class SimpleDbCreator(DBC.DbCreator):
             sequences = []
             array = subdirectory.split('/')
             print(array)
-            user = array[len(array)-2]
+            self.user = array[len(array)-2]
             dbName = array[len(array)-1]
 
-            newSubFolder = self.resourcePath("/"+self.newDb + "/" + user+ "/"+dbName)
+            newSubFolder = self.resourcePath("/"+self.newDb + "/" + self.user+ "/"+dbName)
             newSubFolder = newSubFolder.replace(" ", "_")
 
             # creo una subcarpeta para el subdirectorio correspondiente
@@ -111,3 +113,31 @@ class SimpleDbCreator(DBC.DbCreator):
                     self.saveSequencesInFile(newSubFolder, sequences)
                     # con el archivo anterior puedo armar la base de datos en el subdirectorio
             self.makeBlastDb(newSubFolder)
+            if not self.ambiguous:
+                while (self.testDbFails(newSubFolder)):
+                    self.makeBlastDb(newSubFolder)
+
+    def testDbFails(self, db):
+        print("A TESTEAR DB SIMPLE " + db)
+        i = 0
+        for f in os.listdir(db):
+            if os.stat(db + "/" + f).st_size == 0:
+                return True
+            i = i + 1
+        if i < 6:
+            return True
+        if not self.hasAllFiles(db):
+            print("NO TIENE TODOS LOS ARCHIVOS")
+            return True
+        outputPath = "Test" + "/" + self.user +'/'+ self.dbName
+        print("outputpath es " + outputPath)
+        sb = SB.SimpleBlast(db, "salida", "salida", "fasta", outputPath)
+        queryName = "queryTest.fa"
+        queryPath = self.resourcePath("/" + queryName)
+        try:
+            print("va a alinear " + queryPath + " " + queryName)
+            sb.align(queryPath, queryName)
+        except:
+            return True
+        shutil.rmtree(self.resourcePath('/' + outputPath))
+        return False

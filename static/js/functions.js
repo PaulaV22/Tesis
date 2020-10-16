@@ -1114,7 +1114,7 @@ function downloadInnerHtml_() {
     }
 
 
-function downloadInnerHtml(){
+function downloadInnerHtml_old (){
 const doc = new jsPDF('p', 'pt');
 // according to jspdf, PTSans must be base64 font, full string is on jsPDF/examples/js/basic.js
 
@@ -1167,6 +1167,79 @@ doc.autoTable(columns2, rows2, {
         Alignment: {
             halign: "left",
             font: 'Courier'
+        },
+         End: {
+            halign: "center",
+            font: 'Courier'
+        }
+    },
+    tableWidth: 'wrap',
+    showHeader: 'always',
+});
+
+console.log(doc.getFontList());
+doc.save('alignment-result.pdf');
+}
+
+
+function downloadInnerHtml(){
+const doc = new jsPDF('p', 'pt');
+// according to jspdf, PTSans must be base64 font, full string is on jsPDF/examples/js/basic.js
+
+doc.setFont('Courier', '');
+doc.setFontSize(11);
+
+doc.autoTable({
+  columns: columns1,
+  body: rows1,
+  theme: 'grid',
+  styles: {
+        fontSize: 10,
+        font: 'Courier'
+    },
+    headStyles:{
+        valign: 'middle',
+        halign : 'center'
+    },
+    columnStyles: {
+        SCORE: {
+            halign: "center",
+            font: 'Courier',
+        },
+        EVALUE: {
+            halign: "center",
+            font: 'Courier'
+        },
+        SIMILARITY: {
+            halign: "center",
+            font: 'Courier'
+        }
+    },
+    cellWidth: 'auto'
+
+})
+
+doc.autoTable({
+    columns: columns2,
+    body: rows2,
+    theme: 'plain',
+    styles: {
+        fontSize: 10,
+        font: 'courier'
+    },
+    columnStyles: {
+        font: 'Courier',
+        Name: {
+            halign: "center",
+            font: 'Courier'
+        },
+        Start: {
+            halign: "center",
+            font: 'Courier'
+        },
+        Alignment: {
+            halign: "left",
+            font: 'courier'
         },
          End: {
             halign: "center",

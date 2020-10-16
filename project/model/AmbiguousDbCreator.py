@@ -28,7 +28,7 @@ class AmbiguousDbCreator(DBC.DbCreator):
         self.intermediateDb = intermediateDb
         DBC.DbCreator.__init__(self, filesPath, newDb, dbName, outputFile, outputFormat)
         self.filesPath = self.filesPath + "/" + dbName
-        self.sc = SC.SimpleDbCreator(intermediateDb, newDb, dbName, outputFile, outputFormat)
+        self.sc = SC.SimpleDbCreator(intermediateDb, newDb, dbName, outputFile, outputFormat, True)
         self.ambiguousPos= dict()
         # super(AmbiguousDbCreator, self).__init__(dbPath, newDb, outputFile, outputFormat)
 
@@ -118,20 +118,6 @@ class AmbiguousDbCreator(DBC.DbCreator):
 
     def printAmbiguousPos(self):
         print(self.ambiguousPos)
-
-    def hasAllFilesWithExt(self, db, ext):
-        for e in ext:
-            if not any(fname.endswith(e) for fname in os.listdir(db)):
-                return False
-        return True
-
-    def hasAllFiles(self,db):
-        ext = []
-        if os.name == 'nt':
-            ext= ['.fasta', '.nhr', '.nin','.nog', '.nsd','.nsi', '.nsq' ]
-        else:
-            ext= ['.fasta', '.nhr', '.nin','.nog', '.not','.ntf', '.ndb', '.nos','.nsq', '.nto' ]
-        return self.hasAllFilesWithExt(db, ext);
 
 
     def testDbFails(self,db, file):

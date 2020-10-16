@@ -34,7 +34,7 @@ class DbAdmin:
     def setDb(self, dbPath, dbName):
         self.database = dbPath
         self.simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb",
-                                                  dbName, "secuencias", "fasta")
+                                                  dbName, "secuencias", "fasta", True)
         self.globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", dbPath)
         self.ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb" , "salida", "fasta", "DbAmbigua", dbPath)
         self.simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", dbPath, True)
@@ -42,7 +42,7 @@ class DbAdmin:
     def configureDb(self, dbPath, dbName):
         ####crear la bd con los archivos originales de BoLa####
         ready = False
-        simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta")
+        simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta", True)
 
         globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", dbPath)
         ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb", "salida", "fasta", "DbAmbigua",dbPath)
@@ -69,7 +69,7 @@ class DbAdmin:
 
     def configureSimpleDb(self, dbPath, dbName):
         print("To create simple db")
-        simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta")
+        simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb", dbName, "secuencias", "fasta", False)
         simpleDbCreator.makeDb()
         print("Simple db created "+dbName)
 

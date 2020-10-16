@@ -92,7 +92,7 @@ class HaplotypesSearcher():
     def setDb(self, dbPath, dbName):
         self.db = dbPath
         self.simpleDbCreator = SC.SimpleDbCreator("Databases/" + dbPath, "Blastdb",
-                                                  dbName, "secuencias", "fasta")
+                                                  dbName, "secuencias", "fasta", True)
         self.globalBlast = GC.GlobalBlast("Blastdb", "secuencias", "salida", "fasta", "BlastResult", dbPath)
         self.ambiguousDbCreator = AC.AmbiguousDbCreator("BlastResult", "Nuevadb" , "salida", "fasta", "DbAmbigua", dbPath)
         self.simpleBlast = S.SimpleBlast("DbAmbigua", "salida", "salida", "fasta", "FinalResult", dbPath, True)

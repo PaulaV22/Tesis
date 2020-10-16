@@ -7,6 +7,7 @@ project/DbAmbigua/
 project/FinalResult/
 project/Test/
 project/Temporal/
+project/model/__pycache__/
 venv/
 
 #files
@@ -28,5 +29,5 @@ Muestra1 - CORTADA.fa
 compareView_ui1.py
 compareView_ui1.pyc
 ncbi-blast-2.10.0+-x64-linux.tar.gz
-
+users.json
 

@@ -1,4 +1,4 @@
-biopython
+biopython==1.76
 flask
 numpy
 flask_debug
