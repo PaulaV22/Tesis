@@ -64,8 +64,14 @@ class ResultsAnalizer():
 
         n = 0
         salida = []
-        print(sequences)
-        for key, value in sorted(sequences.items(), key=lambda item: item[1][4], reverse=True):
+
+        #sort by e-value
+        s = sorted(sequences.items(), key=lambda item: item[1][2], reverse=True)
+        #sort by similarity
+        s = sorted(s, key=lambda item: item[1][4], reverse=True)
+
+       # for key, value in sorted(sequences.items(), key=lambda item: item[1][4], reverse=True):
+        for key, value in s:
             if (n<int(number)):
                 value.insert(0, key)
                 print(value)

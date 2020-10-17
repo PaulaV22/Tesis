@@ -15,18 +15,3 @@ class DbCreator:
 
     def makeDb(self):
         pass
-
-
-    def hasAllFilesWithExt(self, db, ext):
-        for e in ext:
-            if not any(fname.endswith(e) for fname in os.listdir(db)):
-                return False
-        return True
-
-    def hasAllFiles(self,db):
-        ext = []
-        if os.name == 'nt':
-            ext= ['.fasta', '.nhr', '.nin','.nog', '.nsd','.nsi', '.nsq' ]
-        else:
-            ext= ['.fasta', '.nhr', '.nin','.nog', '.not','.ntf', '.ndb', '.nos','.nsq', '.nto' ]
-        return self.hasAllFilesWithExt(db, ext)
